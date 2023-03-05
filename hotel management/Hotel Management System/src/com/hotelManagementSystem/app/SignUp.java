@@ -164,14 +164,14 @@ public class SignUp extends JFrame {
                     type = "Receptionist";
                 }
                 String answer = answerField.getText();
-
+                String tmp = "0";
                 Conn c = new Conn();
                 String str = "insert into Users values('" + id + "', '" + username + "', '" + password + "', '" + email + "', '" + phone + "', '" + type + "', '" + answer + "')";
                 try {
                     c.s.executeUpdate(str);
-                    JOptionPane.showMessageDialog(null, "Account Created");
                     setVisible(false);
                     new Login().setVisible(true);
+                    new Notification( "Account Created successfully");
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

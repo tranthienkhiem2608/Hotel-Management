@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
+
 public class Login extends JFrame{
     private JLabel user, pass, l1, l2;
     private JTextField username;
@@ -91,7 +92,7 @@ public class Login extends JFrame{
         forgotBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Change password in database");
+                new ForgotPassword().setVisible(true);
                 dispose();
             }
         });
@@ -127,8 +128,9 @@ public class Login extends JFrame{
                             }
                         }
                         else{
-                            JOptionPane.showMessageDialog(null, "Invalid username or password");
                             setVisible(true);
+                            new Notification( "Invalid username or password");
+
                         }
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
