@@ -17,7 +17,7 @@ public class SignUp extends JFrame {
     private JButton backBtn;
     private JTextArea t1;
     private JRadioButton radioBtnManager, radioBtnReceptionist;
-
+    private String type;
 
     public SignUp(){
         setSize(1400, 800);
@@ -40,65 +40,65 @@ public class SignUp extends JFrame {
         });
         add(backBtn);
 
+        idLabel = new JLabel("ID");
+        idLabel.setBounds(100, 150, 100, 30);
+        idLabel.setFont(new Font("Arial", Font.PLAIN, 20));
+        add(idLabel);
+
+        idField = new JTextField();
+        idField.setBounds(200, 150, 220, 30);
+        idField.setBackground(Color.decode("#e6f2f2"));
+        idField.setFont(new Font("Arial", Font.PLAIN, 15));
+        idField.setForeground(Color.decode("#1a1a1a"));
+        add(idField);
+
         userLabel = new JLabel("Username");
-        userLabel.setBounds(100, 150, 100, 30);
+        userLabel.setBounds(100, 200, 100, 30);
         userLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(userLabel);
 
         userField = new JTextField();
-        userField.setBounds(200, 150, 220, 30);
+        userField.setBounds(200, 200, 220, 30);
         userField.setBackground(Color.decode("#e6f2f2"));
         userField.setFont(new Font("Arial", Font.PLAIN, 15));
         userField.setForeground(Color.decode("#1a1a1a"));
         add(userField);
 
         passLabel = new JLabel("Password");
-        passLabel.setBounds(100, 200, 100, 30);
+        passLabel.setBounds(100, 250, 100, 30);
         passLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(passLabel);
 
         passField = new JPasswordField();
-        passField.setBounds(200, 200, 220, 30);
+        passField.setBounds(200, 250, 220, 30);
         passField.setBackground(Color.decode("#e6f2f2"));
         passField.setFont(new Font("Arial", Font.PLAIN, 15));
         passField.setForeground(Color.decode("#1a1a1a"));
         add(passField);
 
         emailLabel = new JLabel("Email");
-        emailLabel.setBounds(100, 250, 100, 30);
+        emailLabel.setBounds(100, 300, 100, 30);
         emailLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(emailLabel);
 
         emailField = new JTextField();
-        emailField.setBounds(200, 250, 220, 30);
+        emailField.setBounds(200, 300, 220, 30);
         emailField.setBackground(Color.decode("#e6f2f2"));
         emailField.setFont(new Font("Arial", Font.PLAIN, 15));
         emailField.setForeground(Color.decode("#1a1a1a"));
         add(emailField);
 
         phoneLabel = new JLabel("Phone");
-        phoneLabel.setBounds(100, 300, 100, 30);
+        phoneLabel.setBounds(100, 350, 100, 30);
         phoneLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         add(phoneLabel);
 
         phoneField = new JTextField();
-        phoneField.setBounds(200, 300, 220, 30);
+        phoneField.setBounds(200, 350, 220, 30);
         phoneField.setBackground(Color.decode("#e6f2f2"));
         phoneField.setFont(new Font("Arial", Font.PLAIN, 15));
         phoneField.setForeground(Color.decode("#1a1a1a"));
         add(phoneField);
-
-        idLabel = new JLabel("ID");
-        idLabel.setBounds(100, 350, 100, 30);
-        idLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        add(idLabel);
-
-        idField = new JTextField();
-        idField.setBounds(200, 350, 220, 30);
-        idField.setBackground(Color.decode("#e6f2f2"));
-        idField.setFont(new Font("Arial", Font.PLAIN, 15));
-        idField.setForeground(Color.decode("#1a1a1a"));
-        add(idField);
 
         typeLabel = new JLabel("Type");
         typeLabel.setBounds(100, 400, 100, 30);
@@ -151,28 +151,30 @@ public class SignUp extends JFrame {
         signUpBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                String id = idField.getText();
                 String username = userField.getText();
                 String password = passField.getText();
                 String email = emailField.getText();
                 String phone = phoneField.getText();
-                String id = idField.getText();
+
+
                 if (radioBtnManager.isSelected()) {
-                    String type = "Manager";
+                    type = "Manager";
                 } else if (radioBtnReceptionist.isSelected()) {
-                    String type = "Receptionist";
+                    type = "Receptionist";
                 }
                 String answer = answerField.getText();
 
-//                conn c = new conn();
-//                String str = "insert into account values('"+username+"', '"+password+"', '"+email+"', '"+phone+"', '"+id+"', '"+type+"', '"+answer+"')";
-//                try {
-//                    c.s.executeUpdate(str);
-//                    JOptionPane.showMessageDialog(null, "Account Created");
-//                    setVisible(false);
-//                    new Login().setVisible(true);
-//                } catch (SQLException ex) {
-//                    ex.printStackTrace();
-//                }
+                Conn c = new Conn();
+                String str = "insert into Users values('" + id + "', '" + username + "', '" + password + "', '" + email + "', '" + phone + "', '" + type + "', '" + answer + "')";
+                try {
+                    c.s.executeUpdate(str);
+                    JOptionPane.showMessageDialog(null, "Account Created");
+                    setVisible(false);
+                    new Login().setVisible(true);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         add(signUpBtn);
