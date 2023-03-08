@@ -1,6 +1,13 @@
-package com.hotelManagementSystem.app;
+package com.hotelManagementSystem.views;
+
+
+import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.dao.LoginDao;
+import com.hotelManagementSystem.controller.LoginController;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.*;
@@ -14,26 +21,30 @@ public class Login extends JFrame{
     private  Image img1, img2, img3, imgButton1;
     private JTextArea t1;
     private JPanel p1;
-    private static String  usernameLogin, passwordLogin;
+    private static User userLogin;
+    private static String usernameLogin;
 
-
-    public String getUsername(){
+    public User getUserLogin(){
+        return userLogin;
+    }
+    public String getUsernameLogin(){
         return usernameLogin;
     }
-    public void setUsername(String tmp){
-        usernameLogin = tmp;
-    }
-    public String getPassword(){
-        return passwordLogin;
+    public void setUsernameLogin(String username){
+        this.usernameLogin = username;
     }
 
-    public void setPassword(String tmp) {
-        passwordLogin = tmp;
+    public Login(){
+
+        initComponents();
+        setLocationRelativeTo(null);
     }
-    Login(){
+
+    private void initComponents() {
         setSize(1400, 800);
         setLocation(200,100);
         setLayout(null);
+        userLogin = new User();
 
         p1 = new JPanel();
         p1.setBounds(0, 0, 1400, 800);
@@ -47,14 +58,7 @@ public class Login extends JFrame{
         backBtn.setBorder(null);
         backBtn.setBackground(Color.decode("#292C35"));
         // witre add action listener
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new HotelManagementSys().setVisible(true);
-                dispose();
-                //set color button
-            }
-        });
+        new LoginController().backToWelcome(backBtn,this);
         p1.add(backBtn);
 
         user = new JLabel("Username");
@@ -68,6 +72,22 @@ public class Login extends JFrame{
         username.setBackground(Color.decode("#e6f2f2"));
         username.setFont(new Font("serif", Font.PLAIN, 15));
         username.setForeground(Color.decode("#1a1a1a"));
+        username.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userLogin.setUsername(username.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userLogin.setUsername(username.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userLogin.setUsername(username.getText());
+            }
+        });
         p1.add(username);
 
         pass = new JLabel("Password");
@@ -81,7 +101,27 @@ public class Login extends JFrame{
         password.setFont(new Font("serif", Font.PLAIN, 15));
         password.setBackground(Color.decode("#e6f2f2"));
         password.setForeground(Color.decode("#1a1a1a"));
+        password.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userLogin.setPassword(password.getText());
+                usernameLogin = username.getText();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userLogin.setPassword(password.getText());
+                usernameLogin = username.getText();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userLogin.setPassword(password.getText());
+                usernameLogin = username.getText();
+            }
+        });
         p1.add(password);
+
 
         forgotBtn = new JButton("Forgot Password?");
         forgotBtn.setBounds(300, 360, 150, 20);
@@ -89,58 +129,16 @@ public class Login extends JFrame{
         forgotBtn.setFont(new Font("Arial", Font.BOLD, 15));
         forgotBtn.setBackground(Color.decode("#292C35"));
         forgotBtn.setForeground(Color.decode("#c44231"));
-        forgotBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new ForgotPassword().setVisible(true);
-                dispose();
-            }
-        });
+        new LoginController().changeToForgotPass(forgotBtn,this);
         p1.add(forgotBtn);
+
 
         login = new JButton("Login");
         login.setBounds(180, 400, 180, 50);
         login.setFont(new Font("Arial", Font.BOLD, 15));
         login.setBackground(Color.decode("#000000"));
         login.setForeground(Color.decode("#ffffff"));
-        login.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String user = username.getText();
-                String pass = password.getText();
-                setUsername(user);
-                setPassword(pass);
-                try{
-                    Conn c = new Conn();
-                    String query = "select * from Users where username = '"+user+"' and password = '"+pass+"'";
-                    ResultSet rs = c.s.executeQuery(query);
-                    try {
-                        if(rs.next()){
-                            // check if user is manager or employee
-                            String userType = rs.getString("type");
-                            if(userType.equals("Manager")){
-                                new ManagerDashboard().setVisible(true);
-                                dispose();
-                            }
-                            else{
-                                new EmployeeDashboard().setVisible(true);
-                                dispose();
-                            }
-                        }
-                        else{
-                            setVisible(true);
-                            new Notification( "Invalid username or password");
-
-                        }
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                    }
-                catch(Exception e1){
-                    e1.printStackTrace();
-                }
-            }
-        });
+        new LoginController().LoginBtn(login, this, userLogin);
         p1.add(login);
 
         t1 = new JTextArea("Don't have an account?");
@@ -160,13 +158,7 @@ public class Login extends JFrame{
         signupBtn.setForeground(Color.decode("#f5994e"));
         //set text located to the left of the button
         signupBtn.setHorizontalAlignment(SwingConstants.LEFT);
-        signupBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new SignUp().setVisible(true);
-                dispose();
-            }
-        });
+        new LoginController().changeToSignUp(signupBtn,this);
         p1.add(signupBtn);
 
 
@@ -202,6 +194,7 @@ public class Login extends JFrame{
         gradientPanel.setBounds(0, 0, 1400, 800);
         p1.add(gradientPanel);
         setVisible(true);
+
     }
 
     public static void main(String[] args) {

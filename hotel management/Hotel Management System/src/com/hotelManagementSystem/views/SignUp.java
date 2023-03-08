@@ -1,4 +1,6 @@
-package com.hotelManagementSystem.app;
+package com.hotelManagementSystem.views;
+
+import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +22,13 @@ public class SignUp extends JFrame {
     private String type;
 
     public SignUp(){
+        innitComponents();
+        setLocationRelativeTo(null);
+
+    }
+
+    private void innitComponents(){
         setSize(1400, 800);
-        setLocation(200,100);
         setLayout(null);
 
         backBut = new ImageIcon(ClassLoader.getSystemResource("icons/back.png"));
@@ -168,7 +175,7 @@ public class SignUp extends JFrame {
                 Conn c = new Conn();
                 String str = "insert into Users values('" + id + "', '" + username + "', '" + password + "', '" + email + "', '" + phone + "', '" + type + "', '" + answer + "')";
                 try {
-                    c.s.executeUpdate(str);
+                    c.getStatment().executeUpdate(str);
                     setVisible(false);
                     new Login().setVisible(true);
                     new Notification( "Account Created successfully");
@@ -217,7 +224,6 @@ public class SignUp extends JFrame {
         gradientPanel.setBounds(0, 0, 1400, 800);
         add(gradientPanel);
         setVisible(true);
-
     }
 
 

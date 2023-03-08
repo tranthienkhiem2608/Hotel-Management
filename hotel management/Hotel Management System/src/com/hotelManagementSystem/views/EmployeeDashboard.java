@@ -1,4 +1,7 @@
-package com.hotelManagementSystem.app;
+package com.hotelManagementSystem.views;
+
+import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +16,14 @@ public class EmployeeDashboard extends JFrame {
     private ImageIcon logoutIcon;
     private  Image logoutImage;
 
-    EmployeeDashboard() {
+    public EmployeeDashboard() {
+        initComponent();
+        setLocationRelativeTo(null);
+
+    }
+
+    private void initComponent() {
         setSize(1400, 800);
-        setLocation(200, 100);
         setLayout(null);
 
 
@@ -67,21 +75,10 @@ public class EmployeeDashboard extends JFrame {
         t2.setBackground(Color.decode("#1b1c22"));
         t2.setEditable(true);
         try{
-            Conn c = new Conn();
+
             Login l = new Login();
             l.setVisible(false);
-            String username = l.getUsername();
-            String password = l.getPassword();
-            ResultSet rs = c.s.executeQuery("select * from users where username = '"+username+"' and password = '"+password+"'");
-            try {
-                if (rs.next()) {
-                    t2.setText(rs.getString("username"));
-                } else {
-                    t2.setText("null");
-                }
-            }catch(Exception e){
-                e.printStackTrace();
-            }
+            t2.setText(l.getUsernameLogin());
         }catch(Exception e){
 
         }
@@ -169,7 +166,6 @@ public class EmployeeDashboard extends JFrame {
         gradientPanel.setBounds(0, 0, 1400, 800);
         add(gradientPanel);
         setVisible(true);
-
     }
 
     public static void main(String[] args) {

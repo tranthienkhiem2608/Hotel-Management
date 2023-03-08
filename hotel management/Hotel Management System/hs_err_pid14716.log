@@ -16,7 +16,7 @@
 
 ---------------  S U M M A R Y ------------
 
-Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\lib\idea_rt.jar=61048:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 com.hotelManagementSystem.app.HotelManagementSys
+Command Line: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\lib\idea_rt.jar=61048:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 com.hotelManagementSystem.HotelManagementSys
 
 Host: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, 8 cores, 15G,  Windows 11 , 64 bit Build 22621 (10.0.22621.1194)
 Time: Sat Mar  4 18:14:24 2023 SE Asia Standard Time elapsed time: 0.801435 seconds (0d 0h 0m 0s)
@@ -728,7 +728,7 @@ symbol engine: initialized successfully - sym options: 0x614 - pdb path: .;C:\Pr
 
 VM Arguments:
 jvm_args: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\lib\idea_rt.jar=61048:C:\Program Files\JetBrains\IntelliJ IDEA 2022.3.2\bin -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 
-java_command: com.hotelManagementSystem.app.HotelManagementSys
+java_command: com.hotelManagementSystem.HotelManagementSys
 java_class_path (initial): C:\Hotel-Management-System\hotel management\Hotel Management System\out\production\Hotel Management System;C:\Hotel-Management-System\hotel management\mysql-connector-java-8.0.28.jar
 Launcher Type: SUN_STANDARD
 
