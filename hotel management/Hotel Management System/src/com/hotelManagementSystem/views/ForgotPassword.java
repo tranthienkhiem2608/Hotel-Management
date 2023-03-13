@@ -1,8 +1,13 @@
 package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.dao.*;
+import com.hotelManagementSystem.controller.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +16,8 @@ public class ForgotPassword extends JFrame {
 
     private ImageIcon i1,ib1, backBut, checkBut;
     private Image img1, imgButton1, imgButton2;
-    private JLabel  l1, l2, phoneLabel, answerLabel, passwordLabel, confirmPasswordLabel, usernameLabel, resultUsernameLabel;
+    private JLabel  l1, l2, phoneLabel, answerLabel, passwordLabel, confirmPasswordLabel, usernameLabel;
+    private static JLabel resultUsernameLabel;
     private JTextField phoneField, answerField, passwordField, confirmPasswordField;
     private JButton comfirmBtn, backBtn, checkBtn;
     private JTextArea t1;
@@ -19,7 +25,7 @@ public class ForgotPassword extends JFrame {
     private Conn c;
     private ResultSet rs;
 
-    private String phone, answer, query, password, confirmPassword;
+    private static User user;
     public ForgotPassword(){
         initComponent();
         setLocationRelativeTo(null);
@@ -29,6 +35,7 @@ public class ForgotPassword extends JFrame {
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
+        user = new User();
 
         backBut = new ImageIcon(ClassLoader.getSystemResource("icons/back.png"));
         imgButton1 = backBut.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
@@ -37,13 +44,7 @@ public class ForgotPassword extends JFrame {
         backBtn.setBorder(null);
         backBtn.setBackground(Color.decode("#292C35"));
         // witre add action listener
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Login().setVisible(true);
-                dispose();
-            }
-        });
+        new LoginController().changeToLogin(backBtn,this);
         add(backBtn);
 
         phoneLabel = new JLabel("Phone");
@@ -56,6 +57,22 @@ public class ForgotPassword extends JFrame {
         phoneField.setBackground(Color.decode("#e6f2f2"));
         phoneField.setFont(new Font("Arial", Font.PLAIN, 15));
         phoneField.setForeground(Color.decode("#1a1a1a"));
+        phoneField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                user.setPhone(phoneField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                user.setPhone(phoneField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setPhone(phoneField.getText());
+            }
+        });
         add(phoneField);
 
         t1 = new JTextArea("Security Question: What is your favourite food?");
@@ -76,6 +93,22 @@ public class ForgotPassword extends JFrame {
         answerField.setBackground(Color.decode("#e6f2f2"));
         answerField.setFont(new Font("Arial", Font.PLAIN, 15));
         answerField.setForeground(Color.decode("#1a1a1a"));
+        answerField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                user.setAnswer(answerField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                user.setAnswer(answerField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setAnswer(answerField.getText());
+            }
+        });
         add(answerField);
 
         usernameLabel = new JLabel("Username");
@@ -96,28 +129,7 @@ public class ForgotPassword extends JFrame {
         checkBtn.setBorder(null);
         checkBtn.setBackground(Color.decode("#fcd9b8"));
         // witre add action listener
-        checkBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                phone = phoneField.getText();
-                answer = answerField.getText();
-                query = "select * from users where phone = '"+phone+"' and answer = '"+answer+"'";
-                try{
-                    c = new Conn();
-                    rs = c.getStatment().executeQuery(query);
-                    if(rs.next()){
-                        resultUsernameLabel.setText(rs.getString("username"));
-                        resultUsernameLabel.setForeground(Color.decode("#069e20"));
-                    }else{
-                        resultUsernameLabel.setText("not found");
-                        resultUsernameLabel.setForeground(Color.decode("#a30f0f"));
-                        new Notification("Wrong phone or answer");
-                    }
-                }catch (Exception ex){
-                    ex.printStackTrace();
-                }
-            }
-        });
+        new ForgotPasswordController().checkUser(checkBtn, user, resultUsernameLabel);
         add(checkBtn);
 
 
@@ -131,6 +143,22 @@ public class ForgotPassword extends JFrame {
         passwordField.setBackground(Color.decode("#e6f2f2"));
         passwordField.setFont(new Font("Arial", Font.PLAIN, 15));
         passwordField.setForeground(Color.decode("#1a1a1a"));
+        passwordField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                user.setPassword(passwordField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                user.setPassword(passwordField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setPassword(passwordField.getText());
+            }
+        });
         add(passwordField);
 
         confirmPasswordLabel = new JLabel("Confirm password");
@@ -143,36 +171,33 @@ public class ForgotPassword extends JFrame {
         confirmPasswordField.setBackground(Color.decode("#e6f2f2"));
         confirmPasswordField.setFont(new Font("Arial", Font.PLAIN, 15));
         confirmPasswordField.setForeground(Color.decode("#1a1a1a"));
+        confirmPasswordField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                user.setConfirmPassword(confirmPasswordField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                user.setConfirmPassword(confirmPasswordField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setConfirmPassword(confirmPasswordField.getText());
+            }
+        });
         add(confirmPasswordField);
+
 
         comfirmBtn = new JButton("Confirm");
         comfirmBtn.setBounds(130, 470, 280, 40);
         comfirmBtn.setBackground(Color.decode("#000000"));
         comfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         comfirmBtn.setForeground(Color.decode("#ffffff"));
-        comfirmBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                password = passwordField.getText();
-                confirmPassword = confirmPasswordField.getText();
-                String tmp = "0";
-                if(password.equals(confirmPassword)){
-                    query = "update users set password = '"+password+"' where username = '"+resultUsernameLabel.getText()+"'";
-                    try{
-                        c = new Conn();
-                        c.getStatment().executeUpdate(query);
-                        setVisible(false);
-                        new Login().setVisible(true);
-                        new Notification( "Password changed successfully");
-                    }catch (Exception ex){
-                        ex.printStackTrace();
-                    }
-                }else{
-                    setVisible(true);
-                    new Notification( "Password not matched");
-                }
-            }
-        });
+        if(user.getPassword() == user.getConfirmPassword()) {
+            new ForgotPasswordController().changePasswword(comfirmBtn, user, this);
+        }
         add(comfirmBtn);
 
 

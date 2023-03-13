@@ -53,7 +53,12 @@ public class Notification extends JFrame {
                 } else if (mess == "Account Created Successfully") {
                     new Login().setVisible(true);
                 } else if (mess == "Wrong phone or answer") {
+                } else if (mess == "Account Created Failed") {
+                }else if (mess == "Password Changed Successfully") {
+                    new Login().setVisible(true);
+                } else if (mess == "Password Changed Failed") {
                 }
+
             }
         });
         add(b1);

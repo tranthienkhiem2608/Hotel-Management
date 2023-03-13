@@ -11,4 +11,5 @@ public class Constants {
 
     public final static String MESSINVALID = "Invalid username or password";
     public final static String MESSCHANGEPASS = "Password changed successfully";
+    public final static String VALIDID = "ID must less be 10 characters";
 }

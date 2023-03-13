@@ -24,16 +24,9 @@ public class Login extends JFrame{
     private static User userLogin;
     private static String usernameLogin;
 
-    public User getUserLogin(){
-        return userLogin;
-    }
     public String getUsernameLogin(){
         return usernameLogin;
     }
-    public void setUsernameLogin(String username){
-        this.usernameLogin = username;
-    }
-
     public Login(){
 
         initComponents();

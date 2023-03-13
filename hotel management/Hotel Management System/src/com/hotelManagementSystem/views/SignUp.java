@@ -3,11 +3,15 @@ package com.hotelManagementSystem.views;
 import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
+import com.hotelManagementSystem.controller.LoginController;
+import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.controller.SignUpController;
 public class SignUp extends JFrame {
 
     private JLabel userLabel, passLabel, emailLabel, phoneLabel, idLabel, typeLabel, answerLabel, l1, l2;
@@ -20,6 +24,8 @@ public class SignUp extends JFrame {
     private JTextArea t1;
     private JRadioButton radioBtnManager, radioBtnReceptionist;
     private String type;
+    private static ButtonGroup bg;
+    private static User userSignUp;
 
     public SignUp(){
         innitComponents();
@@ -30,6 +36,7 @@ public class SignUp extends JFrame {
     private void innitComponents(){
         setSize(1400, 800);
         setLayout(null);
+        userSignUp = new User();
 
         backBut = new ImageIcon(ClassLoader.getSystemResource("icons/back.png"));
         imgButton1 = backBut.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
@@ -37,14 +44,7 @@ public class SignUp extends JFrame {
         backBtn.setBounds(10, 10, 30, 30);
         backBtn.setBorder(null);
         backBtn.setBackground(Color.decode("#292C35"));
-        // witre add action listener
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new Login().setVisible(true);
-                dispose();
-            }
-        });
+        new LoginController().changeToLogin(backBtn,this);
         add(backBtn);
 
         idLabel = new JLabel("ID");
@@ -57,7 +57,25 @@ public class SignUp extends JFrame {
         idField.setBackground(Color.decode("#e6f2f2"));
         idField.setFont(new Font("Arial", Font.PLAIN, 15));
         idField.setForeground(Color.decode("#1a1a1a"));
+        idField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setId(idField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+
+                userSignUp.setId(idField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setId(idField.getText());
+            }
+        });
         add(idField);
+
 
         userLabel = new JLabel("Username");
         userLabel.setBounds(100, 200, 100, 30);
@@ -69,6 +87,22 @@ public class SignUp extends JFrame {
         userField.setBackground(Color.decode("#e6f2f2"));
         userField.setFont(new Font("Arial", Font.PLAIN, 15));
         userField.setForeground(Color.decode("#1a1a1a"));
+        userField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setUsername(userField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userSignUp.setUsername(userField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setUsername(userField.getText());
+            }
+        });
         add(userField);
 
         passLabel = new JLabel("Password");
@@ -81,6 +115,22 @@ public class SignUp extends JFrame {
         passField.setBackground(Color.decode("#e6f2f2"));
         passField.setFont(new Font("Arial", Font.PLAIN, 15));
         passField.setForeground(Color.decode("#1a1a1a"));
+        passField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setPassword(passField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userSignUp.setPassword(passField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setPassword(passField.getText());
+            }
+        });
         add(passField);
 
         emailLabel = new JLabel("Email");
@@ -93,6 +143,22 @@ public class SignUp extends JFrame {
         emailField.setBackground(Color.decode("#e6f2f2"));
         emailField.setFont(new Font("Arial", Font.PLAIN, 15));
         emailField.setForeground(Color.decode("#1a1a1a"));
+        emailField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setEmail(emailField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userSignUp.setEmail(emailField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setEmail(emailField.getText());
+            }
+        });
         add(emailField);
 
         phoneLabel = new JLabel("Phone");
@@ -105,6 +171,22 @@ public class SignUp extends JFrame {
         phoneField.setBackground(Color.decode("#e6f2f2"));
         phoneField.setFont(new Font("Arial", Font.PLAIN, 15));
         phoneField.setForeground(Color.decode("#1a1a1a"));
+        phoneField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setPhone(phoneField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userSignUp.setPhone(phoneField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setPhone(phoneField.getText());
+            }
+        });
         add(phoneField);
 
         typeLabel = new JLabel("Type");
@@ -126,9 +208,14 @@ public class SignUp extends JFrame {
         radioBtnReceptionist.setForeground(Color.decode("#1a1a1a"));
         add(radioBtnReceptionist);
 
-        ButtonGroup bg = new ButtonGroup();
+        bg = new ButtonGroup();
         bg.add(radioBtnManager);
         bg.add(radioBtnReceptionist);
+        if(bg.getSelection() == radioBtnReceptionist.getModel()){
+            userSignUp.setType("Receptionist");
+        }else{
+            userSignUp.setType("Manager");
+        }
 
         t1 = new JTextArea("Security Question: What is your favourite food?");
         t1.setBounds(100, 450, 350, 20);
@@ -148,42 +235,31 @@ public class SignUp extends JFrame {
         answerField.setBackground(Color.decode("#e6f2f2"));
         answerField.setFont(new Font("Arial", Font.PLAIN, 15));
         answerField.setForeground(Color.decode("#1a1a1a"));
+        answerField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userSignUp.setAnswer(answerField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userSignUp.setAnswer(answerField.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userSignUp.setAnswer(answerField.getText());
+            }
+        });
         add(answerField);
+
 
         signUpBtn = new JButton("Sign Up");
         signUpBtn.setBounds(130, 550, 280, 40);
         signUpBtn.setBackground(Color.decode("#000000"));
         signUpBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         signUpBtn.setForeground(Color.decode("#ffffff"));
-        signUpBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String id = idField.getText();
-                String username = userField.getText();
-                String password = passField.getText();
-                String email = emailField.getText();
-                String phone = phoneField.getText();
-
-
-                if (radioBtnManager.isSelected()) {
-                    type = "Manager";
-                } else if (radioBtnReceptionist.isSelected()) {
-                    type = "Receptionist";
-                }
-                String answer = answerField.getText();
-                String tmp = "0";
-                Conn c = new Conn();
-                String str = "insert into Users values('" + id + "', '" + username + "', '" + password + "', '" + email + "', '" + phone + "', '" + type + "', '" + answer + "')";
-                try {
-                    c.getStatment().executeUpdate(str);
-                    setVisible(false);
-                    new Login().setVisible(true);
-                    new Notification( "Account Created successfully");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+        new SignUpController().SignUpUser(signUpBtn,this, userSignUp);
         add(signUpBtn);
 
         JPanel panelSignUp = new JPanel();

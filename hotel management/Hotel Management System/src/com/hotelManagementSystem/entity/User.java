@@ -3,7 +3,7 @@ package com.hotelManagementSystem.entity;
 public class User {
     private String id;
     private String username;
-    private String password;
+    private String password, confirm_password;
     private String email;
     private String phone;
     private String type;
@@ -13,6 +13,7 @@ public class User {
         id = "";
         username = "";
         password = "";
+        confirm_password = "";
         email = "";
         phone = "";
         type = "";
@@ -36,6 +37,15 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void setConfirmPassword(String confirm_password) {
+        this.confirm_password = confirm_password;
+    }
+
+    public String getConfirmPassword(){
+        return this.confirm_password;
+    }
+
     public String getEmail() {
         return email;
     }
