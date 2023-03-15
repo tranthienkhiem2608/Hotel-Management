@@ -7,7 +7,7 @@ import static com.hotelManagementSystem.constants.Constants.*;
 public class Conn {
 
     private Connection c;
-    private Statement s;
+    public Statement s;
     public Conn() {
         try {
             Class.forName(CLASSNAME);
