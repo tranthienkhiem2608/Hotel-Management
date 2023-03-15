@@ -1,16 +1,11 @@
 package com.hotelManagementSystem.views;
 
+import com.hotelManagementSystem.conn.*;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import com.hotelManagementSystem.conn.Conn;
-import com.hotelManagementSystem.controller.NewCustomerController;
+import java.awt.event.*;
+import java.sql.*;
 
 public class NewCustomer extends JFrame{
 
@@ -103,12 +98,12 @@ public class NewCustomer extends JFrame{
         contentPane.add(lblReserveRoomNumber);
 
         c1 = new Choice();
-//        try{
-//            Conn c = new Conn();
-//            ResultSet rs = c.s.executeQuery("select * from room");
-//            while(rs.next()){
-//                c1.add(rs.getString("roomnumber"));
-//            }
+        try{
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery("select * from room");
+            while(rs.next()){
+                c1.add(rs.getString("roomnumber"));
+            }
         c1.setBounds(271, 274, 150, 20);
         contentPane.add(c1);
 
@@ -138,68 +133,68 @@ public class NewCustomer extends JFrame{
         t6.setColumns(10);
 
         JButton btnNewButton = new JButton("Add");
-//            btnNewButton.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    Conn c = new Conn();
-//                    String radio = null;
-//
-//                    if(r1.isSelected()){
-//                        radio = "Male";
-//                    }
-//                    else if(r2.isSelected()){
-//                        radio = "Female";
-//                    }
-//
-//                    String s6 = c1.getSelectedItem();
-//
-//                    try{
-//
-//                        String s1 = (String)comboBox.getSelectedItem();
-//                        String s2 =  t1.getText();
-//                        String s3 =  t2.getText();
-//                        String s4 =  radio;
-//                        String s5 =  t3.getText();
-//                        String s7 =  t5.getText();
-//                        String s8 =  t6.getText();
-//
-//                        String q1 = "insert into customer values('"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"')";
-//                        String q2 = "update room set availability = 'Occupied' where roomnumber = "+s6;
-//                        c.s.executeUpdate(q1);
-//                        c.s.executeUpdate(q2);
-//
-//
-//                        JOptionPane.showMessageDialog(null, "Data Inserted Successfully");
-//                        new ManagerDashboard().setVisible(true);
-//                        setVisible(false);
-//                    }catch(SQLException e1){
-//                        System.out.println(e1.getMessage());
-//                    }
-//                    catch(NumberFormatException s){
-//                        JOptionPane.showMessageDialog(null, "Please enter a valid Number");
-//                    }
-//                }
-//            });
+            btnNewButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    Conn c = new Conn();
+                    String radio = null;
+
+                    if(r1.isSelected()){
+                        radio = "Male";
+                    }
+                    else if(r2.isSelected()){
+                        radio = "Female";
+                    }
+
+                    String s6 = c1.getSelectedItem();
+
+                    try{
+
+                        String s1 = (String)comboBox.getSelectedItem();
+                        String s2 =  t1.getText();
+                        String s3 =  t2.getText();
+                        String s4 =  radio;
+                        String s5 =  t3.getText();
+                        String s7 =  t5.getText();
+                        String s8 =  t6.getText();
+
+                        String q1 = "insert into customer values('"+s1+"','"+s2+"','"+s3+"','"+s4+"','"+s5+"','"+s6+"','"+s7+"','"+s8+"')";
+                        String q2 = "update room set availability = 'Occupied' where roomnumber = "+s6;
+                        c.s.executeUpdate(q1);
+                        c.s.executeUpdate(q2);
+
+
+                        JOptionPane.showMessageDialog(null, "Data Inserted Successfully");
+                        new ManagerDashboard().setVisible(true);
+                        setVisible(false);
+                    }catch(SQLException e1){
+                        System.out.println(e1.getMessage());
+                    }
+                    catch(NumberFormatException s){
+                        JOptionPane.showMessageDialog(null, "Please enter a valid Number");
+                    }
+                }
+            });
         btnNewButton.setBounds(100, 430, 120, 30);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.setForeground(Color.WHITE);
         contentPane.add(btnNewButton);
 
         JButton btnExit = new JButton("Back");
-//        btnExit.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                new ManagerDashboard().setVisible(true);
-//                setVisible(false);
-//            }
-//        });
+        btnExit.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                new ManagerDashboard().setVisible(true);
+                setVisible(false);
+            }
+        });
         btnExit.setBounds(260, 430, 120, 30);
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.WHITE);
         contentPane.add(btnExit);
 
         getContentPane().setBackground(Color.WHITE);
-//    } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
+    } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 
