@@ -5,20 +5,34 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.ResultSet;
 import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.controller.ManagerDashboardController;
 
 public class ManagerDashboard extends JFrame{
 
     private JLabel l1;
+    private static JLabel labelListBtnAđd, labelListBtnEmployee;
     private JPanel p1, p2;
+    private static JPanel p3;
     private JTextArea t1, t2;
+
     private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, managerBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
+    private String[] buttonLabels = {"Room", "Employee", "Driver"}, buttonLabels2 = {"Employee", "Driver"};
+    private JList<String> buttonList, buttonList2;
+
 
      public ManagerDashboard() {
         initComponent();
         setLocationRelativeTo(null);
 
+    }
+
+    public static JPanel getP3() {
+        return p3;
+    }
+    public static void setP3(JPanel p) {
+        p3 = p;
     }
 
     private void initComponent() {
@@ -92,13 +106,47 @@ public class ManagerDashboard extends JFrame{
         p2.setLayout(null);
         add(p2);
 
-        addBtn = new JButton("Add Room");
+        labelListBtnAđd = new JLabel();
+        labelListBtnAđd.setBounds(250, 100, 140, 80);
+        labelListBtnAđd.setBackground(Color.decode("#b8b8b8"));
+        labelListBtnAđd.setLayout(null);
+        labelListBtnAđd.setVisible(false);
+        add(labelListBtnAđd);
+
+        buttonList = new JList<>(buttonLabels);
+        buttonList.setBounds(0, 0, 140, 120);
+        buttonList.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonList.setBackground(Color.decode("#a3a3a3"));
+        buttonList.setForeground(Color.decode("#2b2b2b"));
+        // check selected item
+        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd);
+        labelListBtnAđd.add(buttonList);
+
+        labelListBtnEmployee = new JLabel();
+        labelListBtnEmployee.setBounds(250, 260, 140, 60);
+        labelListBtnEmployee.setBackground(Color.decode("#b8b8b8"));
+        labelListBtnEmployee.setLayout(null);
+        labelListBtnEmployee.setVisible(false);
+        add(labelListBtnEmployee);
+
+        buttonList2 = new JList<>(buttonLabels2);
+        buttonList2.setBounds(0, 0, 140, 120);
+        buttonList2.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonList2.setBackground(Color.decode("#a3a3a3"));
+        buttonList2.setForeground(Color.decode("#2b2b2b"));
+        // check selected item
+        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee);
+        labelListBtnEmployee.add(buttonList2);
+
+        addBtn = new JButton("Add");
         addBtn.setBounds(0, 0, 250, 50);
         addBtn.setBorder(null);
         addBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         addBtn.setBackground(Color.decode("#292c35"));
         addBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkAddBtn(addBtn, labelListBtnAđd, labelListBtnEmployee);
         p2.add(addBtn);
+
 
         viewBtn = new JButton("View Room");
         viewBtn.setBounds(0, 50, 250, 50);
@@ -116,12 +164,15 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(customerBtn);
 
+
+
         employeeBtn = new JButton("Employee info");
         employeeBtn.setBounds(0, 150, 250, 50);
         employeeBtn.setBorder(null);
         employeeBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         employeeBtn.setBackground(Color.decode("#292c35"));
         employeeBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkEmployeeInfoBtn(employeeBtn, labelListBtnEmployee, labelListBtnAđd);
         p2.add(employeeBtn);
 
         managerBtn = new JButton("Manager info");
@@ -164,8 +215,11 @@ public class ManagerDashboard extends JFrame{
         historyBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(historyBtn);
 
-
-
+        p3 = new JPanel();
+        p3.setBounds(250, 100, 1150, 800);
+        p3.setBackground(Color.decode("#d5e1e4"));
+        p3.setLayout(null);
+        add(p3);
 
         JPanel gradientPanel = new JPanel() {
             @Override
