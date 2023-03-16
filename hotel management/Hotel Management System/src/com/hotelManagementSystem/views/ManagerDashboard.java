@@ -3,6 +3,9 @@ import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
 import java.sql.ResultSet;
 import com.hotelManagementSystem.entity.User;
 
@@ -114,6 +117,16 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
+        customerBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new CustomerInfo().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(customerBtn);
 
         employeeBtn = new JButton("Employee info");
@@ -122,6 +135,16 @@ public class ManagerDashboard extends JFrame{
         employeeBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         employeeBtn.setBackground(Color.decode("#292c35"));
         employeeBtn.setForeground(Color.decode("#f0f5f5"));
+        employeeBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new EmployeeInfo().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(employeeBtn);
 
         managerBtn = new JButton("Manager info");
@@ -130,6 +153,16 @@ public class ManagerDashboard extends JFrame{
         managerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         managerBtn.setBackground(Color.decode("#292c35"));
         managerBtn.setForeground(Color.decode("#f0f5f5"));
+        managerBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new ManagerInfo().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(managerBtn);
 
         updateStatusBtn = new JButton("Update Status");
@@ -146,6 +179,16 @@ public class ManagerDashboard extends JFrame{
         searchRoomBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         searchRoomBtn.setBackground(Color.decode("#292c35"));
         searchRoomBtn.setForeground(Color.decode("#f0f5f5"));
+        searchRoomBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new SearchRoom().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(searchRoomBtn);
 
         statisticsBtn = new JButton("Statistics");

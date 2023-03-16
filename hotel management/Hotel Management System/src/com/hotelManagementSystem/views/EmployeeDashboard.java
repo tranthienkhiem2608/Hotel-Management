@@ -5,7 +5,10 @@ import com.hotelManagementSystem.entity.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EmployeeDashboard extends JFrame {
 
@@ -122,6 +125,16 @@ public class EmployeeDashboard extends JFrame {
         chechInOutBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         chechInOutBtn.setBackground(Color.decode("#292c35"));
         chechInOutBtn.setForeground(Color.decode("#f0f5f5"));
+        chechInOutBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new UpdateCheck().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(chechInOutBtn);
 
         updateRoomBtn = new JButton("Update Room");
