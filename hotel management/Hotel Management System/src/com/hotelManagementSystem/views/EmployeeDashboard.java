@@ -2,11 +2,13 @@ package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.User;
-import com.hotelManagementSystem.controller.EmployeeDashboardController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class EmployeeDashboard extends JFrame {
 
@@ -16,9 +18,6 @@ public class EmployeeDashboard extends JFrame {
     private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
-    private static JLabel labelListBtnCheckInOut;
-    private String[] buttonLabels = {"Check In", "Check Out"};
-    private JList<String> buttonList;
 
     public EmployeeDashboard() {
         initComponent();
@@ -104,7 +103,7 @@ public class EmployeeDashboard extends JFrame {
         newCustomerBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(newCustomerBtn);
 
-        viewBtn = new JButton("View Room");
+        viewBtn = new JButton("View Customer");
         viewBtn.setBounds(0, 50, 250, 50);
         viewBtn.setBorder(null);
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -120,30 +119,22 @@ public class EmployeeDashboard extends JFrame {
         customerBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(customerBtn);
 
-        labelListBtnCheckInOut = new JLabel();
-        labelListBtnCheckInOut.setBounds(250, 260, 140, 60);
-        labelListBtnCheckInOut.setBorder(null);
-        labelListBtnCheckInOut.setFont(new Font("Arial", Font.PLAIN, 20));
-        labelListBtnCheckInOut.setBackground(Color.decode("#b8b8b8"));
-        labelListBtnCheckInOut.setVisible(false);
-        add(labelListBtnCheckInOut);
-
-        buttonList = new JList<>(buttonLabels);
-        buttonList.setBounds(0, 0, 140, 60);
-        buttonList.setBorder(null);
-        buttonList.setFont(new Font("Arial", Font.PLAIN, 20));
-        buttonList.setBackground(Color.decode("#a3a3a3"));
-        buttonList.setForeground(Color.decode("#2b2b2b"));
-        new EmployeeDashboardController().checkSelectBtnListInOut(buttonList, labelListBtnCheckInOut);
-        labelListBtnCheckInOut.add(buttonList);
-
         chechInOutBtn = new JButton("Check In/Out");
         chechInOutBtn.setBounds(0, 150, 250, 50);
         chechInOutBtn.setBorder(null);
         chechInOutBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         chechInOutBtn.setBackground(Color.decode("#292c35"));
         chechInOutBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().checkInOutBtn(chechInOutBtn, labelListBtnCheckInOut);
+        chechInOutBtn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    new UpdateCheck().setVisible(true);
+                    setVisible(false);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
         p2.add(chechInOutBtn);
 
         updateRoomBtn = new JButton("Update Room");
