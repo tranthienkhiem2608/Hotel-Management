@@ -1,0 +1,23 @@
+package com.hotelManagementSystem.dao;
+import  com.hotelManagementSystem.conn.Conn;
+import  com.hotelManagementSystem.entity.Account;
+import  com.hotelManagementSystem.entity.User;
+
+import java.sql.PreparedStatement;
+
+public class AccountSettingDao {
+
+    public int checkChangePassword(User user, Account account) {
+        try {
+            Conn conn = new Conn();
+            String query = "UPDATE account SET password = '" + account.getPassword() + "', count = '1' WHERE id = '" + user.getId() + "'";
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt.executeUpdate();
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+}

@@ -10,10 +10,9 @@ public class EmployeeDashboardController {
 
     }
 
-
-    public void checkSelectBtnListInOut(JList<String> list, JLabel p){
+    public void checkSelectBtnList(JList<String> list, JLabel p){
         list.addListSelectionListener(e -> {
-            if(list.getSelectedValue().equals("Check In")){
+            if(list.getSelectedValue().equals("Check in")){
                 displayPanel("Check In");
                 p.setVisible(false);
             }else if(list.getSelectedValue().equals("Check Out")){

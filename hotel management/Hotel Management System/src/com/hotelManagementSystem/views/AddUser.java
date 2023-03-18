@@ -1,5 +1,9 @@
 package com.hotelManagementSystem.views;
+
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.entity.Account;
+import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.controller.AddUserController;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -8,199 +12,323 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.hotelManagementSystem.controller.LoginController;
-import com.hotelManagementSystem.entity.User;
-import com.hotelManagementSystem.controller.SignUpController;
+public class AddUser extends JFrame implements ActionListener{
 
-public class AddUser extends JFrame{ //Third Frame
+    private static JPanel p1;
+    private JTextField t1,t2,t3,t4, t5, t6;
+    private JComboBox comboBox, comboBox_1;
+    JButton b1,b2;
+    Choice c1;
+    private Account account;
+    private User user;
 
 
-    JTextField textField,textField_1,textField_2,textField_3,textField_4,textField_5,textField_6;
-    JComboBox c1;
-
+    public JPanel getP1(){
+        return p1;
+    }
     public AddUser() {
         initComponent();
-        setLocationRelativeTo(null);
+//        setLocationRelativeTo(null);
 
     }
-    private void initComponent(){
-        getContentPane().setForeground(Color.BLACK);
-        getContentPane().setBackground(Color.WHITE);
-        setTitle("ADD USER DETAILS");
+    private void initComponent() {
+        p1 = new JPanel();
+        p1.setSize(900, 600);
+        p1.setLocation(100, 100);
+        setContentPane(p1);
+        p1.setLayout(null);
+        account = new Account();
+        user = new User();
 
+        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/employee.jpg"));
+        Image i3 = i1.getImage().getScaledInstance(480, 480,Image.SCALE_DEFAULT);
+        ImageIcon i2 = new ImageIcon(i3);
+        JLabel l15 = new JLabel(i2);
+        l15.setBounds(380,30,500,450);
+        add(l15);
 
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-        setSize(778,486);
-        getContentPane().setLayout(null);
+        JLabel l10 = new JLabel("ADD USER");
+        l10.setFont(new Font("Arial", Font.BOLD, 35));
+        l10.setBounds(525, 30, 442, 35);
+        p1.add(l10);
 
-        JLabel email = new JLabel("ID");
-        email.setFont(new Font("Arial", Font.BOLD, 17));
-        email.setBounds(60, 30, 150, 27);
-        add(email);
+        JLabel l1 = new JLabel("ID");
+        l1.setForeground(Color.decode("#17181D"));
+        l1.setFont(new Font("Arial", Font.BOLD, 17));
+        l1.setBounds(60, 80, 150, 27);
+        p1.add(l1);
 
-        textField = new JTextField();
-        textField.setBounds(200, 30, 150, 27);
-        add(textField);
+        t1 = new JTextField();
+        t1.setBounds(200, 80, 150, 27);
+        t1.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t1.getText().length() > 0) {
+                    t1.setBackground(Color.decode("#E0E0E0"));
+                    user.setId(t1.getText());
+                }
+            }
 
-        JLabel Passportno = new JLabel("Name");
-        Passportno.setFont(new Font("Arial", Font.BOLD, 17));
-        Passportno.setBounds(60, 80, 150, 27);
-        add(Passportno);
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t1.getText().length() == 0) {
+                    t1.setBackground(Color.WHITE);
+                    user.setId(t1.getText());
+                }
+            }
 
-        textField_1 = new JTextField();
-        textField_1.setBounds(200, 80, 150, 27);
-        add(textField_1);
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setId(t1.getText());
+                //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        p1.add(t1);
 
-        JButton Next = new JButton("SAVE");
-        Next.setBounds(200, 490, 150, 30);
-        Next.setBackground(Color.BLACK);
-        Next.setForeground(Color.WHITE);
-        add(Next);
+        JLabel l2 = new JLabel("Name");
+        l2.setForeground(Color.decode("#17181D"));
+        l2.setFont(new Font("Arial", Font.BOLD, 17));
+        l2.setBounds(60, 120, 150, 27);
+        p1.add(l2);
 
-        JLabel Pnrno = new JLabel("Age");
-        Pnrno.setFont(new Font("Arial", Font.BOLD, 17));
-        Pnrno.setBounds(60, 130, 150, 27);
-        add(Pnrno);
+        t2 = new JTextField();
+        t2.setBounds(200, 120, 150, 27);
+        t2.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t2.getText().length() > 0) {
+                    t2.setBackground(Color.decode("#E0E0E0"));
+                    user.setName(t2.getText());
+                }
+            }
 
-        textField_2 = new JTextField();
-        textField_2.setBounds(200, 130, 150, 27);
-        add(textField_2);
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t2.getText().length() == 0) {
+                    t2.setBackground(Color.WHITE);
+                    user.setName(t2.getText());
+                }
+            }
 
-        JLabel Gender = new JLabel("Gender");
-        Gender.setFont(new Font("Arial", Font.BOLD, 17));
-        Gender.setBounds(60, 180, 150, 27);
-        add(Gender);
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setName(t2.getText());
+                //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        p1.add(t2);
+
+        JLabel l3 = new JLabel("Age");
+        l3.setFont(new Font("Arial", Font.BOLD, 17));
+        l3.setForeground(Color.decode("#17181D"));
+        l3.setBounds(60, 160, 150, 27);
+        p1.add(l3);
+
+        t3 = new JTextField();
+        t3.setBounds(200, 160, 150, 27);
+        t3.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t3.getText().length() > 0) {
+                    t3.setBackground(Color.decode("#E0E0E0"));
+                    user.setAge(Integer.parseInt(t3.getText()));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t3.getText().length() == 0) {
+                    t3.setBackground(Color.WHITE);
+                    user.setAge(0);
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setAge(Integer.parseInt(t3.getText()));
+                //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        p1.add(t3);
+
+        JLabel l4 = new JLabel("Gender");
+        l4.setFont(new Font("Arial", Font.BOLD, 17));
+        l4.setForeground(Color.decode("#17181D"));
+        l4.setBounds(60, 200, 150, 27);
+        p1.add(l4);
+
 
         JRadioButton NewRadioButton = new JRadioButton("MALE");
         NewRadioButton.setBackground(Color.WHITE);
-        NewRadioButton.setBounds(200, 180, 70, 27);
-        add(NewRadioButton);
+        NewRadioButton.setBounds(200, 200, 70, 27);
+        p1.add(NewRadioButton);
 
         JRadioButton Female = new JRadioButton("FEMALE");
         Female.setBackground(Color.WHITE);
-        Female.setBounds(280, 180, 70, 27);
-        add(Female);
+        Female.setBounds(270, 200, 70, 27);
+        p1.add(Female);
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(NewRadioButton);
         bg.add(Female);
-///////////////
-        JLabel Type = new JLabel("Type");
-        Type.setFont(new Font("Arial", Font.BOLD, 17));
-        Type.setBounds(60, 230, 150, 27);
-        add(Type);
-        JRadioButton ManagerBtn = new JRadioButton("MANAGER");
-        ManagerBtn.setBackground(Color.WHITE);
-        ManagerBtn.setBounds(200, 230, 83, 27);
-        add(ManagerBtn);
-
-        JRadioButton EmployeeBtn = new JRadioButton("EMPLOYEE");
-        EmployeeBtn.setBackground(Color.WHITE);
-        EmployeeBtn.setBounds(280, 230, 95, 27);
-        add(EmployeeBtn);
-
-        ButtonGroup bg_1 = new ButtonGroup();
-        bg_1.add(ManagerBtn);
-        bg_1.add(EmployeeBtn);
-/////////////////
-        JLabel Address = new JLabel("Job");
-        Address.setFont(new Font("Arial", Font.BOLD, 17));
-        Address.setBounds(60, 280, 150, 27);
-        add(Address);
-
-        String course[] = {"Front Desk Clerks","Porters","Housekeeping","Kitchen Staff","Room Service","Waiter/Waitress","Manager","Accountant","Chef"};
-        c1 = new JComboBox(course);
-        c1.setBackground(Color.WHITE);
-        c1.setBounds(200,280,150,30);
-        add(c1);
-
-        JLabel Nationality = new JLabel("Salary");
-        Nationality.setFont(new Font("Arial", Font.BOLD, 17));
-        Nationality.setBounds(60, 330, 150, 27);
-        add(Nationality);
-
-        textField_3 = new JTextField();
-        textField_3.setBounds(200, 330, 150, 27);
-        add(textField_3);
-
-        JLabel Name = new JLabel("Phone");
-        Name.setFont(new Font("Arial", Font.BOLD, 17));
-        Name.setBounds(60, 380, 150, 27);
-        add(Name);
-
-        textField_4 = new JTextField();
-        textField_4.setBounds(200, 380, 150, 27);
-        add(textField_4);
-
-        JLabel Phno = new JLabel("Email");
-        Phno.setFont(new Font("Arial", Font.BOLD, 17));
-        Phno.setBounds(60, 430, 150, 27);
-        add(Phno);
-
-        textField_5 = new JTextField();
-        textField_5.setBounds(200, 430, 150, 27);
-        add(textField_5);
+        if(bg.getSelection() == Female.getModel()){
+            user.setGender("female");
+        }else {
+            user.setGender("male");
+        }
 
 
-        setVisible(true);
+        JLabel l6 = new JLabel("Job");
+        l6.setFont(new Font("Arial", Font.BOLD, 17));
+        l6.setForeground(Color.decode("#17181D"));
+        l6.setBounds(60, 280, 150, 27);
+        p1.add(l6);
 
-        JLabel AddPassengers = new JLabel("ADD USER DETAILS");
-        AddPassengers.setForeground(Color.decode("#17181D"));
-        AddPassengers.setFont(new Font("Arial", Font.BOLD, 35));
-        AddPassengers.setBounds(470, 24, 442, 35);
-        add(AddPassengers);
-
-
-        ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/employee.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(450, 450,Image.SCALE_DEFAULT);
-        ImageIcon i2 = new ImageIcon(i3);
-        JLabel image = new JLabel(i2);
-        image.setBounds(410,80,480,410);
-        add(image);
-
-
-        Next.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae){
-                String name = textField.getText();
-                String age = textField_1.getText();
-                String salary = textField_3.getText();
-                String phone = textField_4.getText();
-                String aadhar = textField_5.getText();
-                String email = textField_6.getText();
-
-                String gender = null;
-
-                if(NewRadioButton.isSelected()){
-                    gender = "male";
-
-                }else if(Female.isSelected()){
-                    gender = "female";
-                }
-
-
-                String s6 = (String)c1.getSelectedItem();
-
-                try {
-                    Conn c = new Conn();
-                    String str = "INSERT INTO employee values( '"+name+"', '"+age+"', '"+gender+"','"+s6+"', '"+salary+"', '"+phone+"','"+aadhar+"', '"+email+"')";
-
-                    c.s.executeUpdate(str);
-                    JOptionPane.showMessageDialog(null,"Employee Added");
-                    setVisible(false);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        comboBox = new JComboBox(new String[] {"receptionist", "manager", "waiter", "housekeeping", "room service", "security"});
+        comboBox.setBounds(200, 280, 150, 27);
+        comboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user.setPosition(comboBox.getSelectedItem().toString());
             }
         });
+        p1.add(comboBox);
 
-        setSize(900,600);
-        setVisible(true);
-        setLocation(530,200);
+        JLabel l7 = new JLabel("Salary");
+        l7.setFont(new Font("Arial", Font.BOLD, 17));
+        l7.setForeground(Color.decode("#17181D"));
+        l7.setBounds(60, 320, 150, 27);
+        p1.add(l7);
+
+        t4 = new JTextField();
+        t4.setBounds(200, 320, 150, 27);
+        t4.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t4.getText().length() > 0) {
+                    t4.setBackground(Color.decode("#E0E0E0"));
+                    user.setSalary(t4.getText());
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t4.getText().length() == 0) {
+                    t4.setBackground(Color.WHITE);
+                    user.setSalary(t4.getText());
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setSalary(t4.getText());
+            }
+        });
+        p1.add(t4);
+
+        JLabel l8 = new JLabel("Phone");
+        l8.setFont(new Font("Arial", Font.BOLD, 17));
+        l8.setForeground(Color.decode("#17181D"));
+        l8.setBounds(60, 360, 150, 27);
+        p1.add(l8);
+
+        t5 = new JTextField();
+        t5.setBounds(200, 360, 150, 27);
+        t5.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t5.getText().length() > 0) {
+                    t5.setBackground(Color.decode("#E0E0E0"));
+                    user.setPhone(t5.getText());
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t5.getText().length() == 0) {
+                    t5.setBackground(Color.WHITE);
+                    user.setPhone(t5.getText());
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setPhone(t5.getText());
+            }
+        });
+        p1.add(t5);
+
+        JLabel l9 = new JLabel("Email");
+        l9.setFont(new Font("Arial", Font.BOLD, 17));
+        l9.setForeground(Color.decode("#17181D"));
+        l9.setBounds(60, 400, 150, 27);
+        p1.add(l9);
+
+        t6 = new JTextField();
+        t6.setBounds(200, 400, 150, 27);
+        t6.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if (t6.getText().length() > 0) {
+                    t6.setBackground(Color.decode("#E0E0E0"));
+                    user.setEmail(t6.getText());
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if (t6.getText().length() == 0) {
+                    t6.setBackground(Color.WHITE);
+                    user.setEmail(t6.getText());
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                user.setEmail(t6.getText());
+            }
+        });
+        p1.add(t6);
+
+        JButton b1 = new JButton("Add");
+        b1.setBackground(Color.BLACK);
+        b1.setForeground(Color.WHITE);
+        b1.setBounds(60, 450, 130, 30);
+        new AddUserController().addBtn(b1, user, account);
+        p1.add(b1);
+        p1.setBackground(Color.WHITE);
 
     }
 
-    public static void main(String[] args){
-        new AddUser();
+    public void actionPerformed(ActionEvent ae){
+        try{
+
+            if(ae.getSource() == b1){
+                try{
+                    Conn c = new Conn();
+                    String name = t1.getText();
+                    String age = t2.getText();
+                    String gender = (String)comboBox.getSelectedItem();
+                    String company  = t3.getText();
+                    String brand = t4.getText();
+                    String available = (String)comboBox_1.getSelectedItem();
+                    String location = t5.getText();
+                    String str = "INSERT INTO driver values( '"+name+"', '"+age+"', '"+gender+"','"+company+"', '"+brand+"', '"+available+"','"+location+"')";
+
+
+                    c.s.executeUpdate(str);
+                    JOptionPane.showMessageDialog(null, "Driver Successfully Added");
+                    this.setVisible(false);
+
+                }catch(Exception ee){
+                    System.out.println(ee);
+                }
+            }
+            else if(ae.getSource() == b2){
+                this.setVisible(false);
+            }
+        }catch(Exception eee){
+
+        }
     }
 }

@@ -2,22 +2,22 @@ package com.hotelManagementSystem.entity;
 
 public class User {
     private String id;
-    private String username;
-    private String password, confirm_password;
+    private String name;
+    private String gender, position;
     private String email;
     private String phone;
-    private String type;
-    private String answer;
+    private String salary;
+    private int age;
 
     public User() {
         id = "";
-        username = "";
-        password = "";
-        confirm_password = "";
+        name = "";
+        age = 0;
+        gender = "";
         email = "";
         phone = "";
-        type = "";
-        answer = "";
+        position = "";
+        salary = "";
     }
     public String getId() {
         return id;
@@ -25,25 +25,32 @@ public class User {
     public void setId(String id) {
         this.id = id;
     }
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
-    public String getPassword() {
-        return password;
+    public int getAge() {
+        return age;
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public void setConfirmPassword(String confirm_password) {
-        this.confirm_password = confirm_password;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getConfirmPassword(){
-        return this.confirm_password;
+    public String getGender(){
+        return gender;
+    }
+
+    public  void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public String getEmail() {
@@ -58,17 +65,13 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getType() {
-        return type;
+    public String getSalary() {
+        return salary;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setSalary(String salary) {
+        this.salary = salary;
     }
-    public String getAnswer() {
-        return answer;
-    }
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
+
+
 
 }

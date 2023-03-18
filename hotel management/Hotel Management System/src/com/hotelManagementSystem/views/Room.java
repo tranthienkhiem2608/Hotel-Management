@@ -4,10 +4,11 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+import com.hotelManagementSystem.dao.RoomDao;
 public class Room extends javax.swing.JFrame {
 
-    private JPanel contentPane;
-    private JTable table;
+    private static JPanel p1;
+    private static JTable table;
     private JLabel lblAvailability;
     private JLabel lblCleanStatus;
     private JLabel lblNewLabel;
@@ -15,6 +16,13 @@ public class Room extends javax.swing.JFrame {
     private JLabel lblRoomNumber;
     private JLabel lblId;
 
+    public JTable getTable() {
+        return table;
+    }
+
+    public JPanel getP1() {
+        return p1;
+    }
     public static void main(String[] args) {
         new Room().setVisible(true);
     }
@@ -28,12 +36,13 @@ public class Room extends javax.swing.JFrame {
     private void initComponents() {
 
             //conn = Javaconnect.getDBConnection();
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            setBounds(450, 200, 1100, 600);
-            contentPane = new JPanel();
-            contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-            setContentPane(contentPane);
-            contentPane.setLayout(null);
+//            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//            setBounds(450, 200, 1100, 600);
+            p1 = new JPanel();
+        p1.setSize(1100, 600);
+        p1.setLocation(0,0);
+            setContentPane(p1);
+        p1.setLayout(null);
 
             ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/eight.jpg"));
             Image i3 = i1.getImage().getScaledInstance(600, 600,Image.SCALE_DEFAULT);
@@ -44,61 +53,41 @@ public class Room extends javax.swing.JFrame {
 
 
             table = new JTable();
-            table.setBounds(0, 40, 500, 400);
-            contentPane.add(table);
+            table.setBounds(0, 40, 500, 500);
+        p1.add(table);
+        try{
+            RoomDao roomDao = new RoomDao();
+            roomDao.showRoom(table);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
-            JButton btnLoadData = new JButton("Load Data");
-//            btnLoadData.addActionListener(new ActionListener() {
-//                public void actionPerformed(ActionEvent e) {
-//                    try{
-//                        Conn c = new Conn();
-//                        String str = "select * from room";
-//                        ResultSet rs = c.s.executeQuery(str);
-//                        table.setModel(DbUtils.resultSetToTableModel(rs));
-//
-//                    }
-//                    catch(Exception e1){
-//                        e1.printStackTrace();
-//                    }
-//                }
-//            });
-            btnLoadData.setBounds(100, 470, 120, 30);
-            btnLoadData.setBackground(Color.BLACK);
-            btnLoadData.setForeground(Color.WHITE);
-            contentPane.add(btnLoadData);
-
-            JButton btnNewButton = new JButton("Back");
-            btnNewButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    new ManagerDashboard().setVisible(true);
-                    setVisible(false);
-                }
-            });
-            btnNewButton.setBounds(290, 470, 120, 30);
-            btnNewButton.setBackground(Color.BLACK);
-            btnNewButton.setForeground(Color.WHITE);
-            contentPane.add(btnNewButton);
+            JButton editBtn = new JButton("Edit");
+            editBtn.setBounds(200, 550, 120, 30);
+            editBtn.setBackground(Color.BLACK);
+            editBtn.setForeground(Color.WHITE);
+        p1.add(editBtn);
 
             lblAvailability = new JLabel("Availability");
             lblAvailability.setBounds(119, 15, 69, 14);
-            contentPane.add(lblAvailability);
+        p1.add(lblAvailability);
 
             lblCleanStatus = new JLabel("Clean Status");
             lblCleanStatus.setBounds(216, 15, 76, 14);
-            contentPane.add(lblCleanStatus);
+        p1.add(lblCleanStatus);
 
             lblNewLabel = new JLabel("Price");
             lblNewLabel.setBounds(330, 15, 46, 14);
-            contentPane.add(lblNewLabel);
+        p1.add(lblNewLabel);
 
             lblNewLabel_1 = new JLabel("Bed Type");
             lblNewLabel_1.setBounds(417, 15, 76, 14);
-            contentPane.add(lblNewLabel_1);
+        p1.add(lblNewLabel_1);
 
 
             lblId = new JLabel("Room Number");
             lblId.setBounds(12, 15, 90, 14);
-            contentPane.add(lblId);
+        p1.add(lblId);
             getContentPane().setBackground(Color.WHITE);
         }
 }
