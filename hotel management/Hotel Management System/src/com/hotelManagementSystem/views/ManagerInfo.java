@@ -52,10 +52,7 @@ public class ManagerInfo extends JFrame {
     }
     public ManagerInfo(){
         initComponent();
-
-
     }
-
 
     private void initComponent(){
         //conn = Javaconnect.getDBConnection();
@@ -86,8 +83,16 @@ public class ManagerInfo extends JFrame {
             e.printStackTrace();
         }
 
+        JButton btnRefesh = new JButton("REFRESH");
+        btnRefesh.setBounds(400, 560, 120, 30);
+        btnRefesh.setBackground(Color.BLACK);
+        btnRefesh.setForeground(Color.WHITE);
+        p1.add(btnRefesh);
+
+        getContentPane().setBackground(Color.WHITE);
+
         JButton btnExit = new JButton("EDIT");
-        btnExit.setBounds(500, 560, 120, 30);
+        btnExit.setBounds(550, 560, 120, 30);
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.WHITE);
         p1.add(btnExit);
