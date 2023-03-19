@@ -12,7 +12,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddUser extends JFrame implements ActionListener{
+public class AddUser extends JFrame {
 
     private static JPanel p1;
     private JTextField t1,t2,t3,t4, t5, t6;
@@ -300,35 +300,6 @@ public class AddUser extends JFrame implements ActionListener{
 
     }
 
-    public void actionPerformed(ActionEvent ae){
-        try{
-
-            if(ae.getSource() == b1){
-                try{
-                    Conn c = new Conn();
-                    String name = t1.getText();
-                    String age = t2.getText();
-                    String gender = (String)comboBox.getSelectedItem();
-                    String company  = t3.getText();
-                    String brand = t4.getText();
-                    String available = (String)comboBox_1.getSelectedItem();
-                    String location = t5.getText();
-                    String str = "INSERT INTO driver values( '"+name+"', '"+age+"', '"+gender+"','"+company+"', '"+brand+"', '"+available+"','"+location+"')";
 
 
-                    c.s.executeUpdate(str);
-                    JOptionPane.showMessageDialog(null, "Driver Successfully Added");
-                    this.setVisible(false);
-
-                }catch(Exception ee){
-                    System.out.println(ee);
-                }
-            }
-            else if(ae.getSource() == b2){
-                this.setVisible(false);
-            }
-        }catch(Exception eee){
-
-        }
-    }
 }
