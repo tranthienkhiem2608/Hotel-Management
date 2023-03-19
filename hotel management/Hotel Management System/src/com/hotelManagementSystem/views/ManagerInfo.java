@@ -24,7 +24,7 @@ public class ManagerInfo extends JFrame {
     Connection conn = null;
     private JPanel contentPane;
     private JTable table;
-    private JLabel lblID;
+    private JTextArea lblID;
     private JLabel lblName;
     private JLabel lblAge;
     private JLabel lblJob;
@@ -100,10 +100,12 @@ public class ManagerInfo extends JFrame {
         contentPane.add(btnExit);
 
         getContentPane().setBackground(Color.WHITE);
-        lblID = new JLabel("ID");
+        lblID = new JTextArea("ID");
         lblID.setBounds(40, 20, 46, 16);
         lblID.setBorder(null);
         lblID.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblID.setBackground(Color.decode("#292c35"));
+        lblID.setForeground(Color.decode("#f0f5f5"));
         contentPane.add(lblID);
 
         lblName = new JLabel("Name");
@@ -126,7 +128,7 @@ public class ManagerInfo extends JFrame {
         lblJob.setBorder(null);
         lblJob.setFont(new Font("Arial", Font.PLAIN, 13));
         lblJob.setBackground(Color.decode("#292c35"));
-        lblJob.setForeground(Color.decode("#f0f5f5"));
+        //lblJob.setForeground(Color.decode("#f0f5f5"));
         contentPane.add(lblJob);
 
         JButton l1 = new JButton("Salary");
