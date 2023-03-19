@@ -105,7 +105,6 @@ public class ManagerDashboard extends JFrame{
         }
         l1.add(t2);
 
-
         p2 = new JPanel();
         p2.setBounds(0, 100, 250, 800);
         p2.setBackground(Color.decode("#292c35"));
@@ -128,21 +127,23 @@ public class ManagerDashboard extends JFrame{
         add(labelListBtnEmployee);
 
         p3 = new JPanel();
-        p3.setBounds(250, 100, 1100, 600);
+        p3.setBounds(265, 130, 1100, 600);
         p3.setBackground(Color.decode("#ffffff"));
         p3.setLayout(null);
         add(p3);
+
         p4 = new JPanel();
-        p4.setBounds(250, 100, 1100, 600);
+        p4.setBounds(265, 130, 1100, 600);
         p4.setBackground(Color.decode("#ffffff"));
         p4.setLayout(null);
         add(p4);
 
         p5 = new JPanel();
-        p5.setBounds(250, 100, 1100, 600);
+        p5.setBounds(265, 130, 1100, 600);
         p5.setBackground(Color.decode("#ffffff"));
         p5.setLayout(null);
         add(p5);
+
         p6 = new JPanel();
         p6.setBounds(265, 130, 1100, 600);
         p6.setBackground(Color.decode("#ffffff"));
@@ -150,7 +151,7 @@ public class ManagerDashboard extends JFrame{
         p6.setVisible(false);
         add(p6);
 
-        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/logologin.png"));
+        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
         Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         profileBtn = new JButton(new ImageIcon(profileImage));
         profileBtn.setBorder(null);
