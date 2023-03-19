@@ -147,6 +147,7 @@ public class Login extends JFrame{
         login.setForeground(Color.decode("#ffffff"));
         new LoginController().LoginBtn(login, this, userLogin, user);
         p1.add(login);
+        getRootPane().setDefaultButton(login);
         nameUser = user.getName();
 
         i3 = new ImageIcon(ClassLoader.getSystemResource("icons/logologin.png"));

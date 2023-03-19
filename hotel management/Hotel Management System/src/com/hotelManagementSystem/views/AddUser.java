@@ -296,6 +296,7 @@ public class AddUser extends JFrame {
         b1.setBounds(60, 450, 130, 30);
         new AddUserController().addBtn(b1, user, account);
         p1.add(b1);
+        getRootPane().setDefaultButton(b1);
         p1.setBackground(Color.WHITE);
 
     }
