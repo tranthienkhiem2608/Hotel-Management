@@ -3,26 +3,43 @@ import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.sql.*;
 import java.sql.ResultSet;
 import com.hotelManagementSystem.entity.User;
+import com.hotelManagementSystem.controller.ManagerDashboardController;
+import com.hotelManagementSystem.dao.ManagerDashboardDao;
+
 
 public class ManagerDashboard extends JFrame{
 
     private JLabel l1;
+    private static JLabel labelListBtnAđd, labelListBtnEmployee;
     private JPanel p1, p2;
-    private JTextArea t1, t2;
+    private static JPanel p3, p4, p5;
+    private JTextArea t1;
+    private static JTextArea t2;
+
     private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, managerBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
+    private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
+    private JList<String> buttonList, buttonList2;
+
+
 
      public ManagerDashboard() {
         initComponent();
         setLocationRelativeTo(null);
 
     }
+
+    public static JPanel getP3() {
+        return p3;
+    }
+    public static void setP3(JPanel p) {
+        p3 = p;
+    }
+
+
 
     private void initComponent() {
         setSize(1400, 800);
@@ -80,7 +97,7 @@ public class ManagerDashboard extends JFrame{
         try{
             Login l = new Login();
             l.setVisible(false);
-            t2.setText(l.getUsernameLogin());
+            new ManagerDashboardDao().setTextNameUser(l.getIDLogin(), t2);
 
 
         }catch(Exception e){
@@ -95,13 +112,68 @@ public class ManagerDashboard extends JFrame{
         p2.setLayout(null);
         add(p2);
 
-        addBtn = new JButton("Add Room");
+
+        labelListBtnAđd = new JLabel();
+        labelListBtnAđd.setBounds(250, 100, 140, 80);
+        labelListBtnAđd.setBackground(Color.decode("#b8b8b8"));
+        labelListBtnAđd.setLayout(null);
+        labelListBtnAđd.setVisible(false);
+        add(labelListBtnAđd);
+
+        labelListBtnEmployee = new JLabel();
+        labelListBtnEmployee.setBounds(250, 260, 140, 60);
+        labelListBtnEmployee.setBackground(Color.decode("#b8b8b8"));
+        labelListBtnEmployee.setLayout(null);
+        labelListBtnEmployee.setVisible(false);
+        add(labelListBtnEmployee);
+
+        p3 = new JPanel();
+        p3.setBounds(250, 100, 1100, 600);
+        p3.setBackground(Color.decode("#ffffff"));
+        p3.setLayout(null);
+        add(p3);
+        p4 = new JPanel();
+        p4.setBounds(250, 100, 1100, 600);
+        p4.setBackground(Color.decode("#ffffff"));
+        p4.setLayout(null);
+        add(p4);
+
+        p5 = new JPanel();
+        p5.setBounds(250, 100, 1100, 600);
+        p5.setBackground(Color.decode("#ffffff"));
+        p5.setLayout(null);
+        add(p5);
+
+
+
+        buttonList = new JList<>(buttonLabels);
+        buttonList.setBounds(0, 0, 140, 120);
+        buttonList.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonList.setBackground(Color.decode("#a3a3a3"));
+        buttonList.setForeground(Color.decode("#2b2b2b"));
+        // check selected item
+        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5);
+        labelListBtnAđd.add(buttonList);
+
+
+        buttonList2 = new JList<>(buttonLabels2);
+        buttonList2.setBounds(0, 0, 140, 120);
+        buttonList2.setFont(new Font("Arial", Font.PLAIN, 20));
+        buttonList2.setBackground(Color.decode("#a3a3a3"));
+        buttonList2.setForeground(Color.decode("#2b2b2b"));
+        // check selected item
+        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5);
+        labelListBtnEmployee.add(buttonList2);
+
+        addBtn = new JButton("Add");
         addBtn.setBounds(0, 0, 250, 50);
         addBtn.setBorder(null);
         addBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         addBtn.setBackground(Color.decode("#292c35"));
         addBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkAddBtn(addBtn, labelListBtnAđd, labelListBtnEmployee);
         p2.add(addBtn);
+
 
         viewBtn = new JButton("View Room");
         viewBtn.setBounds(0, 50, 250, 50);
@@ -109,6 +181,7 @@ public class ManagerDashboard extends JFrame{
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnAđd, p3, p4, p5);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer info");
@@ -117,56 +190,21 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
-        customerBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new CustomerInfo().setVisible(true);
-                    setVisible(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
         p2.add(customerBtn);
 
-        employeeBtn = new JButton("Employee info");
+
+
+        employeeBtn = new JButton("User info");
         employeeBtn.setBounds(0, 150, 250, 50);
         employeeBtn.setBorder(null);
         employeeBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         employeeBtn.setBackground(Color.decode("#292c35"));
         employeeBtn.setForeground(Color.decode("#f0f5f5"));
-        employeeBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new EmployeeInfo().setVisible(true);
-                    setVisible(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
+        new ManagerDashboardController().checkEmployeeInfoBtn(employeeBtn, labelListBtnEmployee, labelListBtnAđd);
         p2.add(employeeBtn);
 
-        managerBtn = new JButton("Manager info");
-        managerBtn.setBounds(0, 200, 250, 50);
-        managerBtn.setBorder(null);
-        managerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
-        managerBtn.setBackground(Color.decode("#292c35"));
-        managerBtn.setForeground(Color.decode("#f0f5f5"));
-        managerBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new ManagerInfo().setVisible(true);
-                    setVisible(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
-        p2.add(managerBtn);
-
         updateStatusBtn = new JButton("Update Status");
-        updateStatusBtn.setBounds(0, 250, 250, 50);
+        updateStatusBtn.setBounds(0, 200, 250, 50);
         updateStatusBtn.setBorder(null);
         updateStatusBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         updateStatusBtn.setBackground(Color.decode("#292c35"));
@@ -174,25 +212,15 @@ public class ManagerDashboard extends JFrame{
         p2.add(updateStatusBtn);
 
         searchRoomBtn = new JButton("Search");
-        searchRoomBtn.setBounds(0, 300, 250, 50);
+        searchRoomBtn.setBounds(0, 250, 250, 50);
         searchRoomBtn.setBorder(null);
         searchRoomBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         searchRoomBtn.setBackground(Color.decode("#292c35"));
         searchRoomBtn.setForeground(Color.decode("#f0f5f5"));
-        searchRoomBtn.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    new SearchRoom().setVisible(true);
-                    setVisible(false);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        });
         p2.add(searchRoomBtn);
 
         statisticsBtn = new JButton("Statistics");
-        statisticsBtn.setBounds(0, 350, 250, 50);
+        statisticsBtn.setBounds(0, 300, 250, 50);
         statisticsBtn.setBorder(null);
         statisticsBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         statisticsBtn.setBackground(Color.decode("#292c35"));
@@ -200,14 +228,12 @@ public class ManagerDashboard extends JFrame{
         p2.add(statisticsBtn);
 
         historyBtn = new JButton("History");
-        historyBtn.setBounds(0, 400, 250, 50);
+        historyBtn.setBounds(0, 350, 250, 50);
         historyBtn.setBorder(null);
         historyBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         historyBtn.setBackground(Color.decode("#292c35"));
         historyBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(historyBtn);
-
-
 
 
         JPanel gradientPanel = new JPanel() {

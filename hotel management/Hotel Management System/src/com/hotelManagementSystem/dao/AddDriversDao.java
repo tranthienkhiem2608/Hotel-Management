@@ -1,0 +1,27 @@
+package com.hotelManagementSystem.dao;
+import com.hotelManagementSystem.entity.Driver;
+import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.views.Notification;
+
+import java.sql.ResultSet;
+
+public class AddDriversDao {
+    public int addDrivers(Driver driver){
+        Conn conn = new Conn();
+        try{
+            String query1 = "select * from Drivers where name = '" + driver.getName() + "'";
+            ResultSet rs = conn.getStatment().executeQuery(query1);
+            if(!rs.next()){
+                String query2 = "insert into Drivers values('" + driver.getName() + "', '" + driver.getAge() + "', '" + driver.getGender() + "', '" + driver.getCarCompany() + "', '" + driver.getCarBrand() + "', '" + driver.getAvailable() + "', '" + driver.getLocation() + "')";
+                conn.getStatment().executeUpdate(query2);
+                return 1;
+            }else {
+                return 2;
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return 0;
+        }
+    }
+}
