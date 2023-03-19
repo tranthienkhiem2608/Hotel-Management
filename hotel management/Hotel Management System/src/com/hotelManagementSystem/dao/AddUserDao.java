@@ -11,32 +11,28 @@ import java.util.Random;
 
 public class AddUserDao {
 
-    public int addUser(User user, Account account){
-        try{
+    public int addUser(User user, Account account) {
+        try {
             Conn conn = new Conn();
             String query = "SELECT * FROM users WHERE id = '" + user.getId() + "'";
             ResultSet rs = conn.getStatment().executeQuery(query);
-            if(!rs.next()){
+            if (!rs.next()) {
                 String query2 = "insert into Users values('" + user.getId() + "', '" + user.getName() + "', '" + user.getAge() + "', '" + user.getGender() + "', '" + user.getPosition() + "', '" + user.getSalary() + "', '" + user.getPhone() + "', '" + user.getEmail() + "')";
                 conn.getStatment().executeUpdate(query2);
-                ResultSet rs2 = conn.getStatment().executeQuery(query2);
-                if (rs2.getString("position" ) == "reception" || rs2.getString("position" ) == "manager" ) {
-                    String query3 = "insert into Account values('" + user.getId() + "', '" + generateRandomPassword(10) + "','" + "0" + "')";
+                if (user.getPosition().equals("manager") || user.getPosition().equals("receptionist")) {
+                    String query3 = "insert into Account values('" + user.getId() + "', '" + generateRandomPassword(10) + "','" + "khong" + "','" + "0" +"')";
                     conn.getStatment().executeUpdate(query3);
                     return 1;
-                }
-                else {
+                } else {
                     return 3;
                 }
-            }else {
+            } else {
                 return 2;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
-
-
     }
 
     public String generateRandomPassword(int length) {
