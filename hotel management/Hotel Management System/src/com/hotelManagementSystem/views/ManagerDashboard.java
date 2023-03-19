@@ -18,9 +18,9 @@ public class ManagerDashboard extends JFrame{
     private JTextArea t1;
     private static JTextArea t2;
 
-    private  JButton logoutBtn, profileBtn, addBtn, viewBtn, customerBtn, employeeBtn, managerBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
-    private ImageIcon logoutIcon, profileIcon;
-    private  Image logoutImage, profileImage;
+    private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, profileBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
+    private ImageIcon logoutIcon;
+    private  Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
 
@@ -44,6 +44,7 @@ public class ManagerDashboard extends JFrame{
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
+
 
         p1 = new JPanel() {
             @Override
@@ -127,23 +128,36 @@ public class ManagerDashboard extends JFrame{
         add(labelListBtnEmployee);
 
         p3 = new JPanel();
-        p3.setBounds(265, 130, 1100, 600);
+        p3.setBounds(250, 100, 1100, 600);
         p3.setBackground(Color.decode("#ffffff"));
         p3.setLayout(null);
         add(p3);
         p4 = new JPanel();
-        p4.setBounds(265, 130, 1100, 600);
+        p4.setBounds(250, 100, 1100, 600);
         p4.setBackground(Color.decode("#ffffff"));
         p4.setLayout(null);
-        p4.setVisible(false);
         add(p4);
 
         p5 = new JPanel();
-        p5.setBounds(265, 130, 1100, 600);
+        p5.setBounds(250, 100, 1100, 600);
         p5.setBackground(Color.decode("#ffffff"));
         p5.setLayout(null);
-        p5.setVisible(false);
         add(p5);
+        p6 = new JPanel();
+        p6.setBounds(265, 130, 1100, 600);
+        p6.setBackground(Color.decode("#ffffff"));
+        p6.setLayout(null);
+        p6.setVisible(false);
+        add(p6);
+
+        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/logologin.png"));
+        Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+        profileBtn = new JButton(new ImageIcon(profileImage));
+        profileBtn.setBorder(null);
+        profileBtn.setBounds(1250, 30, 30, 30);
+        profileBtn.setBackground(Color.decode("#272a32"));
+        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6);
+        p1.add(profileBtn);
 
 
 
@@ -153,7 +167,7 @@ public class ManagerDashboard extends JFrame{
         buttonList.setBackground(Color.decode("#a3a3a3"));
         buttonList.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5);
+        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5, p6);
         labelListBtnAđd.add(buttonList);
 
 
@@ -163,7 +177,7 @@ public class ManagerDashboard extends JFrame{
         buttonList2.setBackground(Color.decode("#a3a3a3"));
         buttonList2.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5);
+        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5, p6);
         labelListBtnEmployee.add(buttonList2);
 
         addBtn = new JButton("Add");
@@ -182,7 +196,7 @@ public class ManagerDashboard extends JFrame{
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnAđd, p3, p4, p5);
+        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer info");
