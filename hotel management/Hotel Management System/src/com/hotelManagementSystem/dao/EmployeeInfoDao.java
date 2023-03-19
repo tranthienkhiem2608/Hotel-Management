@@ -13,7 +13,7 @@ public class EmployeeInfoDao {
     private User user;
     public void showEmployee(JTable table, DefaultTableModel tableModel){
         user = new User();
-        try {
+        try{
             Conn conn = new Conn();
             String query = "select * from users where position != 'manager'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);
@@ -32,8 +32,9 @@ public class EmployeeInfoDao {
             }
             table.setModel(tableModel);
             table.setRowHeight(30);
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
+
     }
 }
