@@ -31,9 +31,10 @@ public class ManagerDashboardController {
         addRoom.setVisible(false);
         cardLayout = new CardLayout();
         p.setLayout(cardLayout);
+        p.add(addRoom.getP1(), "addRoom");
         p.add(addDrivers.getP1(), "addDrivers");
         p.add(addUser.getP1(), "addUser");
-        p.add(addRoom.getP1(), "addRoom");
+
     }
 
     public void addCardLayout2(JPanel p){

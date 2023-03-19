@@ -35,18 +35,19 @@ public class AddDrivers extends JFrame {
         p1.setLocation(100, 100);
         setContentPane(p1);
         p1.setLayout(null);
+        p1.setBackground(Color.WHITE);
         driver = new Driver();
 
         ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/drivers.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(480, 480,Image.SCALE_DEFAULT);
+        Image i3 = i1.getImage().getScaledInstance(500, 500,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l15 = new JLabel(i2);
-        l15.setBounds(380,30,500,450);
+        l15.setBounds(470,20,500,500);
         add(l15);
 
         JLabel l10 = new JLabel("ADD DRIVER");
         l10.setFont(new Font("Arial", Font.BOLD, 35));
-        l10.setBounds(525, 30, 442, 35);
+        l10.setBounds(95, 30, 442, 35);
         p1.add(l10);
 
 
@@ -54,12 +55,12 @@ public class AddDrivers extends JFrame {
         JLabel l1 = new JLabel("Name");
         l1.setForeground(Color.decode("#17181D"));
         l1.setFont(new Font("Arial", Font.BOLD, 17));
-        l1.setBounds(60, 80, 150, 27);
+        l1.setBounds(60, 130, 150, 27);
         p1.add(l1);
 
 
         t1 = new JTextField();
-        t1.setBounds(174, 80, 150, 27);
+        t1.setBounds(174, 130, 150, 27);
         t1.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -82,11 +83,11 @@ public class AddDrivers extends JFrame {
         JLabel l2 = new JLabel("Age");
         l2.setForeground(Color.decode("#17181D"));
         l2.setFont(new Font("Arial", Font.BOLD, 17));
-        l2.setBounds(60, 130, 150, 27);
+        l2.setBounds(60, 180, 150, 27);
         p1.add(l2);
 
         t2 = new JTextField();
-        t2.setBounds(174, 130, 150, 27);
+        t2.setBounds(174, 180, 150, 27);
         t2.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -108,17 +109,17 @@ public class AddDrivers extends JFrame {
 
         JLabel Gender = new JLabel("Gender");
         Gender.setFont(new Font("Arial", Font.BOLD, 17));
-        Gender.setBounds(60, 180, 150, 27);
+        Gender.setBounds(60, 230, 150, 27);
         add(Gender);
 
         JRadioButton NewRadioButton = new JRadioButton("MALE");
         NewRadioButton.setBackground(Color.WHITE);
-        NewRadioButton.setBounds(170, 180, 70, 27);
+        NewRadioButton.setBounds(170, 230, 70, 27);
         p1.add(NewRadioButton);
 
         JRadioButton Female = new JRadioButton("FEMALE");
         Female.setBackground(Color.WHITE);
-        Female.setBounds(240, 180, 70, 27);
+        Female.setBounds(240, 230, 70, 27);
         p1.add(Female);
 
         ButtonGroup bg = new ButtonGroup();
@@ -133,11 +134,11 @@ public class AddDrivers extends JFrame {
         JLabel l4 = new JLabel("Car Company");
         l4.setForeground(Color.decode("#17181D"));
         l4.setFont(new Font("Arial", Font.BOLD, 17));
-        l4.setBounds(60, 230, 150, 27);
+        l4.setBounds(60, 280, 150, 27);
         p1.add(l4);
 
         t3 = new JTextField();
-        t3.setBounds(174, 230, 150, 27);
+        t3.setBounds(174, 280, 150, 27);
         t3.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -159,12 +160,12 @@ public class AddDrivers extends JFrame {
         JLabel l5 = new JLabel("Car Brand");
         l5.setForeground(Color.decode("#17181D"));
         l5.setFont(new Font("Arial", Font.BOLD, 17));
-        l5.setBounds(60, 280, 150, 27);
+        l5.setBounds(60, 330, 150, 27);
         p1.add(l5);
 
 
         t4 = new JTextField();
-        t4.setBounds(174, 280, 150, 27);
+        t4.setBounds(174, 330, 150, 27);
         t4.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -187,11 +188,11 @@ public class AddDrivers extends JFrame {
         JLabel l6 = new JLabel("Available");
         l6.setForeground(Color.decode("#17181D"));
         l6.setFont(new Font("Arial", Font.BOLD, 17));
-        l6.setBounds(60, 330, 150, 27);
+        l6.setBounds(60, 380, 150, 27);
         p1.add(l6);
 
         comboBox = new JComboBox(new String[] { "yes", "no" });
-        comboBox.setBounds(174, 330, 150, 27);
+        comboBox.setBounds(174, 380, 150, 27);
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -204,12 +205,12 @@ public class AddDrivers extends JFrame {
         JLabel l7 = new JLabel("Location");
         l7.setForeground(Color.decode("#17181D"));
         l7.setFont(new Font("Arial", Font.BOLD, 17));
-        l7.setBounds(60, 380, 150, 27);
+        l7.setBounds(60, 430, 150, 27);
         p1.add(l7);
 
 
         t5 = new JTextField();
-        t5.setBounds(174, 380, 150, 27);
+        t5.setBounds(174, 430, 150, 27);
         t5.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -231,7 +232,7 @@ public class AddDrivers extends JFrame {
 
 
         b1 = new JButton("ADD");
-        b1.setBounds(80, 430, 111, 33);
+        b1.setBounds(130, 500, 111, 33);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         new AddDriversController().addDriversBtn(b1, driver);

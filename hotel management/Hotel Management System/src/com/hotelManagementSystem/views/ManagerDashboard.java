@@ -14,13 +14,13 @@ public class ManagerDashboard extends JFrame{
     private JLabel l1;
     private static JLabel labelListBtnAđd, labelListBtnEmployee;
     private JPanel p1, p2;
-    private static JPanel p3, p4, p5;
+    private static JPanel p3, p4, p5, p6;
     private JTextArea t1;
     private static JTextArea t2;
 
-    private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, managerBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
-    private ImageIcon logoutIcon;
-    private  Image logoutImage;
+    private  JButton logoutBtn, profileBtn, addBtn, viewBtn, customerBtn, employeeBtn, managerBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
+    private ImageIcon logoutIcon, profileIcon;
+    private  Image logoutImage, profileImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
 
@@ -44,7 +44,6 @@ public class ManagerDashboard extends JFrame{
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
-
 
         p1 = new JPanel() {
             @Override
@@ -128,20 +127,22 @@ public class ManagerDashboard extends JFrame{
         add(labelListBtnEmployee);
 
         p3 = new JPanel();
-        p3.setBounds(250, 100, 1100, 600);
+        p3.setBounds(265, 130, 1100, 600);
         p3.setBackground(Color.decode("#ffffff"));
         p3.setLayout(null);
         add(p3);
         p4 = new JPanel();
-        p4.setBounds(250, 100, 1100, 600);
+        p4.setBounds(265, 130, 1100, 600);
         p4.setBackground(Color.decode("#ffffff"));
         p4.setLayout(null);
+        p4.setVisible(false);
         add(p4);
 
         p5 = new JPanel();
-        p5.setBounds(250, 100, 1100, 600);
+        p5.setBounds(265, 130, 1100, 600);
         p5.setBackground(Color.decode("#ffffff"));
         p5.setLayout(null);
+        p5.setVisible(false);
         add(p5);
 
 
