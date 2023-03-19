@@ -19,20 +19,24 @@ public class AddUserDao {
             if(!rs.next()){
                 String query2 = "insert into Users values('" + user.getId() + "', '" + user.getName() + "', '" + user.getAge() + "', '" + user.getGender() + "', '" + user.getPosition() + "', '" + user.getSalary() + "', '" + user.getPhone() + "', '" + user.getEmail() + "')";
                 conn.getStatment().executeUpdate(query2);
-                if (user.getPosition() == "receptionist" || user.getPosition() == "manager") {
+                ResultSet rs2 = conn.getStatment().executeQuery(query2);
+                if (rs2.getString("position" ) == "reception" || rs2.getString("position" ) == "manager" ) {
                     String query3 = "insert into Account values('" + user.getId() + "', '" + generateRandomPassword(10) + "','" + "0" + "')";
                     conn.getStatment().executeUpdate(query3);
                     return 1;
                 }
-                return 1;
+                else {
+                    return 3;
+                }
             }else {
                 return 2;
             }
         }catch (Exception e){
             e.printStackTrace();
+            return 0;
         }
 
-        return 0;
+
     }
 
     public String generateRandomPassword(int length) {

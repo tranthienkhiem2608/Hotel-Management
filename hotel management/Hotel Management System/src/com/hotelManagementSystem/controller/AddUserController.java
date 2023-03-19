@@ -16,7 +16,7 @@ public class AddUserController {
                 new Notification("Add user successfully!").setVisible(true);
             } else if (flag == 2) {
                 new Notification("User already exists!").setVisible(true);
-            } else {
+            } else if (flag == 0){
                 new Notification("Add user failed!").setVisible(true);
             }
         });
