@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.hotelManagementSystem.views;
+import com.hotelManagementSystem.controller.EmployeeInfoController;
 import com.hotelManagementSystem.dao.EmployeeInfoDao;
 
 import java.awt.BorderLayout;
@@ -67,6 +68,7 @@ public class EmployeeInfo extends JFrame {
         btnEdit.setBounds(550, 540, 120, 30);
         btnEdit.setBackground(Color.BLACK);
         btnEdit.setForeground(Color.WHITE);
+        new EmployeeInfoController().ChangeToEdit(btnEdit);
         p1.add(btnEdit);
 
         getContentPane().setBackground(Color.WHITE);
