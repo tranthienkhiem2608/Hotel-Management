@@ -1,6 +1,7 @@
 package com.hotelManagementSystem.views;
 
 
+import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.dao.LoginDao;
 import com.hotelManagementSystem.controller.LoginController;
@@ -13,20 +14,32 @@ import java.awt.event.*;
 import java.sql.*;
 
 public class Login extends JFrame{
-    private JLabel user, pass, l1, l2;
-    private JTextField username;
+    private JLabel id, pass, l1, l2;
+    private JTextField idUser;
     private JPasswordField password;
     private JButton login, backBtn, forgotBtn, signupBtn;
     private ImageIcon i1, i2, i3, ib1, ib2, ib3, backBut;
     private  Image img1, img2, img3, imgButton1;
     private JTextArea t1;
     private JPanel p1;
-    private static User userLogin;
-    private static String usernameLogin;
+    private static Account userLogin;
+    private static User user;
+    private static String IDUser, nameUser = "";
 
-    public String getUsernameLogin(){
-        return usernameLogin;
+    public String getIDLogin(){
+        return IDUser;
     }
+    public String getNameLogin(){
+        return nameUser;
+    }
+
+    public Account getUserLogin(){
+        return userLogin;
+    }
+    public User getUser(){
+        return user;
+    }
+
     public Login(){
 
         initComponents();
@@ -37,7 +50,8 @@ public class Login extends JFrame{
         setSize(1400, 800);
         setLocation(200,100);
         setLayout(null);
-        userLogin = new User();
+        userLogin = new Account();
+        user = new User();
 
         p1 = new JPanel();
         p1.setBounds(0, 0, 1400, 800);
@@ -54,34 +68,34 @@ public class Login extends JFrame{
         new LoginController().backToWelcome(backBtn,this);
         p1.add(backBtn);
 
-        user = new JLabel("Username");
-        user.setBounds(100, 270, 100, 30);
-        user.setFont(new Font("Arial", Font.PLAIN, 20));
-        user.setForeground(Color.decode("#f0f5f5"));
-        p1.add(user);
+        id = new JLabel("ID");
+        id.setBounds(100, 270, 100, 30);
+        id.setFont(new Font("Arial", Font.PLAIN, 20));
+        id.setForeground(Color.decode("#f0f5f5"));
+        p1.add(id);
 
-        username = new JTextField();
-        username.setBounds(200, 270, 220, 30);
-        username.setBackground(Color.decode("#e6f2f2"));
-        username.setFont(new Font("serif", Font.PLAIN, 15));
-        username.setForeground(Color.decode("#1a1a1a"));
-        username.getDocument().addDocumentListener(new DocumentListener() {
+        idUser = new JTextField();
+        idUser.setBounds(200, 270, 220, 30);
+        idUser.setBackground(Color.decode("#e6f2f2"));
+        idUser.setFont(new Font("serif", Font.PLAIN, 15));
+        idUser.setForeground(Color.decode("#1a1a1a"));
+        idUser.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                userLogin.setUsername(username.getText());
+                userLogin.setIdAccount(idUser.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                userLogin.setUsername(username.getText());
+                userLogin.setIdAccount(idUser.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                userLogin.setUsername(username.getText());
+                userLogin.setIdAccount(idUser.getText());
             }
         });
-        p1.add(username);
+        p1.add(idUser);
 
         pass = new JLabel("Password");
         pass.setBounds(100, 320, 100, 30);
@@ -98,19 +112,19 @@ public class Login extends JFrame{
             @Override
             public void insertUpdate(DocumentEvent e) {
                 userLogin.setPassword(password.getText());
-                usernameLogin = username.getText();
+                IDUser = idUser.getText();
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
                 userLogin.setPassword(password.getText());
-                usernameLogin = username.getText();
+                IDUser = idUser.getText();
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
                 userLogin.setPassword(password.getText());
-                usernameLogin = username.getText();
+                IDUser = idUser.getText();
             }
         });
         p1.add(password);
@@ -131,36 +145,16 @@ public class Login extends JFrame{
         login.setFont(new Font("Arial", Font.BOLD, 15));
         login.setBackground(Color.decode("#000000"));
         login.setForeground(Color.decode("#ffffff"));
-        new LoginController().LoginBtn(login, this, userLogin);
+        new LoginController().LoginBtn(login, this, userLogin, user);
         p1.add(login);
-
-        t1 = new JTextArea("Don't have an account?");
-        t1.setBounds(140, 460, 180, 50);
-        t1.setFont(new Font("Arial", Font.BOLD, 15));
-        t1.setBackground(Color.decode("#292C35"));
-        t1.setForeground(Color.decode("#f0f5f5"));
-        t1.setEditable(false);
-        p1.add(t1);
-
-
-        signupBtn = new JButton("Sign Up");
-        signupBtn.setBounds(320, 460, 60, 20);
-        signupBtn.setBorder(null);
-        signupBtn.setFont(new Font("Arial", Font.BOLD, 15));
-        signupBtn.setBackground(Color.decode("#292C35"));
-        signupBtn.setForeground(Color.decode("#f5994e"));
-        //set text located to the left of the button
-        signupBtn.setHorizontalAlignment(SwingConstants.LEFT);
-        new LoginController().changeToSignUp(signupBtn,this);
-        p1.add(signupBtn);
-
+        nameUser = user.getName();
 
         i3 = new ImageIcon(ClassLoader.getSystemResource("icons/logologin.png"));
         img3 = i3.getImage().getScaledInstance(400, 400, Image.SCALE_DEFAULT);
         ib3 = new ImageIcon(img3);
         l1 = new JLabel(ib3);
         l1.setBounds(800, 200, 400, 400);
-        p1.add(l1);
+            p1.add(l1);
 
         JPanel panel = new JPanel();
         l2 = new JLabel("LOGIN");

@@ -1,6 +1,7 @@
 package com.hotelManagementSystem.controller;
 
 import com.hotelManagementSystem.dao.ForgotPasswordDao;
+import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.views.Login;
 import com.hotelManagementSystem.views.Notification;
@@ -13,12 +14,13 @@ import java.awt.event.ActionListener;
 public class ForgotPasswordController {
 
     public ForgotPasswordController(){}
-    public void checkUser(JButton btn,User user, JLabel result){
+    public void checkUser(JButton btn, User user, Account account, JLabel result){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(new ForgotPasswordDao().checkValidUser(user, result) != null){
-                    result.setText(user.getUsername());
+                System.out.println(user.getPhone() + " " + account.getKeyAnswer());
+                if(new ForgotPasswordDao().checkValidUser(user, account) != null){
+                    result.setText(user.getName());
                     result.setForeground(Color.decode("#069e20"));
                 }else{
                     result.setText("not found");
@@ -29,12 +31,12 @@ public class ForgotPasswordController {
         });
     }
 
-    public void changePasswword(JButton btn, User user,  JFrame frame){
+    public void changePasswword(JButton btn, User user, Account account,  JFrame frame){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
-                int flag = new ForgotPasswordDao().changePassword(user);
+                System.out.println(account.getPassword() + " " + user.getId() + " " + account.getConfirmPassword());
+                int flag = new ForgotPasswordDao().changePassword(account, user);
                 if(flag == 1){
                     frame.setVisible(false);
                     new Login().setVisible(true);

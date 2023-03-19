@@ -1,6 +1,8 @@
 package com.hotelManagementSystem.controller;
 
+import com.hotelManagementSystem.dao.AccountSettingDao;
 import com.hotelManagementSystem.dao.LoginDao;
+import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.views.*;
 
@@ -33,15 +35,6 @@ public class LoginController {
         });
     }
 
-    public void changeToSignUp(JButton btn, JFrame frame){
-        btn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                new SignUp().setVisible(true);
-            }
-        });
-    }
 
     public void changeToForgotPass(JButton btn, JFrame frame){
         btn.addActionListener(new ActionListener() {
@@ -53,18 +46,23 @@ public class LoginController {
         });
     }
 
-    public void LoginBtn(JButton btn, JFrame frame, User userLogin){
+    public void LoginBtn(JButton btn, JFrame frame, Account userLogin, User user){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int flag = new LoginDao().checkLogin(userLogin);
+                System.out.println(userLogin.getIdAccount() + " " + userLogin.getPassword());
+                int flag = new LoginDao().checkLogin(userLogin, user);
                 if(flag == 1) {
                     new ManagerDashboard().setVisible(true);
                     frame.setVisible(false);
                 } else if (flag == 2) {
                     new EmployeeDashboard().setVisible(true);
                     frame.setVisible(false);
-                } else {
+                } else if (flag == 3) {
+                    frame.setVisible(false);
+                    new AccountSetting(user).setVisible(true);
+                }
+                else {
                     new Notification("Invalid Username or Password").setVisible(true);
                 }
             }

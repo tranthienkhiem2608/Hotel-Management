@@ -1,6 +1,7 @@
 package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.dao.*;
 import com.hotelManagementSystem.controller.*;
@@ -26,6 +27,7 @@ public class ForgotPassword extends JFrame {
     private ResultSet rs;
 
     private static User user;
+    private static Account account;
     public ForgotPassword(){
         initComponent();
         setLocationRelativeTo(null);
@@ -36,6 +38,7 @@ public class ForgotPassword extends JFrame {
         setSize(1400, 800);
         setLayout(null);
         user = new User();
+        account = new Account();
 
         backBut = new ImageIcon(ClassLoader.getSystemResource("icons/back.png"));
         imgButton1 = backBut.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
@@ -96,17 +99,17 @@ public class ForgotPassword extends JFrame {
         answerField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                user.setAnswer(answerField.getText());
+                account.setKeyAnswer(answerField.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                user.setAnswer(answerField.getText());
+                account.setKeyAnswer(answerField.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                user.setAnswer(answerField.getText());
+                account.setKeyAnswer(answerField.getText());
             }
         });
         add(answerField);
@@ -129,7 +132,7 @@ public class ForgotPassword extends JFrame {
         checkBtn.setBorder(null);
         checkBtn.setBackground(Color.decode("#fcd9b8"));
         // witre add action listener
-        new ForgotPasswordController().checkUser(checkBtn, user, resultUsernameLabel);
+        new ForgotPasswordController().checkUser(checkBtn, user, account, resultUsernameLabel);
         add(checkBtn);
 
 
@@ -146,17 +149,17 @@ public class ForgotPassword extends JFrame {
         passwordField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                user.setPassword(passwordField.getText());
+                account.setPassword(passwordField.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                user.setPassword(passwordField.getText());
+                account.setPassword(passwordField.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                user.setPassword(passwordField.getText());
+                account.setPassword(passwordField.getText());
             }
         });
         add(passwordField);
@@ -174,17 +177,17 @@ public class ForgotPassword extends JFrame {
         confirmPasswordField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                user.setConfirmPassword(confirmPasswordField.getText());
+                account.setConfirmPassword(confirmPasswordField.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                user.setConfirmPassword(confirmPasswordField.getText());
+                account.setConfirmPassword(confirmPasswordField.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                user.setConfirmPassword(confirmPasswordField.getText());
+                account.setConfirmPassword(confirmPasswordField.getText());
             }
         });
         add(confirmPasswordField);
@@ -195,9 +198,7 @@ public class ForgotPassword extends JFrame {
         comfirmBtn.setBackground(Color.decode("#000000"));
         comfirmBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         comfirmBtn.setForeground(Color.decode("#ffffff"));
-        if(user.getPassword() == user.getConfirmPassword()) {
-            new ForgotPasswordController().changePasswword(comfirmBtn, user, this);
-        }
+        new ForgotPasswordController().changePasswword(comfirmBtn, user, account, this);
         add(comfirmBtn);
 
 

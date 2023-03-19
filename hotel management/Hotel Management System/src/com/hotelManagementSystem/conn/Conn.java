@@ -24,4 +24,17 @@ public class Conn {
     public Connection getConnection(){
         return c;
     }
+
+
+
+    public void closeConnection(){
+        try {
+            c.close();
+            s.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
