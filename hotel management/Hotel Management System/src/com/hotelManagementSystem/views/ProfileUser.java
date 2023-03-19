@@ -40,27 +40,27 @@ public class ProfileUser extends JFrame{
         account = new Account();
         user = new User();
 
-        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/employee.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(480, 480,Image.SCALE_DEFAULT);
+        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/editInfo.jpg"));
+        Image i3 = i1.getImage().getScaledInstance(530, 530,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l15 = new JLabel(i2);
-        l15.setBounds(380,30,500,450);
+        l15.setBounds(450,40,700,550);
         add(l15);
 
-        JLabel l10 = new JLabel("PROFILE USER");
+        JLabel l10 = new JLabel("EDIT USER INFORMATION");
         l10.setFont(new Font("Arial", Font.BOLD, 35));
-        l10.setBounds(525, 30, 442, 35);
+        l10.setBounds(35, 30, 442, 35);
         p1.add(l10);
 
 
         JLabel l2 = new JLabel("Name");
         l2.setForeground(Color.decode("#17181D"));
         l2.setFont(new Font("Arial", Font.BOLD, 17));
-        l2.setBounds(60, 30, 150, 27);
+        l2.setBounds(70, 130, 150, 27);
         p1.add(l2);
 
         t2 = new JTextField();
-        t2.setBounds(200, 30, 150, 27);
+        t2.setBounds(210, 130, 150, 27);
         t2.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -89,11 +89,11 @@ public class ProfileUser extends JFrame{
         JLabel l3 = new JLabel("Age");
         l3.setFont(new Font("Arial", Font.BOLD, 17));
         l3.setForeground(Color.decode("#17181D"));
-        l3.setBounds(60, 80, 150, 27);
+        l3.setBounds(70, 180, 150, 27);
         p1.add(l3);
 
         t3 = new JTextField();
-        t3.setBounds(200, 80, 150, 27);
+        t3.setBounds(210, 180, 150, 27);
         t3.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -122,18 +122,18 @@ public class ProfileUser extends JFrame{
         JLabel l4 = new JLabel("Gender");
         l4.setFont(new Font("Arial", Font.BOLD, 17));
         l4.setForeground(Color.decode("#17181D"));
-        l4.setBounds(60, 130, 150, 27);
+        l4.setBounds(70, 230, 150, 27);
         p1.add(l4);
 
 
         JRadioButton NewRadioButton = new JRadioButton("MALE");
         NewRadioButton.setBackground(Color.WHITE);
-        NewRadioButton.setBounds(200, 130, 70, 27);
+        NewRadioButton.setBounds(210, 230, 70, 27);
         p1.add(NewRadioButton);
 
         JRadioButton Female = new JRadioButton("FEMALE");
         Female.setBackground(Color.WHITE);
-        Female.setBounds(270, 130, 70, 27);
+        Female.setBounds(280, 230, 70, 27);
         p1.add(Female);
 
         ButtonGroup bg = new ButtonGroup();
@@ -149,11 +149,11 @@ public class ProfileUser extends JFrame{
         JLabel l8 = new JLabel("Phone");
         l8.setFont(new Font("Arial", Font.BOLD, 17));
         l8.setForeground(Color.decode("#17181D"));
-        l8.setBounds(60, 180, 150, 27);
+        l8.setBounds(70, 280, 150, 27);
         p1.add(l8);
 
         t5 = new JTextField();
-        t5.setBounds(200, 180, 150, 27);
+        t5.setBounds(210, 280, 150, 27);
         t5.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -181,11 +181,11 @@ public class ProfileUser extends JFrame{
         JLabel l9 = new JLabel("Email");
         l9.setFont(new Font("Arial", Font.BOLD, 17));
         l9.setForeground(Color.decode("#17181D"));
-        l9.setBounds(60, 230, 150, 27);
+        l9.setBounds(70, 330, 150, 27);
         p1.add(l9);
 
         t6 = new JTextField();
-        t6.setBounds(200, 230, 150, 27);
+        t6.setBounds(210, 330, 150, 27);
         t6.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -213,11 +213,11 @@ public class ProfileUser extends JFrame{
         JLabel l5 = new JLabel("Password");
         l5.setFont(new Font("Arial", Font.BOLD, 17));
         l5.setForeground(Color.decode("#17181D"));
-        l5.setBounds(60, 280, 150, 27);
+        l5.setBounds(70, 380, 150, 27);
         p1.add(l5);
 
         t4 = new JTextField();
-        t4.setBounds(200, 280, 150, 27);
+        t4.setBounds(210, 380, 150, 27);
         t4.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -242,10 +242,10 @@ public class ProfileUser extends JFrame{
         });
         p1.add(t4);
 
-        JButton b1 = new JButton("Add");
+        JButton b1 = new JButton("ADD");
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
-        b1.setBounds(60, 350, 130, 30);
+        b1.setBounds(150, 450, 111, 33);
         new AddUserController().addBtn(b1, user, account);
         p1.add(b1);
         p1.setBackground(Color.WHITE);

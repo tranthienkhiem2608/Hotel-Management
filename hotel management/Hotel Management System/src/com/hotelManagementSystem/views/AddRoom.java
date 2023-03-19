@@ -41,15 +41,15 @@ public class AddRoom extends JFrame{
         room = new Room();
 
         ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/rooms.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(500, 400,Image.SCALE_DEFAULT);
+        Image i3 = i1.getImage().getScaledInstance(650, 550,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l15 = new JLabel(i2);
-        l15.setBounds(350,80,550,400);
+        l15.setBounds(400,50,700,550);
         add(l15);
 
         JLabel l10 = new JLabel("ADD ROOM");
         l10.setFont(new Font("Arial", Font.BOLD, 35));
-        l10.setBounds(525, 24, 442, 35);
+        l10.setBounds(105, 30, 442, 35);
         p1.add(l10);
 
 
@@ -57,12 +57,12 @@ public class AddRoom extends JFrame{
         JLabel l1 = new JLabel("Room Number");
         l1.setForeground(Color.decode("#17181D"));
         l1.setFont(new Font("Arial", Font.BOLD, 17));
-        l1.setBounds(60, 80, 150, 27);
+        l1.setBounds(60, 130, 150, 27);
         p1.add(l1);
 
 
         t4 = new JTextField();
-        t4.setBounds(200, 80, 150, 27);
+        t4.setBounds(200, 130, 150, 27);
         t4.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -96,11 +96,11 @@ public class AddRoom extends JFrame{
         JLabel l2 = new JLabel("Availability");
         l2.setForeground(Color.decode("#17181D"));
         l2.setFont(new Font("Arial", Font.BOLD, 17));
-        l2.setBounds(60, 130, 150, 27);
+        l2.setBounds(60, 180, 150, 27);
         p1.add(l2);
 
-        comboBox = new JComboBox(new String[] { "available", "occupied" });
-        comboBox.setBounds(200, 130, 150, 27);
+        comboBox = new JComboBox(new String[] { "Available", "Occupied" });
+        comboBox.setBounds(200, 180, 150, 27);
         comboBox.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -113,11 +113,11 @@ public class AddRoom extends JFrame{
         JLabel l3 = new JLabel("Cleaning Status");
         l3.setForeground(Color.decode("#17181D"));
         l3.setFont(new Font("Arial", Font.BOLD, 17));
-        l3.setBounds(60, 180, 150, 27);
+        l3.setBounds(60, 230, 150, 27);
         p1.add(l3);
 
-        comboBox_2 = new JComboBox(new String[] { "cleaned", "dirty" });
-        comboBox_2.setBounds(200, 180, 150, 27);
+        comboBox_2 = new JComboBox(new String[] { "Cleaned", "Dirty" });
+        comboBox_2.setBounds(200, 230, 150, 27);
         comboBox_2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -129,11 +129,11 @@ public class AddRoom extends JFrame{
         JLabel l4 = new JLabel("Price");
         l4.setForeground(Color.decode("#17181D"));
         l4.setFont(new Font("Arial", Font.BOLD, 17));
-        l4.setBounds(64, 230, 150, 27);
+        l4.setBounds(64, 280, 150, 27);
         p1.add(l4);
 
         t2 = new JTextField();
-        t2.setBounds(200, 230, 150, 27);
+        t2.setBounds(200, 280, 150, 27);
         t2.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -166,12 +166,12 @@ public class AddRoom extends JFrame{
         JLabel l5 = new JLabel("Bed Type");
         l5.setForeground(Color.decode("#17181D"));
         l5.setFont(new Font("Arial", Font.BOLD, 17));
-        l5.setBounds(64, 280, 150, 27);
+        l5.setBounds(64, 330, 150, 27);
         p1.add(l5);
 
 
         comboBox_3 = new JComboBox(new String[] { "Single Bed", "Double Bed", "King bed"});
-        comboBox_3.setBounds(200, 280, 150, 27);
+        comboBox_3.setBounds(200, 330, 150, 27);
         comboBox_3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -182,7 +182,7 @@ public class AddRoom extends JFrame{
 
 
         b1 = new JButton("ADD");
-        b1.setBounds(90, 350, 111, 33);
+        b1.setBounds(140, 400, 111, 33);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         new AddRoomController().addRoomBtn(b1, room);

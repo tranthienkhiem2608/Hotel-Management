@@ -44,7 +44,7 @@ public class Room extends javax.swing.JFrame {
             setContentPane(p1);
         p1.setLayout(null);
 
-            ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/eight.jpg"));
+            ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/roomview.jpg"));
             Image i3 = i1.getImage().getScaledInstance(600, 600,Image.SCALE_DEFAULT);
             ImageIcon i2 = new ImageIcon(i3);
             JLabel l1 = new JLabel(i2);
@@ -62,8 +62,8 @@ public class Room extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-            JButton editBtn = new JButton("Edit");
-            editBtn.setBounds(200, 550, 120, 30);
+            JButton editBtn = new JButton("EDIT");
+            editBtn.setBounds(180, 550, 120, 30);
             editBtn.setBackground(Color.BLACK);
             editBtn.setForeground(Color.WHITE);
         p1.add(editBtn);
