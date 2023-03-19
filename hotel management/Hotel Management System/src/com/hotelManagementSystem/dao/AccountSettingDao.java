@@ -10,7 +10,7 @@ public class AccountSettingDao {
     public int checkChangePassword(User user, Account account) {
         try {
             Conn conn = new Conn();
-            String query = "UPDATE account SET password = '" + account.getPassword() + "', count = '1' WHERE id = '" + user.getId() + "'";
+            String query = "UPDATE account SET password = '" + account.getPassword() +"', keyAnswer = '" + account.getKeyAnswer() + "', count = '1' WHERE id = '" + user.getId() + "'";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.executeUpdate();
             return 1;
