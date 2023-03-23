@@ -131,7 +131,7 @@ public class AddDrivers extends JFrame {
         }
         bg.add(Female);
 
-        JLabel l4 = new JLabel("Car Company");
+        JLabel l4 = new JLabel("Phone");
         l4.setForeground(Color.decode("#17181D"));
         l4.setFont(new Font("Arial", Font.BOLD, 17));
         l4.setBounds(60, 280, 150, 27);
