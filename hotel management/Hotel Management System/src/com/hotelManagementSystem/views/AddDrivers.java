@@ -237,7 +237,6 @@ public class AddDrivers extends JFrame {
         b1.setForeground(Color.WHITE);
         new AddDriversController().addDriversBtn(b1, driver);
         p1.add(b1);
-        getRootPane().setDefaultButton(b1);
 
     }
 
