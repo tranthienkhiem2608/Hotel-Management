@@ -238,7 +238,6 @@ public class AddDrivers extends JFrame {
         new AddDriversController().addDriversBtn(b1, driver);
         p1.add(b1);
 
-
     }
 
 }

@@ -188,7 +188,6 @@ public class AddRoom extends JFrame{
         new AddRoomController().addRoomBtn(b1, room);
         p1.add(b1);
 
-
         p1.setBackground(Color.WHITE);
 
     }
