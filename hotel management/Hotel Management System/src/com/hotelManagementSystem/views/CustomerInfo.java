@@ -74,7 +74,7 @@ public class CustomerInfo extends JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();
-        table.setBounds(0, 40, 950, 450);
+        table.setBounds(50, 50, 1000, 500);;
         table.enableInputMethods(false);
         p1.add(table);
 
@@ -119,7 +119,7 @@ public class CustomerInfo extends JFrame {
 
 
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(300, 500, 120, 30);
+        btnSearch.setBounds(600, 100, 120, 30);
         btnSearch.setBackground(Color.BLACK);
         btnSearch.setForeground(Color.WHITE);
         new CustomerInfoController().btnSearch(btnSearch, table, tableModel, customer);
@@ -128,43 +128,43 @@ public class CustomerInfo extends JFrame {
 
 
         lblId = new JLabel("ID");
-        lblId.setBounds(40, 20, 46, 16);
-        lblId.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblId.setBounds(100, 20, 50, 16);
+        lblId.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblId);
 
         JLabel l1 = new JLabel("Number");
-        l1.setBounds(125, 20, 46, 16);
-        l1.setFont(new Font("Arial", Font.PLAIN, 13));
+        l1.setBounds(215, 20, 50, 16);
+        l1.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(l1);
 
         lblNewLabel = new JLabel("Name");
-        lblNewLabel.setBounds(240, 20, 46, 16);
-        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblNewLabel.setBounds(345, 20, 50, 16);
+        lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblNewLabel);
 
         lblGender = new JLabel("Gender");
-        lblGender.setBounds(360, 20, 46, 16);
-        lblGender.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblGender.setBounds(455, 20, 50, 16);
+        lblGender.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblGender);
 
         lblCountry = new JLabel("Country");
-        lblCountry.setBounds(480, 20, 46, 16);
-        lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblCountry.setBounds(590, 20, 50, 16);
+        lblCountry.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblCountry);
 
         lblRoom = new JLabel("Room");
-        lblRoom.setBounds(600, 20, 46, 16);
-        lblRoom.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblRoom.setBounds(715, 20, 50, 16);
+        lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblRoom);
 
-        lblStatus = new JLabel("Check-in Status");
-        lblStatus.setBounds(680, 20, 100, 16);
-        lblStatus.setFont(new Font("Arial", Font.PLAIN, 14));
+        lblStatus = new JLabel("Status");
+        lblStatus.setBounds(830, 20, 50, 16);
+        lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblStatus);
 
         lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(850, 20, 100, 16);
-        lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 13));
+        lblNewLabel_1.setBounds(955, 20, 50, 16);
+        lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblNewLabel_1);
 
         getContentPane().setBackground(Color.WHITE);

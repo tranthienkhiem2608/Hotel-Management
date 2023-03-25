@@ -68,6 +68,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblId = new JLabel("ID :");
         lblId.setBounds(35, 76, 200, 14);
+        setFont(new Font("Arial", Font.BOLD, 17));
         p1.add(lblId);
 
         comboBox = new JComboBox(new String[] {"Passport", "Aadhar Card", "Voter Id", "Driving license"});
@@ -82,6 +83,7 @@ public class NewCustomer extends JFrame{
 
         JLabel l2 = new JLabel("Number :");
         l2.setBounds(35, 111, 200, 14);
+        setFont(new Font("Arial", Font.BOLD, 17));
         p1.add(l2);
 
         t1 = new JTextField();
@@ -106,6 +108,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblName_1 = new JLabel("Name :");
         lblName_1.setBounds(35, 151, 200, 14);
+        setFont(new Font("Arial", Font.BOLD, 17));
         p1.add(lblName_1);
 
         t2 = new JTextField();
@@ -132,6 +135,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblGender = new JLabel("Gender :");
         lblGender.setBounds(35, 191, 200, 14);
+        setFont(new Font("Arial", Font.BOLD, 17));
         p1.add(lblGender);
 
         r1 = new JRadioButton("male");
@@ -151,13 +155,14 @@ public class NewCustomer extends JFrame{
         bg.add(r1);
         bg.add(r2);
         if(bg.getSelection() == r2.getModel()){
-            customer.setGender("female");
+            customer.setGender("Female");
         }else {
-            customer.setGender("male");
+            customer.setGender("Male");
         }
 
         JLabel lblCountry = new JLabel("Country :");
         lblCountry.setBounds(35, 231, 200, 14);
+        setFont(new Font("Arial", Font.BOLD, 17));
         p1.add(lblCountry);
 
         JLabel lblReserveRoomNumber = new JLabel("Allocated Room Number :");
@@ -192,8 +197,9 @@ public class NewCustomer extends JFrame{
             Date time = new Date();
 
             JLabel lblCheckInStatus = new JLabel("Checked-In : ");
-        lblCheckInStatus.setBounds(35, 316, 200, 14);
-        p1.add(lblCheckInStatus);
+            lblCheckInStatus.setBounds(35, 316, 200, 17);
+            setFont(new Font("Arial", Font.BOLD, 17));
+            p1.add(lblCheckInStatus);
             t4 = new JTextArea();
             t4.setBounds(271, 316, 200, 20);
             t4.setText(dateFormat.format(date) + " " + timeFormat.format(time));
@@ -205,6 +211,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblDeposite = new JLabel("Deposit :");
         lblDeposite.setBounds(35, 359, 200, 14);
+            setFont(new Font("Arial", Font.BOLD, 17));
             p1.add(lblDeposite);
 
 
@@ -256,7 +263,7 @@ public class NewCustomer extends JFrame{
 
         JButton btnNewButton = new JButton("Add");
 
-        btnNewButton.setBounds(100, 430, 120, 30);
+        btnNewButton.setBounds(175, 430, 120, 30);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.setForeground(Color.WHITE);
         new NewCustomerController().addNewCustomer(btnNewButton,  customer);

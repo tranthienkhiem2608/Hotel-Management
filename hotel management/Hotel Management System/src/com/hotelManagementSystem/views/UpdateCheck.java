@@ -73,7 +73,7 @@ public class UpdateCheck extends JFrame {
 
         JTextArea lblUpdateCheckStatus = new JTextArea("Check-In Details");
         lblUpdateCheckStatus.setFont(new Font("serif", Font.BOLD, 30));
-        lblUpdateCheckStatus.setBounds(0, 0, 1000, 50);
+        lblUpdateCheckStatus.setBounds(0, 0, 1400, 50);
         lblUpdateCheckStatus.setForeground(Color.decode("#e09145"));
         lblUpdateCheckStatus.setBackground(Color.decode("#1b1c22"));
         lblUpdateCheckStatus.setEditable(false);
@@ -249,16 +249,16 @@ public class UpdateCheck extends JFrame {
             p1.add(txt_Payment);
 
             JButton btnAdd = new JButton("Check");
-            btnAdd.setFont(new Font("Arial", Font.BOLD, 20));
-            btnAdd.setBounds(60, 425, 150, 50);
+            btnAdd.setFont(new Font("Arial", Font.BOLD, 17));
+            btnAdd.setBounds(80, 410, 100, 40);
             btnAdd.setBackground(Color.BLACK);
             btnAdd.setForeground(Color.WHITE);
             new UpdateCheckController().btnCheckOut(btnAdd, customer,txt_ID, txt_Status, txt_Time, txt_Deposit, txt_Payment);
             p1.add(btnAdd);
 
             JButton btnUpdate = new JButton("Update");
-            btnUpdate.setFont(new Font("Arial", Font.BOLD, 20));
-            btnUpdate.setBounds(350, 425, 150, 50);
+            btnUpdate.setFont(new Font("Arial", Font.BOLD, 17));
+            btnUpdate.setBounds(220, 410, 100, 40);
             btnUpdate.setBackground(Color.BLACK);
             btnUpdate.setForeground(Color.WHITE);
             new UpdateCheckController().btnUpdate(btnUpdate, customer);

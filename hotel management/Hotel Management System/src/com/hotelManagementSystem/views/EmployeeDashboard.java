@@ -2,6 +2,7 @@ package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.EmployeeDashboardController;
+import com.hotelManagementSystem.controller.ManagerDashboardController;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.dao.EmployeeDashboardDao;
 
@@ -19,7 +20,7 @@ public class EmployeeDashboard extends JFrame {
     private static JPanel p3, p4, p5;
     private JTextArea t1;
     private static JTextArea t2;
-    private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
+    private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn,profileBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
     private static JLabel labelListBtnCheckInOut;
@@ -102,6 +103,13 @@ public class EmployeeDashboard extends JFrame {
 
         l1.add(t2);
 
+        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
+        Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+        profileBtn = new JButton(new ImageIcon(profileImage));
+        profileBtn.setBorder(null);
+        profileBtn.setBounds(1250, 30, 30, 30);
+        profileBtn.setBackground(Color.decode("#272a32"));
+        p1.add(profileBtn);
 
         p2 = new JPanel();
         p2.setBounds(0, 100, 250, 800);
@@ -110,20 +118,20 @@ public class EmployeeDashboard extends JFrame {
         add(p2);
 
         p3 = new JPanel();
-        p3.setBounds(250, 100, 1000, 600);
+        p3.setBounds(265, 130, 1100, 600);
         p3.setBackground(Color.decode("#d5e1e4"));
         p3.setLayout(null);
         add(p3);
 
         p4 = new JPanel();
-        p4.setBounds(250, 100, 1000, 600);
+        p4.setBounds(265, 130, 1100, 600);
         p4.setBackground(Color.decode("#d5e1e4"));
         p4.setVisible(false);
         p4.setLayout(null);
         add(p4);
 
         p5 = new JPanel();
-        p5.setBounds(250, 100, 1000, 600);
+        p5.setBounds(265, 130, 1100, 600);
         p5.setBackground(Color.decode("#d5e1e4"));
         p5.setVisible(false);
         p5.setLayout(null);
