@@ -16,7 +16,7 @@ public class EmployeeDashboard extends JFrame {
 
     private JLabel l1;
     private JPanel p1, p2;
-    private static JPanel p3;
+    private static JPanel p3, p4, p5;
     private JTextArea t1;
     private static JTextArea t2;
     private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
@@ -109,20 +109,43 @@ public class EmployeeDashboard extends JFrame {
         p2.setLayout(null);
         add(p2);
 
+        p3 = new JPanel();
+        p3.setBounds(250, 100, 1000, 600);
+        p3.setBackground(Color.decode("#d5e1e4"));
+        p3.setLayout(null);
+        add(p3);
+
+        p4 = new JPanel();
+        p4.setBounds(250, 100, 1000, 600);
+        p4.setBackground(Color.decode("#d5e1e4"));
+        p4.setVisible(false);
+        p4.setLayout(null);
+        add(p4);
+
+        p5 = new JPanel();
+        p5.setBounds(250, 100, 1000, 600);
+        p5.setBackground(Color.decode("#d5e1e4"));
+        p5.setVisible(false);
+        p5.setLayout(null);
+        add(p5);
+
+
         newCustomerBtn = new JButton("New Customer");
         newCustomerBtn.setBounds(0, 0, 250, 50);
         newCustomerBtn.setBorder(null);
         newCustomerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         newCustomerBtn.setBackground(Color.decode("#292c35"));
         newCustomerBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().newCustomerBtn(newCustomerBtn, p3, p4, p5);
         p2.add(newCustomerBtn);
 
-        viewBtn = new JButton("View Customer");
+        viewBtn = new JButton("Update Customer");
         viewBtn.setBounds(0, 50, 250, 50);
         viewBtn.setBorder(null);
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().updateCustomerBtn(viewBtn,p5, p3, p4);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer Info");
@@ -131,6 +154,7 @@ public class EmployeeDashboard extends JFrame {
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().customerInfoBtn(customerBtn, p4, p3, p5);
         p2.add(customerBtn);
 
         labelListBtnCheckInOut = new JLabel();
@@ -182,11 +206,6 @@ public class EmployeeDashboard extends JFrame {
         p2.add(searchRoomBtn);
 
 
-        p3 = new JPanel();
-        p3.setBounds(250, 100, 1150, 800);
-        p3.setBackground(Color.decode("#d5e1e4"));
-        p3.setLayout(null);
-        add(p3);
 
 
         JPanel gradientPanel = new JPanel() {
