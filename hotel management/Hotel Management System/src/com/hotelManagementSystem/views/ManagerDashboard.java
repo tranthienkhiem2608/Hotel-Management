@@ -227,16 +227,8 @@ public class ManagerDashboard extends JFrame{
         updateStatusBtn.setForeground(Color.decode("#f0f5f5"));
         p2.add(updateStatusBtn);
 
-        searchRoomBtn = new JButton("Search");
-        searchRoomBtn.setBounds(0, 250, 250, 50);
-        searchRoomBtn.setBorder(null);
-        searchRoomBtn.setFont(new Font("Arial", Font.PLAIN, 20));
-        searchRoomBtn.setBackground(Color.decode("#292c35"));
-        searchRoomBtn.setForeground(Color.decode("#f0f5f5"));
-        p2.add(searchRoomBtn);
-
         statisticsBtn = new JButton("Statistics");
-        statisticsBtn.setBounds(0, 300, 250, 50);
+        statisticsBtn.setBounds(0, 250, 250, 50);
         statisticsBtn.setBorder(null);
         statisticsBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         statisticsBtn.setBackground(Color.decode("#292c35"));
@@ -244,7 +236,7 @@ public class ManagerDashboard extends JFrame{
         p2.add(statisticsBtn);
 
         historyBtn = new JButton("History");
-        historyBtn.setBounds(0, 350, 250, 50);
+        historyBtn.setBounds(0, 300, 250, 50);
         historyBtn.setBorder(null);
         historyBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         historyBtn.setBackground(Color.decode("#292c35"));
