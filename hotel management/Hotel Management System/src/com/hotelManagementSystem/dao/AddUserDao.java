@@ -19,7 +19,7 @@ public class AddUserDao {
             if (!rs.next()) {
                 String query2 = "insert into Users values('" + user.getId() + "', '" + user.getName() + "', '" + user.getAge() + "', '" + user.getGender() + "', '" + user.getPosition() + "', '" + user.getSalary() + "', '" + user.getPhone() + "', '" + user.getEmail() + "')";
                 conn.getStatment().executeUpdate(query2);
-                if (user.getPosition().equals("manager") || user.getPosition().equals("receptionist")) {
+                if (user.getPosition().equals("Manager") || user.getPosition().equals("Receptionist")) {
                     String query3 = "insert into Account values('" + user.getId() + "', '" + generateRandomPassword(10) + "','" + "khong" + "','" + "0" +"')";
                     conn.getStatment().executeUpdate(query3);
                     return 1;

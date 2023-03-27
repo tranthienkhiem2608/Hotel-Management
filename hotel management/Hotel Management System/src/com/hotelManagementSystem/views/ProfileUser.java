@@ -1,6 +1,9 @@
 package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.controller.ProfileUserController;
+import com.hotelManagementSystem.dao.ManagerDashboardDao;
+import com.hotelManagementSystem.dao.ProfileUserDao;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.controller.AddUserController;
@@ -19,7 +22,7 @@ public class ProfileUser extends JFrame{
     private JComboBox comboBox, comboBox_1;
     JButton b1,b2;
     Choice c1;
-    private Account account;
+    private  Account account;
     private User user;
 
 
@@ -223,7 +226,7 @@ public class ProfileUser extends JFrame{
             public void insertUpdate(DocumentEvent e) {
                 if (t4.getText().length() > 0) {
                     t4.setBackground(Color.decode("#E0E0E0"));
-                    user.setEmail(t4.getText());
+                    account.setPassword(t4.getText());
                 }
             }
 
@@ -231,22 +234,22 @@ public class ProfileUser extends JFrame{
             public void removeUpdate(DocumentEvent e) {
                 if (t4.getText().length() == 0) {
                     t4.setBackground(Color.WHITE);
-                    user.setEmail(t4.getText());
+                    account.setPassword(t4.getText());
                 }
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                user.setEmail(t4.getText());
+                account.setPassword(t4.getText());
             }
         });
         p1.add(t4);
 
-        JButton b1 = new JButton("ADD");
+        JButton b1 = new JButton("Update");
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         b1.setBounds(150, 450, 111, 33);
-        new AddUserController().addBtn(b1, user, account);
+        new ProfileUserController().updateBtn(b1,account, user);
         p1.add(b1);
         p1.setBackground(Color.WHITE);
     }

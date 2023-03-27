@@ -200,6 +200,7 @@ public class ForgotPassword extends JFrame {
         comfirmBtn.setForeground(Color.decode("#ffffff"));
         new ForgotPasswordController().changePasswword(comfirmBtn, user, account, this);
         add(comfirmBtn);
+        getRootPane().setDefaultButton(comfirmBtn);
 
 
         JPanel panelForm = new JPanel();
