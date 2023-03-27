@@ -13,18 +13,27 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.hotelManagementSystem.controller.CustomerInfoController;
+import com.hotelManagementSystem.dao.CustomerInfoDao;
+import com.hotelManagementSystem.dao.EmployeeInfoDao;
+import com.hotelManagementSystem.entity.Customer;
 import net.proteanit.sql.DbUtils;
 import java.sql.*;
 
 import javax.swing.*;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CustomerInfo extends JFrame {
     Connection conn = null;
-    private JPanel contentPane;
+    private  static JPanel p1;
+    private JButton btnSearch;
+    private JTextField textField;
     private JLabel lblId;
     private JLabel lblNewLabel;
     private JLabel lblGender;
@@ -33,10 +42,11 @@ public class CustomerInfo extends JFrame {
     private JLabel lblRoom;
     private JLabel lblStatus;
     private JLabel lblNewLabel_1;
+    private Customer customer;
 
-    /**
-     * Launch the application.
-     */
+    public JPanel getP1() {
+        return p1;
+    }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -49,103 +59,113 @@ public class CustomerInfo extends JFrame {
             }
         });
     }
-    public void close()
-    {
-        this.dispose();
+    public CustomerInfo(){
+        initComponent();
     }
-    /**
-     * Create the frame.
-     * @throws SQLException
-     */
-    public CustomerInfo() throws SQLException {
-        //conn = Javaconnect.getDBConnection();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(550, 200, 1000, 600);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+
+    private void initComponent(){
+        p1 = new JPanel();
+        p1.setSize(1000, 600);
+        setContentPane(p1);
+        p1.setLayout(null);
+        customer = new Customer();
+
+        String[] columnNames = {"ID", "Number", "Name", "Gender", "Country", "Room", "Check-in Status", "Deposit"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();
-        table.setBounds(0, 40, 900, 450);
-        contentPane.add(table);
+        table.setBounds(50, 50, 1000, 500);;
+        table.enableInputMethods(false);
+        p1.add(table);
 
-//      Sử dụng db
-//
-//        JButton btnLoadData = new JButton("Load Data");
-//        btnLoadData.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent arg0) {
-//                try{
-//                    conn c  = new conn();
-//
-//                    String displayCustomersql = "select * from Customer";
-//                    ResultSet rs = c.s.executeQuery(displayCustomersql);
-//                    table.setModel(DbUtils.resultSetToTableModel(rs));
-//                }
-//                catch(Exception e)
-//                {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//
-//        });
-//        btnLoadData.setBounds(300, 510, 120, 30);
-//        btnLoadData.setBackground(Color.BLACK);
-//        btnLoadData.setForeground(Color.WHITE);
-//        contentPane.add(btnLoadData);
+        try{
+            CustomerInfoDao customerInfoDao = new CustomerInfoDao();
+            customerInfoDao.viewCustomerInfo(table, tableModel);
 
-        JButton btnExit = new JButton("Back");
-        btnExit.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                new ManagerDashboard().setVisible(true);
-                setVisible(false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(500, 500, 120, 30);
+        btnRefresh.setBackground(Color.BLACK);
+        btnRefresh.setForeground(Color.WHITE);
+        new CustomerInfoController().btnRefresh(btnRefresh, table, tableModel);
+        p1.add(btnRefresh);
+
+        textField = new JTextField();
+        textField.setBounds(40, 500, 250, 30);
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                customer.setName(textField.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                customer.setName(textField.getText());
+
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                customer.setName(textField.getText());
+
             }
         });
-        btnExit.setBounds(550, 500, 120, 30);
-        btnExit.setBackground(Color.BLACK);
-        btnExit.setForeground(Color.WHITE);
-        contentPane.add(btnExit);
+        p1.add(textField);
+
+        //clear table previous data
+
+
+        btnSearch = new JButton("Search");
+        btnSearch.setBounds(600, 100, 120, 30);
+        btnSearch.setBackground(Color.BLACK);
+        btnSearch.setForeground(Color.WHITE);
+        new CustomerInfoController().btnSearch(btnSearch, table, tableModel, customer);
+        p1.add(btnSearch);
+
+
 
         lblId = new JLabel("ID");
-        lblId.setBounds(40, 20, 46, 16);
-        lblId.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblId);
+        lblId.setBounds(100, 20, 50, 16);
+        lblId.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblId);
 
         JLabel l1 = new JLabel("Number");
-        l1.setBounds(125, 20, 46, 16);
-        l1.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(l1);
+        l1.setBounds(215, 20, 50, 16);
+        l1.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(l1);
 
         lblNewLabel = new JLabel("Name");
-        lblNewLabel.setBounds(240, 20, 46, 16);
-        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblNewLabel);
+        lblNewLabel.setBounds(345, 20, 50, 16);
+        lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblNewLabel);
 
         lblGender = new JLabel("Gender");
-        lblGender.setBounds(360, 20, 46, 16);
-        lblGender.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblGender);
+        lblGender.setBounds(455, 20, 50, 16);
+        lblGender.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblGender);
 
         lblCountry = new JLabel("Country");
-        lblCountry.setBounds(480, 20, 46, 16);
-        lblCountry.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblCountry);
+        lblCountry.setBounds(590, 20, 50, 16);
+        lblCountry.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblCountry);
 
         lblRoom = new JLabel("Room");
-        lblRoom.setBounds(600, 20, 46, 16);
-        lblRoom.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblRoom);
+        lblRoom.setBounds(715, 20, 50, 16);
+        lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblRoom);
 
-        lblStatus = new JLabel("Check-in Status");
-        lblStatus.setBounds(680, 20, 100, 16);
-        lblStatus.setFont(new Font("Arial", Font.PLAIN, 14));
-        contentPane.add(lblStatus);
+        lblStatus = new JLabel("Status");
+        lblStatus.setBounds(830, 20, 50, 16);
+        lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblStatus);
 
         lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(850, 20, 100, 16);
-        lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 13));
-        contentPane.add(lblNewLabel_1);
+        lblNewLabel_1.setBounds(955, 20, 50, 16);
+        lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblNewLabel_1);
 
         getContentPane().setBackground(Color.WHITE);
     }
