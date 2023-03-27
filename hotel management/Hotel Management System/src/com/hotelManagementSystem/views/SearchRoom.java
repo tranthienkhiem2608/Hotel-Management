@@ -50,14 +50,15 @@ public class SearchRoom extends JFrame {
         this.dispose();
     }
 
-    /**
-     * Create the frame.
-     * @throws SQLException
-     */
-    public SearchRoom() throws SQLException {
-        //conn = Javaconnect.getDBConnection();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(530, 200, 1000, 600);
+    public JPanel getP1() {
+        return p1;
+    }
+
+    public SearchRoom() {
+        initComponent();
+        setLocationRelativeTo(null);
+    }
+    private void initComponent() {
         p1 = new JPanel();
         p1.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(p1);
@@ -75,7 +76,6 @@ public class SearchRoom extends JFrame {
 
         JLabel lblRoomAvailable = new JLabel("Room Bed Type:");
         lblRoomAvailable.setBounds(10, 70, 95, 14);
-        //lblRoomAvailable.setFont(new Font("Arial", Font.PLAIN, 14));
         p1.add(lblRoomAvailable);
 
 

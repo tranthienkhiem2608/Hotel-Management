@@ -87,7 +87,7 @@ public class CustomerInfo extends JFrame {
         }
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(500, 500, 120, 30);
+        btnRefresh.setBounds(200, 200, 120, 30);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new CustomerInfoController().btnRefresh(btnRefresh, table, tableModel);
