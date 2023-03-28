@@ -14,7 +14,7 @@ public class ManagerDashboard extends JFrame{
     private JLabel l1;
     private static JLabel labelListBtnAđd, labelListBtnEmployee;
     private JPanel p1, p2;
-    private static JPanel p3, p4, p5, p6, p7;
+    private static JPanel p3, p4, p5, p6, p7, p8;
     private JTextArea t1;
     private static JTextArea t2;
 
@@ -158,13 +158,20 @@ public class ManagerDashboard extends JFrame{
         p7.setVisible(false);
         add(p7);
 
+        p8 = new JPanel();
+        p8.setBounds(265, 130, 1100, 600);
+        p8.setBackground(Color.decode("#d5e1e4"));
+        p8.setLayout(null);
+        p8.setVisible(false);
+        add(p8);
+
         ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
         Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
         profileBtn = new JButton(new ImageIcon(profileImage));
         profileBtn.setBorder(null);
         profileBtn.setBounds(1250, 30, 30, 30);
         profileBtn.setBackground(Color.decode("#272a32"));
-        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6, p7);
+        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6, p7, p8);
         p1.add(profileBtn);
 
 
@@ -175,7 +182,7 @@ public class ManagerDashboard extends JFrame{
         buttonList.setBackground(Color.decode("#a3a3a3"));
         buttonList.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5, p6, p7);
+        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5, p6, p7, p8);
         labelListBtnAđd.add(buttonList);
 
 
@@ -185,7 +192,7 @@ public class ManagerDashboard extends JFrame{
         buttonList2.setBackground(Color.decode("#a3a3a3"));
         buttonList2.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5, p6, p7);
+        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5, p6, p7, p8);
         labelListBtnEmployee.add(buttonList2);
 
         addBtn = new JButton("Add");
@@ -204,7 +211,7 @@ public class ManagerDashboard extends JFrame{
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7);
+        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer info");
@@ -213,7 +220,7 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6);
+        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6, p8);
         p2.add(customerBtn);
 
 
@@ -233,6 +240,7 @@ public class ManagerDashboard extends JFrame{
         updateStatusBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         updateStatusBtn.setBackground(Color.decode("#292c35"));
         updateStatusBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkUpdateStatusBtn(updateStatusBtn, labelListBtnAđd, labelListBtnEmployee, p8, p4, p5, p6, p7, p3);
         p2.add(updateStatusBtn);
 
         statisticsBtn = new JButton("Statistics");
