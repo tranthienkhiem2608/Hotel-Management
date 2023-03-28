@@ -145,6 +145,7 @@ public class EmployeeDashboard extends JFrame {
 
 
 
+
         newCustomerBtn = new JButton("New Customer");
         newCustomerBtn.setBounds(0, 0, 250, 50);
         newCustomerBtn.setBorder(null);
