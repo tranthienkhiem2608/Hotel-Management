@@ -22,7 +22,6 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 public class ManagerInfo extends JFrame {
-    Connection conn = null;
     private static JPanel p1;
     private JTable table;
     private JLabel lblID;
@@ -55,7 +54,6 @@ public class ManagerInfo extends JFrame {
     }
 
     private void initComponent(){
-        //conn = Javaconnect.getDBConnection();
         p1 = new JPanel();
         p1.setSize(1000, 600);
         p1.setBackground(Color.decode("#fcf6f0"));

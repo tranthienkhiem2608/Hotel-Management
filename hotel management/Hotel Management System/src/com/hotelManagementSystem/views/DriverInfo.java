@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.views;
 
+
 import java.awt.*;
 
 import java.sql.*;
@@ -9,9 +10,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 
 public class DriverInfo extends JFrame {
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
     private JPanel contentPane;
     private JTable table;
     Choice c1;
@@ -41,7 +39,6 @@ public class DriverInfo extends JFrame {
      * @throws SQLException
      */
     public DriverInfo() throws SQLException {
-        //conn = Javaconnect.getDBConnection();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(200, 100, 1000, 600);
         contentPane = new JPanel();

@@ -10,9 +10,9 @@ import java.sql.ResultSet;
 public class LoginDao {
 
 
-    public int checkLogin(Account account, User user) {
-        Conn conn = new Conn();
+    public int checkLogin(Account account, User user){
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.id = ?";
+        Conn conn = new Conn();
         try{
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, account.getIdAccount());

@@ -12,9 +12,6 @@ import java.awt.*;
 public class AccountSetting extends JFrame {
     private JButton btnConfirm;
     private JPanel p1;
-    private JLabel lblName, lblID, lblPassword, lblConfirmPassword, lblKeyAnswer;
-    private JTextArea txtName, txtID;
-    private JTextField txtPassword, txtConfirmPassword, txtKeyAnswer;
     public AccountSetting(User user) {
         initComponents(user);
     }
@@ -161,7 +158,7 @@ public class AccountSetting extends JFrame {
 
 
     }
-    public static void main(String[] args) {
-        new AccountSetting(new User()).setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        new AccountSetting(new User()).setVisible(true);
+//    }
 }

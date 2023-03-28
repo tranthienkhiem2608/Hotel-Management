@@ -1,6 +1,5 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.EditEmployeeController;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;

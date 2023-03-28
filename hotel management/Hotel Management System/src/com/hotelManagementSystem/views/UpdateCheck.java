@@ -18,8 +18,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UpdateCheck extends JFrame {
-    Connection conn = null;
-    PreparedStatement pst = null;
+
     private static JPanel p1;
     private JTextField txt_ID;
     private JTextField txt_Room;

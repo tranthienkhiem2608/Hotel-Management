@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import com.hotelManagementSystem.dao.RoomDao;
 public class Room extends javax.swing.JFrame {
 
@@ -13,7 +14,6 @@ public class Room extends javax.swing.JFrame {
     private JLabel lblCleanStatus;
     private JLabel lblNewLabel;
     private JLabel lblNewLabel_1;
-    private JLabel lblRoomNumber;
     private JLabel lblId;
 
     public JTable getTable() {
@@ -62,10 +62,11 @@ public class Room extends javax.swing.JFrame {
             e.printStackTrace();
         }
 
-            JButton editBtn = new JButton("EDIT");
+            JButton editBtn = new JButton("Refresh");
             editBtn.setBounds(180, 550, 120, 30);
             editBtn.setBackground(Color.BLACK);
             editBtn.setForeground(Color.WHITE);
+            new RoomDao().showRoom(table);
         p1.add(editBtn);
 
             lblAvailability = new JLabel("Availability");

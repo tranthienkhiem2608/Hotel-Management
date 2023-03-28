@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.controller;
 
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.dao.UpdateCheckDao;
 import com.hotelManagementSystem.entity.Customer;
 import com.hotelManagementSystem.views.Notification;

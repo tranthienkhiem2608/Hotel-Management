@@ -1,6 +1,5 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.EmployeeDashboardController;
 import com.hotelManagementSystem.controller.ManagerDashboardController;
 import com.hotelManagementSystem.entity.User;
@@ -42,8 +41,6 @@ public class EmployeeDashboard extends JFrame {
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
-
-
         p1 = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {

@@ -16,8 +16,8 @@ public class ForgotPasswordDao {
     public ForgotPasswordDao(){}
 
     public User checkValidUser(User user, Account account) {
-        Conn conn = new Conn();
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.phone = ? AND account.keyAnswer = ?";
+        Conn conn = new Conn();
         try {
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, user.getPhone());
@@ -41,8 +41,8 @@ public class ForgotPasswordDao {
     public int changePassword(Account account, User user) {
 
         String query = "update account set password = '" + account.getPassword() + "' where id = '" + user.getId() + "'";
+        Conn conn = new Conn();
         try {
-            Conn conn = new Conn();
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.executeUpdate();
             return 1;
@@ -51,6 +51,8 @@ public class ForgotPasswordDao {
             e.printStackTrace();
             return 0;
 
+        }finally {
+            conn.closeConnection();
         }
     }
 }

@@ -18,9 +18,8 @@ public class ProfileUserDao {
     }
 
     public int updateUser(Account account, User user){
+        Conn conn = new Conn();
         try{
-
-            Conn conn = new Conn();
             String query = "update users set name = ?, age = ?, gender = ?, phone = ?, email = ? where id = ?";
             String query2 = "update account set password = ? where id = ?";
             PreparedStatement stmt = conn.getConnection().prepareStatement(query);
@@ -43,6 +42,8 @@ public class ProfileUserDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            conn.closeConnection();
         }
     }
 }

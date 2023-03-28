@@ -12,8 +12,8 @@ import java.util.Random;
 public class AddUserDao {
 
     public int addUser(User user, Account account) {
+        Conn conn = new Conn();
         try {
-            Conn conn = new Conn();
             String query = "SELECT * FROM users WHERE id = '" + user.getId() + "'";
             ResultSet rs = conn.getStatment().executeQuery(query);
             if (!rs.next()) {
@@ -32,6 +32,8 @@ public class AddUserDao {
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
+        } finally {
+            conn.closeConnection();
         }
     }
 

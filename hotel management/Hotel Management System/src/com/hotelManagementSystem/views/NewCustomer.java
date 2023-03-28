@@ -1,6 +1,6 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.*;
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Customer;
 import com.hotelManagementSystem.controller.NewCustomerController;
 
@@ -28,8 +28,6 @@ public class NewCustomer extends JFrame{
 
     }
 
-    Connection conn = null;
-    PreparedStatement pst = null;
     private static JPanel p1;
     private JTextField t1,t2,t3,t5,t6;
     private JTextArea t4;
