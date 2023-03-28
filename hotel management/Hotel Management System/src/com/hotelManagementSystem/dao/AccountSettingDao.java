@@ -8,8 +8,8 @@ import java.sql.PreparedStatement;
 public class AccountSettingDao {
 
     public int checkChangePassword(User user, Account account) {
+        Conn conn = new Conn();
         try {
-            Conn conn = new Conn();
             String query = "UPDATE account SET password = '" + account.getPassword() +"', keyAnswer = '" + account.getKeyAnswer() + "', count = '1' WHERE id = '" + user.getId() + "'";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.executeUpdate();
@@ -17,6 +17,8 @@ public class AccountSettingDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        } finally {
+            conn.closeConnection();
         }
     }
 

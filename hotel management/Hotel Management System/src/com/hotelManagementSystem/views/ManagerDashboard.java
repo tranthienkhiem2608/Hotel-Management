@@ -1,5 +1,4 @@
 package com.hotelManagementSystem.views;
-import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +8,7 @@ import com.hotelManagementSystem.controller.ManagerDashboardController;
 import com.hotelManagementSystem.dao.ManagerDashboardDao;
 
 
-public class ManagerDashboard extends JFrame{
+public class ManagerDashboard extends JFrame {
 
     private JLabel l1;
     private static JLabel labelListBtnAđd, labelListBtnEmployee;
@@ -18,15 +17,14 @@ public class ManagerDashboard extends JFrame{
     private JTextArea t1;
     private static JTextArea t2;
 
-    private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, profileBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
+    private JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, profileBtn, updateStatusBtn, searchRoomBtn, statisticsBtn, historyBtn;
     private ImageIcon logoutIcon;
-    private  Image logoutImage;
+    private Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
 
 
-
-     public ManagerDashboard() {
+    public ManagerDashboard() {
         initComponent();
         setLocationRelativeTo(null);
 
@@ -35,15 +33,16 @@ public class ManagerDashboard extends JFrame{
     public static JPanel getP3() {
         return p3;
     }
+
     public static void setP3(JPanel p) {
         p3 = p;
     }
 
 
-
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
         p1 = new JPanel() {
@@ -94,13 +93,13 @@ public class ManagerDashboard extends JFrame{
         t2.setForeground(Color.decode("#b3530b"));
         t2.setBackground(Color.decode("#1b1c22"));
         t2.setEditable(true);
-        try{
+        try {
             Login l = new Login();
             l.setVisible(false);
             new ManagerDashboardDao().setTextNameUser(l.getIDLogin(), t2);
 
 
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
         l1.add(t2);
@@ -164,9 +163,8 @@ public class ManagerDashboard extends JFrame{
         profileBtn.setBorder(null);
         profileBtn.setBounds(1250, 30, 30, 30);
         profileBtn.setBackground(Color.decode("#272a32"));
-        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6, p7);
+        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7);
         p1.add(profileBtn);
-
 
 
         buttonList = new JList<>(buttonLabels);
@@ -204,7 +202,7 @@ public class ManagerDashboard extends JFrame{
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7);
+        new ManagerDashboardController().checkViewBtn(viewBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer info");
@@ -213,9 +211,8 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6);
+        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6);
         p2.add(customerBtn);
-
 
 
         employeeBtn = new JButton("User info");
@@ -227,7 +224,7 @@ public class ManagerDashboard extends JFrame{
         new ManagerDashboardController().checkEmployeeInfoBtn(employeeBtn, labelListBtnEmployee, labelListBtnAđd);
         p2.add(employeeBtn);
 
-        updateStatusBtn = new JButton("Update Status");
+        updateStatusBtn = new JButton("Update Room");
         updateStatusBtn.setBounds(0, 200, 250, 50);
         updateStatusBtn.setBorder(null);
         updateStatusBtn.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -268,7 +265,13 @@ public class ManagerDashboard extends JFrame{
         setVisible(true);
 
     }
+
     public static void main(String[] args) {
-        new ManagerDashboard();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                new ManagerDashboard();
+            }
+        });
     }
 }

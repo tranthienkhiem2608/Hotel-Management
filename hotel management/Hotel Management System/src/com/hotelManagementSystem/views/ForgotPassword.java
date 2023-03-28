@@ -1,6 +1,5 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.dao.*;
@@ -23,8 +22,6 @@ public class ForgotPassword extends JFrame {
     private JButton comfirmBtn, backBtn, checkBtn;
     private JTextArea t1;
 
-    private Conn c;
-    private ResultSet rs;
 
     private static User user;
     private static Account account;

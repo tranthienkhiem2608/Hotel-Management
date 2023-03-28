@@ -10,12 +10,12 @@ import java.sql.Time;
 import java.time.format.DateTimeFormatter;
 
 public class NewCustomerDao {
-    public int addNewCustomer(Customer customer){
+    public int addNewCustomer(Customer customer) {
 
+        Conn conn = new Conn();
         try{
             java.sql.Date sqlDate = new java.sql.Date(customer.getCheckInDate().getTime());
             java.sql.Time sqlTime = new java.sql.Time(customer.getCheckInTime().getTime());
-            Conn conn = new Conn();
             String query = "INSERT INTO customer (document, numberID, name, gender, country, roomNumber,checkindate, checkintime, deposit) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getDocument());
@@ -40,6 +40,8 @@ public class NewCustomerDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            conn.closeConnection();
         }
     }
 }

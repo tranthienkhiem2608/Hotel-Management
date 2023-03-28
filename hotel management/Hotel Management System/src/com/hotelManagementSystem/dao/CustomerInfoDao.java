@@ -13,8 +13,8 @@ public class CustomerInfoDao {
     public void viewCustomerInfo(JTable table, DefaultTableModel tableModel){
         customer = new Customer();
         String dateTime ="";
+        Conn conn = new Conn();
         try{
-            Conn conn = new Conn();
             String query = "SELECT * FROM customer";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -39,14 +39,16 @@ public class CustomerInfoDao {
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
 
     }
 
     public void searchCustomerByName(JTable table, DefaultTableModel model, Customer customer){
         String dateTime ="";
+        Conn conn = new Conn();
         try{
-            Conn conn = new Conn();
             String query = "SELECT * FROM customer WHERE name LIKE ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, "%" + customer.getName() + "%");
@@ -71,6 +73,8 @@ public class CustomerInfoDao {
 
         }catch (Exception e){
             e.printStackTrace();
+        } finally {
+            conn.closeConnection();
         }
     }
 }

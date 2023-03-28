@@ -14,7 +14,7 @@ import java.awt.event.*;
 import java.awt.event.ActionEvent;
 
 public class CheckOut extends JFrame{
-    Connection conn = null;
+
     PreparedStatement pst = null;
     private JPanel contentPane;
     private JLabel t1;
@@ -44,7 +44,6 @@ public class CheckOut extends JFrame{
      * @throws SQLException
      */
     public CheckOut() throws SQLException {
-        //conn = Javaconnect.getDBConnection();
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(200, 100, 1000, 600);
         contentPane = new JPanel();

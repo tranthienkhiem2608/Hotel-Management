@@ -1,6 +1,6 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
+
 import com.hotelManagementSystem.entity.Room;
 
 import javax.swing.*;

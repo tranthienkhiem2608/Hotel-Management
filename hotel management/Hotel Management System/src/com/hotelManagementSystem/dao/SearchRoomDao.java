@@ -13,8 +13,9 @@ public class SearchRoomDao {
         String query = "select * from room where bedType = '"+room.getBedType()+"'";
         String query1 = "select * from Room where availability = 'available' AND bedType = '"+room.getBedType()+"'";
         String query2 = "select * from Room where availability = 'occupied' AND bedType = '"+room.getBedType()+"'";
+        Conn conn = new Conn();
         try{
-            Conn conn = new Conn();
+
             if(room.getAvailability() == "available"){
                 ResultSet rs1 = conn.getStatment().executeQuery(query1);
                 table.setModel(DbUtils.resultSetToTableModel(rs1));
@@ -29,6 +30,8 @@ public class SearchRoomDao {
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.controller;
 
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.dao.AccountSettingDao;
 import com.hotelManagementSystem.dao.LoginDao;
 import com.hotelManagementSystem.entity.Account;

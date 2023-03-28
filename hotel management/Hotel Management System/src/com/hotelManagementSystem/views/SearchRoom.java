@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.SearchRoomController;
 import net.proteanit.sql.DbUtils;
 

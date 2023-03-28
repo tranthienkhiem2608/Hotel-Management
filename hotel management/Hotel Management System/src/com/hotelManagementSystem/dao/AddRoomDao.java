@@ -21,6 +21,8 @@ public class AddRoomDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            conn.closeConnection();
         }
     }
 }

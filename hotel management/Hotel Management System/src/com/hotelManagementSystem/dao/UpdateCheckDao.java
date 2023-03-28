@@ -7,10 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UpdateCheckDao {
-
+    private Conn conn = new Conn();
     public Customer getCustomerInfo(Customer customer){
         try{
-            Conn conn = new Conn();
             String query = "SELECT * FROM customer WHERE numberID = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getNumberID());
@@ -30,13 +29,14 @@ public class UpdateCheckDao {
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
         return null;
     }
 
     public int getPriceRoom(Customer customer){
         try{
-            Conn conn = new Conn();
             String query = "SELECT price FROM room WHERE roomNumber = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, customer.getRoomNumber());
@@ -46,6 +46,8 @@ public class UpdateCheckDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+        } finally {
+            conn.closeConnection();
         }
         return 0;
     }
@@ -53,7 +55,6 @@ public class UpdateCheckDao {
 
     public int updateCustomer(Customer customer){
         try {
-            Conn conn = new Conn();
             String query = "UPDATE customer SET name = ?, roomNumber = ?, deposit = ? WHERE numberID = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getName());
@@ -65,6 +66,8 @@ public class UpdateCheckDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        } finally {
+            conn.closeConnection();
         }
     }
 }
