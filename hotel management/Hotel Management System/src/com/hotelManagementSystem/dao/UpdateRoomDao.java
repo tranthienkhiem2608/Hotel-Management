@@ -7,9 +7,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UpdateRoomDao {
+    private final Conn conn = new Conn();
+
     public Room getRoomInfo(Room room){
         try{
-            Conn conn = new Conn();
+
             String query = "SELECT * FROM room WHERE roomNumber = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, room.getRoomNumber());
@@ -30,7 +32,7 @@ public class UpdateRoomDao {
     }
     public int updateRoom(Room room){
         try {
-            Conn conn = new Conn();
+
             String query = "UPDATE room SET price = ?, bedType = ? WHERE roomNumber = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, room.getPrice());

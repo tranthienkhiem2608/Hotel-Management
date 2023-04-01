@@ -11,8 +11,9 @@ import java.util.Random;
 
 public class AddUserDao {
 
+    private final Conn conn = new Conn();
+
     public int addUser(User user, Account account) {
-        Conn conn = new Conn();
         try {
             String query = "SELECT * FROM users WHERE id = '" + user.getId() + "'";
             ResultSet rs = conn.getStatment().executeQuery(query);

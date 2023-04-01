@@ -140,17 +140,17 @@ public class AddDrivers extends JFrame {
         t3.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
         });
         p1.add(t3);

@@ -9,9 +9,13 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import com.toedter.calendar.JDateChooser;
+
 import java.util.*;
 import java.time.*;
 
@@ -158,16 +162,24 @@ public class NewCustomer extends JFrame{
             customer.setGender("Male");
         }
 
-        JLabel lblCountry = new JLabel("Country :");
-        lblCountry.setBounds(35, 231, 200, 14);
+        JLabel lblPhone = new JLabel("Phone:");
+        lblPhone.setBounds(35, 231, 200, 14);
         setFont(new Font("Arial", Font.BOLD, 17));
-        p1.add(lblCountry);
+        p1.add(lblPhone);
 
         JLabel lblReserveRoomNumber = new JLabel("Allocated Room Number :");
         lblReserveRoomNumber.setBounds(35, 274, 200, 14);
         p1.add(lblReserveRoomNumber);
 
+
+
         comboBox_1 = new JComboBox();
+        p1.add(comboBox_1);
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(430, 271, 80, 20);
+        new NewCustomerController().refreshBtn(btnRefresh, comboBox_1);
+        p1.add(btnRefresh);
+
         try{
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from room where availability = 'Available'");
@@ -175,22 +187,15 @@ public class NewCustomer extends JFrame{
                 comboBox_1.addItem(rs.getString("roomNumber"));
             }
         comboBox_1.setBounds(271, 271, 150, 20);
-        comboBox_1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //convert to int
-                customer.setRoomNumber(Integer.parseInt((String) comboBox_1.getSelectedItem()));
+            String selectedItem = (String) comboBox_1.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty()) {
+                customer.setRoomNumber(Integer.parseInt(selectedItem));
             }
-        });
-        p1.add(comboBox_1);
-
-
 
 
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = new Date();
 
-            //time format
             DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
             Date time = new Date();
 
@@ -206,9 +211,33 @@ public class NewCustomer extends JFrame{
             customer.setCheckInDate(date);
             customer.setCheckInTime(time);
 
+            JLabel lblCheckOutStatus = new JLabel("Checked-Out : ");
+            lblCheckOutStatus.setBounds(35, 359, 200, 17);
+            setFont(new Font("Arial", Font.BOLD, 17));
+            p1.add(lblCheckOutStatus);
+
+            JDateChooser dateChooser = new JDateChooser();
+            dateChooser.setBounds(271, 359, 150, 20);
+            dateChooser.setDateFormatString("yyyy-MM-dd");
+            dateChooser.getDateEditor().addPropertyChangeListener(new PropertyChangeListener() {
+                @Override
+                public void propertyChange(PropertyChangeEvent evt) {
+                    if("date".equals(evt.getPropertyName())){
+                        customer.setCheckOutDate(dateChooser.getDate());
+                    }
+                }
+            });
+            p1.add(dateChooser);
+
+            Date outDate = new Date();
+            outDate.setHours(12);
+            outDate.setMinutes(0);
+            outDate.setSeconds(0);
+            customer.setCheckOutTime(outDate);
+
 
         JLabel lblDeposite = new JLabel("Deposit :");
-        lblDeposite.setBounds(35, 359, 200, 14);
+        lblDeposite.setBounds(35, 402, 200, 14);
             setFont(new Font("Arial", Font.BOLD, 17));
             p1.add(lblDeposite);
 
@@ -218,17 +247,17 @@ public class NewCustomer extends JFrame{
         t3.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                customer.setCountry(t3.getText());
+                customer.setPhone(t3.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                customer.setCountry(t3.getText());
+                customer.setPhone(t3.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                customer.setCountry(t3.getText());
+                customer.setPhone(t3.getText());
             }
         });
 
@@ -237,7 +266,7 @@ public class NewCustomer extends JFrame{
 
 
         t6 = new JTextField();
-        t6.setBounds(271, 359, 150, 20);
+        t6.setBounds(271, 402, 150, 20);
         t6.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -247,7 +276,7 @@ public class NewCustomer extends JFrame{
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                customer.setDeposit(Integer.parseInt(t6.getText()));
+                customer.setDeposit(0);
             }
 
             @Override
@@ -266,6 +295,7 @@ public class NewCustomer extends JFrame{
         btnNewButton.setForeground(Color.WHITE);
         new NewCustomerController().addNewCustomer(btnNewButton,  customer);
             p1.add(btnNewButton);
+
 
 
         getContentPane().setBackground(Color.WHITE);

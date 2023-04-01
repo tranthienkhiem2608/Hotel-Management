@@ -9,10 +9,10 @@ import com.hotelManagementSystem.views.ManagerDashboard;
 import javax.swing.*;
 
 public class ManagerDashboardDao {
+    private final Conn conn = new Conn();
 
     public void setTextNameUser(String id, JTextArea txtName){
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.id = ?";
-        Conn conn = new Conn();
         try{
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, id);

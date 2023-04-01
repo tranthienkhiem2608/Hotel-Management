@@ -3,6 +3,7 @@ package com.hotelManagementSystem.dao;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Customer;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -19,10 +20,12 @@ public class UpdateCheckDao {
                 customer.setNumberID(rs.getString("numberID"));
                 customer.setName(rs.getString("name"));
                 customer.setGender(rs.getString("gender"));
-                customer.setCountry(rs.getString("country"));
+                customer.setPhone(rs.getString("phone"));
                 customer.setRoomNumber(rs.getInt("roomNumber"));
                 customer.setCheckInDate(rs.getDate("checkInDate"));
                 customer.setCheckInTime(rs.getTime("checkInTime"));
+                customer.setCheckOutDate(rs.getDate("checkOutDate"));
+                customer.setCheckOutTime(rs.getTime("checkOutTime"));
                 customer.setDeposit(rs.getInt("deposit"));
             }
             return customer;
@@ -67,6 +70,20 @@ public class UpdateCheckDao {
             e.printStackTrace();
             return 0;
         } finally {
+            conn.closeConnection();
+        }
+    }
+
+    public void refreshID(JComboBox comboBox){
+
+        try{
+            ResultSet rs = conn.s.executeQuery("select * from customer");
+            while (rs.next()) {
+                comboBox.addItem(rs.getString("numberID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
             conn.closeConnection();
         }
     }

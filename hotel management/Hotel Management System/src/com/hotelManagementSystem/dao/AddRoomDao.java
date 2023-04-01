@@ -6,8 +6,9 @@ import java.sql.ResultSet;
 
 public class AddRoomDao {
 
+    private final Conn conn = new Conn();
+
     public int addRoom(Room room){
-        Conn conn = new Conn();
         try{
             String query1 = "select * from Room where roomNumber = '" + room.getRoomNumber() + "'";
             ResultSet rs = conn.getStatment().executeQuery(query1);

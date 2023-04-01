@@ -30,7 +30,7 @@ public class CustomerInfo extends JFrame {
     private JLabel lblNewLabel;
     private JLabel lblGender;
     private JTable table;
-    private JLabel lblCountry;
+    private JLabel lblPhone;
     private JLabel lblRoom;
     private JLabel lblStatus;
     private JLabel lblNewLabel_1;
@@ -62,7 +62,7 @@ public class CustomerInfo extends JFrame {
         p1.setLayout(null);
         customer = new Customer();
 
-        String[] columnNames = {"ID", "Number", "Name", "Gender", "Country", "Room", "Check-in Status", "Deposit"};
+        String[] columnNames = {"ID", "Number", "Name", "Gender", "Phone", "Room", "Check-in", "Check-out","Price Room", "Deposit"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();
@@ -140,23 +140,28 @@ public class CustomerInfo extends JFrame {
         lblGender.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblGender);
 
-        lblCountry = new JLabel("Country");
-        lblCountry.setBounds(590, 20, 50, 16);
-        lblCountry.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblCountry);
+        lblPhone = new JLabel("Phone");
+        lblPhone.setBounds(590, 20, 50, 16);
+        lblPhone.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblPhone);
 
         lblRoom = new JLabel("Room");
         lblRoom.setBounds(715, 20, 50, 16);
         lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblRoom);
 
-        lblStatus = new JLabel("Status");
+        lblStatus = new JLabel("Check-in");
         lblStatus.setBounds(830, 20, 50, 16);
         lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblStatus);
 
+        JLabel lblNewLabel_2 = new JLabel("Check-out");
+        lblNewLabel_2.setBounds(955, 20, 50, 16);
+        lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblNewLabel_2);
+
         lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(955, 20, 50, 16);
+        lblNewLabel_1.setBounds(980, 20, 50, 16);
         lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblNewLabel_1);
 

@@ -10,9 +10,10 @@ import java.sql.ResultSet;
 
 public class ManagerInfoDao {
     private User user;
+    private final Conn conn = new Conn();
+
     public void showManager(JTable table, DefaultTableModel tableModel){
         user = new User();
-        Conn conn = new Conn();
         try{
             String query = "select * from users where position = 'manager'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);

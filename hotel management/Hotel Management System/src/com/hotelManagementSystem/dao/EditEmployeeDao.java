@@ -7,8 +7,8 @@ import java.sql.ResultSet;
 
 public class EditEmployeeDao {
 
+    private final Conn conn = new Conn();
     public User searchUser(User user) {
-        Conn conn = new Conn();
         try {
             String query = "select * from users where id = '" + user.getId() + "'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);
@@ -35,7 +35,6 @@ public class EditEmployeeDao {
         }
     }
     public int saveUser(User user){
-        Conn conn = new Conn();
         try{
             String query = "update users set name = ?, age = ?, gender = ?, position = ?, salary = ?, phone = ?, email = ? where id = ?";
             PreparedStatement stmt = conn.getConnection().prepareStatement(query);
@@ -59,7 +58,6 @@ public class EditEmployeeDao {
     }
 
     public int deleteUser(User user){
-        Conn conn = new Conn();
         try{
             String query = "delete from account where id = ?";
             String query2 = "delete from users where id = ?";

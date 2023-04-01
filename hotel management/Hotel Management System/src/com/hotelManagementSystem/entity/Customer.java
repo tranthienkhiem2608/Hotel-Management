@@ -11,11 +11,13 @@ public class Customer {
     private String numberID;
     private String name;
     private String gender;
-    private String country;
+    private String phone;
     private int roomNumber;
 
     private Date checkInDate;
     private Date checkInTime;
+    private Date checkOutDate;
+    private Date checkOutTime;
 
     private int deposit;
 
@@ -51,12 +53,12 @@ public class Customer {
         this.gender =gender;
     }
 
-    public String getCountry() {
-        return country;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setCountry(String country){
-        this.country = country;
+    public void setPhone(String phone){
+        this.phone = phone;
     }
 
     public int getRoomNumber() {
@@ -81,6 +83,22 @@ public class Customer {
 
     public void setCheckInTime(Date checkInTime){
         this.checkInTime = checkInTime;
+    }
+
+    public Date getCheckOutDate() {
+        return checkOutDate;
+    }
+
+    public void setCheckOutDate(Date checkOutDate){
+        this.checkOutDate = checkOutDate;
+    }
+
+    public Date getCheckOutTime() {
+        return checkOutTime;
+    }
+
+    public void setCheckOutTime(Date checkOutTime){
+        this.checkOutTime = checkOutTime;
     }
 
     public int getDeposit() {

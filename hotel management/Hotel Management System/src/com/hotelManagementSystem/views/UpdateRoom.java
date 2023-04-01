@@ -51,8 +51,6 @@ public class UpdateRoom extends JFrame {
     public UpdateRoom() {initComponent();    }
     private void initComponent(){
         room = new Room();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(200, 100, 1000, 600);
         p1 = new JPanel();
         p1.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(p1);

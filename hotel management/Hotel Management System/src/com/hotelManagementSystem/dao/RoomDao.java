@@ -7,9 +7,9 @@ import javax.swing.*;
 import java.sql.ResultSet;
 
 public class RoomDao {
+    private final Conn conn = new Conn();
 
     public void showRoom(JTable table){
-        Conn conn = new Conn();
         try{
             String query = "select * from room";
             ResultSet rs = conn.getStatment().executeQuery(query);

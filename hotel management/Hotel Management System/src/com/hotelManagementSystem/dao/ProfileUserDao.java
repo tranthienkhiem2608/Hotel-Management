@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 
 public class ProfileUserDao {
     private Login l;
+    private final Conn conn = new Conn();
 
     public ProfileUserDao(){
         l = new Login();
@@ -18,7 +19,6 @@ public class ProfileUserDao {
     }
 
     public int updateUser(Account account, User user){
-        Conn conn = new Conn();
         try{
             String query = "update users set name = ?, age = ?, gender = ?, phone = ?, email = ? where id = ?";
             String query2 = "update account set password = ? where id = ?";
