@@ -71,7 +71,13 @@ public class ManagerInfo extends JFrame {
 
         table = new JTable();
         table.setBounds(50, 50, 1000, 500);;
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         p1.add(table);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 50, 1000, 450);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p1.add(scrollPane);
 
         try{
             ManagerInfoDao managerInfoDao = new ManagerInfoDao();
@@ -97,52 +103,6 @@ public class ManagerInfo extends JFrame {
 
         getContentPane().setBackground(Color.WHITE);
 
-        lblID = new JLabel("ID");
-        lblID.setBounds(100, 20, 46, 16);
-        lblID.setBorder(null);
-        lblID.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(lblID);
-
-        lblName = new JLabel("Name");
-        lblName.setBounds(215, 20, 46, 16);
-        lblName.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(lblName);
-
-        lblAge = new JLabel("Age");
-        lblAge.setBounds(345, 20, 46, 16);
-        lblAge.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(lblAge);
-
-        lblGender = new JLabel("Gender");
-        lblGender.setBounds(455, 20, 54, 16);
-        lblGender.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(lblGender);
-
-        lblJob = new JLabel("Job");
-        lblJob.setBounds(595, 20, 46, 16);
-        lblJob.setBorder(null);
-        lblJob.setFont(new Font("Arial", Font.BOLD, 15));
-        lblJob.setBackground(Color.decode("#292c35"));
-        lblJob.setForeground(Color.decode("#000000"));
-        p2.add(lblJob);
-
-        lblSalary= new JLabel("Salary");
-        lblSalary.setBounds(700, 20, 46, 16);
-        lblSalary.setBorder(null);
-        lblSalary.setFont(new Font("Arial", Font.BOLD, 15));
-        lblSalary.setBackground(Color.decode("#292c35"));
-        lblSalary.setForeground(Color.decode("#00000"));
-        p2.add(lblSalary);
-
-        JLabel l2 = new JLabel("Phone");
-        l2.setBounds(825, 20, 46, 16);
-        l2.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(l2);
-
-        JLabel l3 = new JLabel("Email");
-        l3.setBounds(955, 20, 46, 16);
-        l3.setFont(new Font("Arial", Font.BOLD, 15));
-        p2.add(l3);
 
         //getContentPane().setBackground(Color.WHITE);
     }

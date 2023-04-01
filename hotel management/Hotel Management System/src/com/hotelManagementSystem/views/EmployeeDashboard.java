@@ -223,7 +223,7 @@ public class EmployeeDashboard extends JFrame {
         new EmployeeDashboardController().historyBtn(updateRoomBtn, p9, p3, p4, p5, p6, p7, p8, p10);
         p2.add(updateRoomBtn);
 
-        pickUpServiceBtn = new JButton("Pick Up Service");
+        pickUpServiceBtn = new JButton("Driver Info");
         pickUpServiceBtn.setBounds(0, 250, 250, 50);
         pickUpServiceBtn.setBorder(null);
         pickUpServiceBtn.setFont(new Font("Arial", Font.PLAIN, 20));
