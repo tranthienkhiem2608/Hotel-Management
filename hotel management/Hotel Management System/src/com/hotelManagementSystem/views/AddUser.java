@@ -161,11 +161,23 @@ public class AddUser extends JFrame {
         JRadioButton NewRadioButton = new JRadioButton("MALE");
         NewRadioButton.setBackground(Color.WHITE);
         NewRadioButton.setBounds(200, 280, 70, 27);
+        NewRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user.setGender("male");
+            }
+        });
         p1.add(NewRadioButton);
 
         JRadioButton Female = new JRadioButton("FEMALE");
         Female.setBackground(Color.WHITE);
         Female.setBounds(270, 280, 70, 27);
+        Female.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                user.setGender("female");
+            }
+        });
         p1.add(Female);
 
         ButtonGroup bg = new ButtonGroup();

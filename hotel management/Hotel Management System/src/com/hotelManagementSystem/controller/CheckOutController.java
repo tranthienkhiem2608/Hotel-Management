@@ -34,9 +34,10 @@ public class CheckOutController {
     public void btnCheckOut(JButton btn, Customer cusstomer){
 
         btn.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println(cusstomer.getDeposit() + " " + cusstomer.getRoomNumber());
+                System.out.println(cusstomer.getDeposit() + " " + cusstomer.getRoomNumber() + " " + cusstomer.getCheckInDate() + " " + cusstomer.getCheckInTime() + " " + cusstomer.getCheckOutDate() + " " + cusstomer.getCheckOutTime());
                 int flag = new CheckOutDao().checkOut(cusstomer);
                 if(flag == 1){
                     new Notification("Check out successfully").setVisible(true);

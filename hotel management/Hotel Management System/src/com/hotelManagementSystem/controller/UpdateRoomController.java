@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.controller;
 
+import com.hotelManagementSystem.dao.NewCustomerDao;
 import com.hotelManagementSystem.dao.UpdateRoomDao;
 import com.hotelManagementSystem.entity.Room;
 import com.hotelManagementSystem.views.Notification;
@@ -26,6 +27,13 @@ public class UpdateRoomController {
             }else{
                 new Notification("Update failed").setVisible(true);
             }
+        });
+    }
+
+    public void refreshBtn(JButton btn, JComboBox comboBox){
+        btn.addActionListener(e -> {
+            comboBox.removeAllItems();
+            new UpdateRoomDao().refreshRoom(comboBox);
         });
     }
 }

@@ -144,23 +144,30 @@ public class NewCustomer extends JFrame{
         r1.setFont(new Font("Raleway", Font.BOLD, 14));
         r1.setBackground(Color.WHITE);
         r1.setBounds(271, 191, 80, 12);
+        r1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customer.setGender("male");
+            }
+        });
         add(r1);
 
         r2 = new JRadioButton("female");
         r2.setFont(new Font("Raleway", Font.BOLD, 14));
         r2.setBackground(Color.WHITE);
         r2.setBounds(350, 191, 100, 12);
+        r2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                customer.setGender("female");
+            }
+        });
         add(r2);
 
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(r1);
         bg.add(r2);
-        if(bg.getSelection() == r2.getModel()){
-            customer.setGender("Female");
-        }else {
-            customer.setGender("Male");
-        }
 
         JLabel lblPhone = new JLabel("Phone:");
         lblPhone.setBounds(35, 231, 200, 14);
@@ -189,7 +196,12 @@ public class NewCustomer extends JFrame{
         comboBox_1.setBounds(271, 271, 150, 20);
             String selectedItem = (String) comboBox_1.getSelectedItem();
             if (selectedItem != null && !selectedItem.isEmpty()) {
-                customer.setRoomNumber(Integer.parseInt(selectedItem));
+                comboBox_1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        customer.setRoomNumber(Integer.parseInt(selectedItem));
+                    }
+                });
             }
 
 

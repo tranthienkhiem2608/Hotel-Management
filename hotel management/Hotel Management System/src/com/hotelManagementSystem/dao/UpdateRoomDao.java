@@ -3,6 +3,7 @@ package com.hotelManagementSystem.dao;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Room;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
@@ -43,6 +44,22 @@ public class UpdateRoomDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    public void refreshRoom(JComboBox comboBox){
+        String query = "SELECT roomNumber FROM room WHERE availability = 'available'";
+        try{
+            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+            comboBox.removeAllItems();
+            while(rs.next()){
+                comboBox.addItem(rs.getInt("roomNumber"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
     }
 }

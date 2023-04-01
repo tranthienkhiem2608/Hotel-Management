@@ -1,6 +1,7 @@
 package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.controller.NewCustomerController;
 import com.hotelManagementSystem.controller.UpdateRoomController;
 import com.hotelManagementSystem.entity.Room;
 
@@ -76,21 +77,29 @@ public class UpdateRoom extends JFrame {
         p1.add(lblNewLabel);
 
         c1 = new JComboBox();
+        p1.add(c1);
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(330, 130, 80, 20);
+        new UpdateRoomController().refreshBtn(btnRefresh, c1);
+        p1.add(btnRefresh);
+
         try{
             Conn c = new Conn();
             ResultSet rs = c.s.executeQuery("select * from room where availability = 'Available'");
             while(rs.next()){
                 c1.addItem(rs.getString("roomNumber"));
             }
-            c1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                room.setRoomNumber(Integer.parseInt((String) c1.getSelectedItem()));
+            c1.setBounds(180, 130, 140, 20);
+            String selectedItem = (String) c1.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty()) {
+                c1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        room.setRoomNumber(Integer.parseInt(selectedItem));
+                    }
+                });
             }
-        });
-        }catch(Exception e){ }
-        c1.setBounds(180, 130, 140, 20);
-        p1.add(c1);
+        }catch (Exception e){}
 
         JLabel lblRoomId = new JLabel("Price:");
         lblRoomId.setFont(new Font("Arial", Font.PLAIN, 20));

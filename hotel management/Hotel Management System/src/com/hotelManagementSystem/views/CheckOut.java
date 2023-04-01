@@ -164,32 +164,6 @@ public class CheckOut extends JFrame{
         customer1.setCheckOutTime(time);
 
         JButton btnCheckOut = new JButton("Check Out");
-//        Su dung DB
-//        btnCheckOut.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                String id = c1.getSelectedItem();
-//                String s1 = t1.getText();
-//                String deleteSQL = "Delete from customer where number = "+id;
-//                String q2 = "update room set availability = 'Available' where room_number = "+s1;
-//
-//
-//                conn c = new conn();
-//
-//                try{
-//
-//
-//                    c.s.executeUpdate(deleteSQL);
-//                    c.s.executeUpdate(q2);
-//                    JOptionPane.showMessageDialog(null, "Check Out Successful");
-//        Date date = new Date();
-//        lblCheckOutTime.setText("" +date)");      //  153, 154 tao đột biến --> Ao chình
-//                    new Reception().setVisible(true);
-//                    setVisible(false);
-//                }catch(SQLException e1){
-//                    System.out.println(e1.getMessage());
-//                }
-//            }
-//        });
         new CheckOutController().btnCheckOut(btnCheckOut, customer1);
         btnCheckOut.setBounds(220, 400, 180, 50);
         btnCheckOut.setBackground(Color.BLACK);
