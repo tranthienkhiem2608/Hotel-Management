@@ -39,8 +39,6 @@ public class ManagerDashboard extends JFrame{
         p3 = p;
     }
 
-
-
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
@@ -65,7 +63,8 @@ public class ManagerDashboard extends JFrame{
         logoutImage = logoutIcon.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
         logoutBtn = new JButton(new ImageIcon(logoutImage));
         logoutBtn.setBorder(null);
-        logoutBtn.setBounds(1300, 30, 30, 30);
+        logoutBtn.setBounds(1300, 30, 30, 30
+        );
         logoutBtn.setBackground(Color.decode("#272a32"));
         logoutBtn.addActionListener(e -> {
             new Login();
@@ -214,7 +213,7 @@ public class ManagerDashboard extends JFrame{
         new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8);
         p2.add(viewBtn);
 
-        customerBtn = new JButton("Customer info");
+        customerBtn = new JButton("Customer Info");
         customerBtn.setBounds(0, 100, 250, 50);
         customerBtn.setBorder(null);
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -225,7 +224,7 @@ public class ManagerDashboard extends JFrame{
 
 
 
-        employeeBtn = new JButton("User info");
+        employeeBtn = new JButton("User Info");
         employeeBtn.setBounds(0, 150, 250, 50);
         employeeBtn.setBorder(null);
         employeeBtn.setFont(new Font("Arial", Font.PLAIN, 20));

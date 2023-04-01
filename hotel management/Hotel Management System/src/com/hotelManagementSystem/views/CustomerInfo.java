@@ -69,7 +69,14 @@ public class CustomerInfo extends JFrame {
         table.setBounds(50, 50, 1000, 450);;
         table.setModel(tableModel);
         table.enableInputMethods(false);
+
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         p1.add(table);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 50, 1000, 450);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p1.add(scrollPane);
 
         try{
             CustomerInfoDao customerInfoDao = new CustomerInfoDao();
@@ -87,7 +94,7 @@ public class CustomerInfo extends JFrame {
         p1.add(btnRefresh);
 
         textField = new JTextField();
-        textField.setBounds(40, 500, 250, 30);
+        textField.setBounds(50, 500, 250, 30);
         textField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -120,45 +127,7 @@ public class CustomerInfo extends JFrame {
 
 
 
-        lblId = new JLabel("ID");
-        lblId.setBounds(100, 20, 50, 16);
-        lblId.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblId);
 
-        JLabel l1 = new JLabel("Number");
-        l1.setBounds(215, 20, 50, 16);
-        l1.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(l1);
-
-        lblNewLabel = new JLabel("Name");
-        lblNewLabel.setBounds(345, 20, 50, 16);
-        lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblNewLabel);
-
-        lblGender = new JLabel("Gender");
-        lblGender.setBounds(455, 20, 50, 16);
-        lblGender.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblGender);
-
-        lblCountry = new JLabel("Country");
-        lblCountry.setBounds(590, 20, 50, 16);
-        lblCountry.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblCountry);
-
-        lblRoom = new JLabel("Room");
-        lblRoom.setBounds(715, 20, 50, 16);
-        lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblRoom);
-
-        lblStatus = new JLabel("Status");
-        lblStatus.setBounds(830, 20, 50, 16);
-        lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblStatus);
-
-        lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(955, 20, 50, 16);
-        lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblNewLabel_1);
 
         getContentPane().setBackground(Color.WHITE);
     }
