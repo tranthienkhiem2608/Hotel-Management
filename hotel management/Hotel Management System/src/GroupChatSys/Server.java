@@ -1,4 +1,4 @@
-package group.chatting.application;
+package GroupChatSys;
 
 import java.net.*;
 import java.io.*;
@@ -47,7 +47,7 @@ public class Server implements Runnable {
 
 
     public static void main(String[] args) throws Exception {
-        String ipAddress = "localhost"; // Change this to your server's IP address
+        String ipAddress = "192.168.1.49"; // Change this to your server's IP address
         int portNumber = 2003; // Change this to the port number you want to use
 
         ServerSocket serverSocket = new ServerSocket(portNumber, 50, InetAddress.getByName(ipAddress));
