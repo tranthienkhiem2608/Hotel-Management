@@ -121,7 +121,7 @@ public class UserOne implements ActionListener, Runnable {
         f.setVisible(true);
 
         try {
-            Socket socket = new Socket("10.124.7.216", 2003);
+            Socket socket = new Socket("localhost", 2003);
             writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (Exception e) {

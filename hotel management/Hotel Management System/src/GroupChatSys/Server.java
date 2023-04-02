@@ -1,4 +1,4 @@
-package group.chatting.application;
+package GroupChatSys;
 
 import java.net.*;
 import java.io.*;
@@ -44,7 +44,6 @@ public class Server implements Runnable {
             e.printStackTrace();
         }
     }
-
 
     public static void main(String[] args) throws Exception {
         String ipAddress = "localhost"; // Change this to your server's IP address
