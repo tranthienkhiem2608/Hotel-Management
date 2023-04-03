@@ -3,14 +3,14 @@ package com.hotelManagementSystem.dao;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Customer;
 
+import javax.swing.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UpdateCheckDao {
-
+    private Conn conn = new Conn();
     public Customer getCustomerInfo(Customer customer){
         try{
-            Conn conn = new Conn();
             String query = "SELECT * FROM customer WHERE numberID = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getNumberID());
@@ -20,23 +20,26 @@ public class UpdateCheckDao {
                 customer.setNumberID(rs.getString("numberID"));
                 customer.setName(rs.getString("name"));
                 customer.setGender(rs.getString("gender"));
-                customer.setCountry(rs.getString("country"));
+                customer.setPhone(rs.getString("phone"));
                 customer.setRoomNumber(rs.getInt("roomNumber"));
                 customer.setCheckInDate(rs.getDate("checkInDate"));
                 customer.setCheckInTime(rs.getTime("checkInTime"));
+                customer.setCheckOutDate(rs.getDate("checkOutDate"));
+                customer.setCheckOutTime(rs.getTime("checkOutTime"));
                 customer.setDeposit(rs.getInt("deposit"));
             }
             return customer;
 
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
         return null;
     }
 
     public int getPriceRoom(Customer customer){
         try{
-            Conn conn = new Conn();
             String query = "SELECT price FROM room WHERE roomNumber = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setInt(1, customer.getRoomNumber());
@@ -46,6 +49,8 @@ public class UpdateCheckDao {
             }
         }catch (Exception e){
             e.printStackTrace();
+        } finally {
+            conn.closeConnection();
         }
         return 0;
     }
@@ -53,7 +58,6 @@ public class UpdateCheckDao {
 
     public int updateCustomer(Customer customer){
         try {
-            Conn conn = new Conn();
             String query = "UPDATE customer SET name = ?, roomNumber = ?, deposit = ? WHERE numberID = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getName());
@@ -65,6 +69,22 @@ public class UpdateCheckDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        } finally {
+            conn.closeConnection();
+        }
+    }
+
+    public void refreshID(JComboBox comboBox){
+
+        try{
+            ResultSet rs = conn.s.executeQuery("select * from customer");
+            while (rs.next()) {
+                comboBox.addItem(rs.getString("numberID"));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            conn.closeConnection();
         }
     }
 }

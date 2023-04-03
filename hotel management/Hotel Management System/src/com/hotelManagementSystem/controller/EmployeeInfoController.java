@@ -1,4 +1,5 @@
 package com.hotelManagementSystem.controller;
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.views.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;

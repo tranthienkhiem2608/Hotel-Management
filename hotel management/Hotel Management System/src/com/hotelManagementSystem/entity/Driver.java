@@ -5,20 +5,11 @@ public class Driver {
     private String name;
     private int age;
     private String gender;
-    private String carCompany;
+    private String phone;
     private String carBrand;
     private String available;
     private String location;
 
-    public Driver(){
-        name = "";
-        age = 0;
-        gender = "";
-        carCompany = "";
-        carBrand = "";
-        available = "";
-        location = "";
-    }
 
     public String getName() {
         return name;
@@ -44,12 +35,12 @@ public class Driver {
         this.gender = gender;
     }
 
-    public String getCarCompany(){
-        return carCompany;
+    public String getPhone(){
+        return phone;
     }
 
-    public void setCarCompany(String carCompany){
-        this.carCompany = carCompany;
+    public void setPhone(String phone){
+        this.phone = phone;
     }
 
     public String getCarBrand(){

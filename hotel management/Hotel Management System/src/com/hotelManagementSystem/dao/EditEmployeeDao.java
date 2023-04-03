@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 
 public class EditEmployeeDao {
 
+    private final Conn conn = new Conn();
     public User searchUser(User user) {
         try {
-            Conn conn = new Conn();
             String query = "select * from users where id = '" + user.getId() + "'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
@@ -30,11 +30,12 @@ public class EditEmployeeDao {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }finally {
+            conn.closeConnection();
         }
     }
     public int saveUser(User user){
         try{
-            Conn conn = new Conn();
             String query = "update users set name = ?, age = ?, gender = ?, position = ?, salary = ?, phone = ?, email = ? where id = ?";
             PreparedStatement stmt = conn.getConnection().prepareStatement(query);
             stmt.setString(1, user.getName());
@@ -51,12 +52,13 @@ public class EditEmployeeDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            conn.closeConnection();
         }
     }
 
     public int deleteUser(User user){
         try{
-            Conn conn = new Conn();
             String query = "delete from account where id = ?";
             String query2 = "delete from users where id = ?";
             PreparedStatement stmt = conn.getConnection().prepareStatement(query);
@@ -70,6 +72,8 @@ public class EditEmployeeDao {
         }catch (Exception e){
             e.printStackTrace();
             return 0;
+        }finally {
+            conn.closeConnection();
         }
     }
 }

@@ -1,6 +1,7 @@
 package com.hotelManagementSystem.views;
 
 import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.controller.NewCustomerController;
 import com.hotelManagementSystem.controller.UpdateCheckController;
 import com.hotelManagementSystem.entity.Customer;
 
@@ -18,8 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UpdateCheck extends JFrame {
-    Connection conn = null;
-    PreparedStatement pst = null;
+
     private static JPanel p1;
     private JTextField txt_ID;
     private JTextField txt_Room;
@@ -28,7 +28,7 @@ public class UpdateCheck extends JFrame {
     private JTextField txt_Payment;
     private JComboBox comboBox_1;
     private Customer customer;
-    private JTextArea txt_Time;
+    private JTextArea txt_Time, txt_TimeOut;
 
     private int valuePayment;
 
@@ -81,7 +81,7 @@ public class UpdateCheck extends JFrame {
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/nine.jpg"));
         JLabel l1 = new JLabel(i1);
-        l1.setBounds(450, 70, 476, 270);
+        l1.setBounds(500, 70, 476, 270);
         add(l1);
 
         JLabel lblNewLabel = new JLabel("ID:");
@@ -97,16 +97,24 @@ public class UpdateCheck extends JFrame {
                 comboBox_1.addItem(rs.getString("numberID"));
             }
             comboBox_1.setBounds(248, 88, 150, 20);
+            String selectedItem = (String) comboBox_1.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty()) {
             comboBox_1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     customer.setNumberID((String) comboBox_1.getSelectedItem());
                 }
             });
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
             p1.add(comboBox_1);
+
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(420, 88, 80, 20);
+        new UpdateCheckController().refreshBtn(btnRefresh, comboBox_1);
+        p1.add(btnRefresh);
 
             JLabel lblNewLabel_1 = new JLabel("Room No :");
             lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
@@ -150,14 +158,20 @@ public class UpdateCheck extends JFrame {
             lblNewLabel_3.setBounds(25, 235, 107, 16);
             p1.add(lblNewLabel_3);
 
-            JLabel lblNewLabel_4 = new JLabel("Amount Paid(Rs) : ");
+            JLabel lblNewLabel_6 = new JLabel("Checked-out :");
+            lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 16));
+            lblNewLabel_6.setBounds(25, 285, 107, 16);
+            p1.add(lblNewLabel_6);
+
+
+        JLabel lblNewLabel_4 = new JLabel("Amount Paid(Rs) : ");
             lblNewLabel_4.setFont(new Font("Arial", Font.BOLD, 16));
-            lblNewLabel_4.setBounds(25, 285, 170, 16);
+            lblNewLabel_4.setBounds(25, 335, 170, 16);
             p1.add(lblNewLabel_4);
 
             JLabel lblNewLabel_5 = new JLabel("Pending Amount(Rs) : ");
             lblNewLabel_5.setFont(new Font("Arial", Font.BOLD, 16));
-            lblNewLabel_5.setBounds(25, 335, 200, 16);
+            lblNewLabel_5.setBounds(25, 385, 200, 16);
             p1.add(lblNewLabel_5);
 
 
@@ -194,8 +208,14 @@ public class UpdateCheck extends JFrame {
             txt_Time.setText("0/0/0 00:00:00");
             p1.add(txt_Time);
 
+            txt_TimeOut = new JTextArea();
+            txt_TimeOut.setBounds(248, 285, 140, 20);
+            txt_TimeOut.setEditable(false);
+            txt_TimeOut.setText("0/0/0 00:00:00");
+            p1.add(txt_TimeOut);
+
             txt_Deposit = new JTextField();
-            txt_Deposit.setBounds(248, 285, 140, 20);
+            txt_Deposit.setBounds(248, 335, 140, 20);
             txt_Deposit.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -222,7 +242,7 @@ public class UpdateCheck extends JFrame {
             p1.add(txt_Deposit);
 
             txt_Payment = new JTextField();
-            txt_Payment.setBounds(248, 335, 140, 20);
+            txt_Payment.setBounds(248, 385, 140, 20);
             txt_Payment.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -250,15 +270,15 @@ public class UpdateCheck extends JFrame {
 
             JButton btnAdd = new JButton("Check");
             btnAdd.setFont(new Font("Arial", Font.BOLD, 17));
-            btnAdd.setBounds(80, 410, 100, 40);
+            btnAdd.setBounds(80, 450, 100, 40);
             btnAdd.setBackground(Color.BLACK);
             btnAdd.setForeground(Color.WHITE);
-            new UpdateCheckController().btnCheckOut(btnAdd, customer,txt_ID, txt_Status, txt_Time, txt_Deposit, txt_Payment);
+            new UpdateCheckController().btnCheckOut(btnAdd, customer,txt_ID, txt_Status, txt_Time, txt_TimeOut, txt_Deposit, txt_Payment);
             p1.add(btnAdd);
 
             JButton btnUpdate = new JButton("Update");
             btnUpdate.setFont(new Font("Arial", Font.BOLD, 17));
-            btnUpdate.setBounds(220, 410, 100, 40);
+            btnUpdate.setBounds(220, 450, 100, 40);
             btnUpdate.setBackground(Color.BLACK);
             btnUpdate.setForeground(Color.WHITE);
             new UpdateCheckController().btnUpdate(btnUpdate, customer);

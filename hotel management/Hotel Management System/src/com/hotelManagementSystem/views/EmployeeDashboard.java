@@ -1,6 +1,5 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.EmployeeDashboardController;
 import com.hotelManagementSystem.controller.ManagerDashboardController;
 import com.hotelManagementSystem.entity.User;
@@ -17,14 +16,13 @@ public class EmployeeDashboard extends JFrame {
 
     private JLabel l1;
     private JPanel p1, p2;
-    private static JPanel p3, p4, p5, p6;
+    private static JPanel p3, p4, p5, p6, p7, p8, p9, p10;
     private JTextArea t1;
     private static JTextArea t2;
     private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn,profileBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
     private static JLabel labelListBtnCheckInOut;
-    private String[] buttonLabels = {"Check in", "Check Out"};
     private JList<String> buttonList;
 
     public EmployeeDashboard() {
@@ -42,8 +40,7 @@ public class EmployeeDashboard extends JFrame {
     private void initComponent() {
         setSize(1400, 800);
         setLayout(null);
-
-
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         p1 = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
@@ -103,13 +100,7 @@ public class EmployeeDashboard extends JFrame {
 
         l1.add(t2);
 
-        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
-        Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
-        profileBtn = new JButton(new ImageIcon(profileImage));
-        profileBtn.setBorder(null);
-        profileBtn.setBounds(1250, 30, 30, 30);
-        profileBtn.setBackground(Color.decode("#272a32"));
-        p1.add(profileBtn);
+
 
         p2 = new JPanel();
         p2.setBounds(0, 100, 250, 800);
@@ -143,6 +134,40 @@ public class EmployeeDashboard extends JFrame {
         p6.setLayout(null);
         add(p6);
 
+        p7 = new JPanel();
+        p7.setBounds(265, 130, 1100, 600);
+        p7.setVisible(false);
+        p7.setLayout(null);
+        add(p7);
+
+        p8 = new JPanel();
+        p8.setBounds(265, 130, 1100, 600);
+        p8.setVisible(false);
+        p8.setLayout(null);
+        add(p8);
+
+        p9 = new JPanel();
+        p9.setBounds(265, 130, 1100, 600);
+        p9.setVisible(false);
+        p9.setLayout(null);
+        add(p9);
+
+        p10 = new JPanel();
+        p10.setBounds(265, 130, 1100, 600);
+        p10.setVisible(false);
+        p10.setLayout(null);
+        add(p10);
+
+
+
+        ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
+        Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+        profileBtn = new JButton(new ImageIcon(profileImage));
+        profileBtn.setBorder(null);
+        profileBtn.setBounds(1250, 30, 30, 30);
+        profileBtn.setBackground(Color.decode("#272a32"));
+        new EmployeeDashboardController().profileBtn(profileBtn, p7, p3, p4, p5, p6, p8, p9, p10);
+        p1.add(profileBtn);
 
 
         newCustomerBtn = new JButton("New Customer");
@@ -151,7 +176,7 @@ public class EmployeeDashboard extends JFrame {
         newCustomerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         newCustomerBtn.setBackground(Color.decode("#292c35"));
         newCustomerBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().newCustomerBtn(newCustomerBtn, p3, p4, p5, p6);
+        new EmployeeDashboardController().newCustomerBtn(newCustomerBtn, p3, p4, p5, p6, p7, p8, p9, p10);
         p2.add(newCustomerBtn);
 
         viewBtn = new JButton("Update Customer");
@@ -160,7 +185,7 @@ public class EmployeeDashboard extends JFrame {
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().updateCustomerBtn(viewBtn,p5, p3, p4, p6);
+        new EmployeeDashboardController().updateCustomerBtn(viewBtn,p5, p3, p4, p6, p7, p8, p9, p10);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer Info");
@@ -169,7 +194,7 @@ public class EmployeeDashboard extends JFrame {
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().customerInfoBtn(customerBtn, p4, p3, p5, p6);
+        new EmployeeDashboardController().customerInfoBtn(customerBtn, p4, p3, p5, p6, p7, p8, p9, p10);
         p2.add(customerBtn);
 
         labelListBtnCheckInOut = new JLabel();
@@ -179,37 +204,32 @@ public class EmployeeDashboard extends JFrame {
         labelListBtnCheckInOut.setVisible(false);
         add(labelListBtnCheckInOut);
 
-        buttonList = new JList<>(buttonLabels);
-        buttonList.setBounds(0, 0, 140, 120);
-        buttonList.setFont(new Font("Arial", Font.PLAIN, 20));
-        buttonList.setBackground(Color.decode("#a3a3a3"));
-        buttonList.setForeground(Color.decode("#2b2b2b"));
-        new EmployeeDashboardController().checkSelectBtnList(buttonList, labelListBtnCheckInOut);
-        labelListBtnCheckInOut.add(buttonList);
 
-        chechInOutBtn = new JButton("Check In/Out");
+        chechInOutBtn = new JButton("Check Out");
         chechInOutBtn.setBounds(0, 150, 250, 50);
         chechInOutBtn.setBorder(null);
         chechInOutBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         chechInOutBtn.setBackground(Color.decode("#292c35"));
         chechInOutBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().checkInOutBtn(chechInOutBtn, labelListBtnCheckInOut);
+        new EmployeeDashboardController().checkInOutBtn(chechInOutBtn, p8, p3, p4, p5, p6, p7, p9, p10);
         p2.add(chechInOutBtn);
 
-        updateRoomBtn = new JButton("Update Room");
+        updateRoomBtn = new JButton("History");
         updateRoomBtn.setBounds(0, 200, 250, 50);
         updateRoomBtn.setBorder(null);
         updateRoomBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         updateRoomBtn.setBackground(Color.decode("#292c35"));
         updateRoomBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().historyBtn(updateRoomBtn, p9, p3, p4, p5, p6, p7, p8, p10);
         p2.add(updateRoomBtn);
 
-        pickUpServiceBtn = new JButton("Pick Up Service");
+        pickUpServiceBtn = new JButton("Driver Info");
         pickUpServiceBtn.setBounds(0, 250, 250, 50);
         pickUpServiceBtn.setBorder(null);
         pickUpServiceBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         pickUpServiceBtn.setBackground(Color.decode("#292c35"));
         pickUpServiceBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().driverInfoBtn(pickUpServiceBtn, p10, p3, p4, p5, p6, p7, p8, p9);
         p2.add(pickUpServiceBtn);
 
         searchRoomBtn = new JButton("Search Room");
@@ -218,7 +238,7 @@ public class EmployeeDashboard extends JFrame {
         searchRoomBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         searchRoomBtn.setBackground(Color.decode("#292c35"));
         searchRoomBtn.setForeground(Color.decode("#f0f5f5"));
-        new EmployeeDashboardController().checkSearchRoomBtn(searchRoomBtn, p6, p4, p5, p3);
+        new EmployeeDashboardController().checkSearchRoomBtn(searchRoomBtn, p6, p4, p5, p3, p7, p8, p9, p10);
         p2.add(searchRoomBtn);
 
 

@@ -14,9 +14,10 @@ import java.awt.*;
 public class ForgotPasswordDao {
 
     public ForgotPasswordDao(){}
+    private final Conn conn = new Conn();
+
 
     public User checkValidUser(User user, Account account) {
-        Conn conn = new Conn();
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.phone = ? AND account.keyAnswer = ?";
         try {
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
@@ -42,7 +43,6 @@ public class ForgotPasswordDao {
 
         String query = "update account set password = '" + account.getPassword() + "' where id = '" + user.getId() + "'";
         try {
-            Conn conn = new Conn();
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.executeUpdate();
             return 1;
@@ -51,6 +51,8 @@ public class ForgotPasswordDao {
             e.printStackTrace();
             return 0;
 
+        }finally {
+            conn.closeConnection();
         }
     }
 }

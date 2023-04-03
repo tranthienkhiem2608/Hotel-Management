@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.controller;
 
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.dao.UpdateCheckDao;
 import com.hotelManagementSystem.entity.Customer;
 import com.hotelManagementSystem.views.Notification;
@@ -8,7 +9,7 @@ import javax.swing.*;
 
 public class UpdateCheckController {
 
-    public void btnCheckOut(JButton btn, Customer customer, JTextField txtRoomNumber ,JTextField txtName, JTextArea txtDateTime, JTextField txtDeposit, JTextField txtPayment){
+    public void btnCheckOut(JButton btn, Customer customer, JTextField txtRoomNumber ,JTextField txtName, JTextArea txtDateTime, JTextArea txtDateTimeOut, JTextField txtDeposit, JTextField txtPayment){
         btn.addActionListener(e -> {
             int price = 0;
             int payment = 0;
@@ -16,11 +17,18 @@ public class UpdateCheckController {
                 new Notification("Customer not found").setVisible(true);
             }else{
                 price = new UpdateCheckDao().getPriceRoom(customer);
+                long milliseconds1 = customer.getCheckInDate().getTime();
+                long milliseconds2 = customer.getCheckOutDate().getTime();
+                long diff = milliseconds2 - milliseconds1;
+                long diffDays = diff / (24 * 60 * 60 * 1000);
+                price = (int) (price * diffDays);
+
+
                 txtRoomNumber.setText(String.valueOf(customer.getRoomNumber()));
                 txtName.setText(customer.getName());
                 txtDateTime.setText(customer.getCheckInDate() + " " + customer.getCheckInTime());
+                txtDateTimeOut.setText(customer.getCheckOutDate() + " " + customer.getCheckOutTime());
                 payment = price - customer.getDeposit();
-                System.out.println(price + " " + customer.getDeposit() + " " + payment);
                 txtDeposit.setText(String.valueOf(customer.getDeposit()));
                 txtPayment.setText(String.valueOf(payment));
             }
@@ -34,6 +42,13 @@ public class UpdateCheckController {
             }else{
                 new Notification("Update failed").setVisible(true);
             }
+        });
+    }
+
+    public void refreshBtn(JButton btn, JComboBox comboBox){
+        btn.addActionListener(e -> {
+            comboBox.removeAllItems();
+            new UpdateCheckDao().refreshID(comboBox);
         });
     }
 }

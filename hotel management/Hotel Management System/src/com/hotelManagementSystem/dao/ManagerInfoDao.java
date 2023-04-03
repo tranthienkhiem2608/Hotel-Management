@@ -10,10 +10,11 @@ import java.sql.ResultSet;
 
 public class ManagerInfoDao {
     private User user;
+    private final Conn conn = new Conn();
+
     public void showManager(JTable table, DefaultTableModel tableModel){
         user = new User();
         try{
-            Conn conn = new Conn();
             String query = "select * from users where position = 'manager'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);
             ResultSet rs = stmt.executeQuery();
@@ -33,6 +34,8 @@ public class ManagerInfoDao {
             table.setRowHeight(30);
         }catch (Exception e){
             e.printStackTrace();
+        } finally {
+            conn.closeConnection();
         }
 
     }

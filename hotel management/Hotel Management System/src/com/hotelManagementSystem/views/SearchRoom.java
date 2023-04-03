@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.controller.SearchRoomController;
 import net.proteanit.sql.DbUtils;
 
@@ -79,7 +80,7 @@ public class SearchRoom extends JFrame {
         p1.add(lblRoomAvailable);
 
 
-        comboBox = new JComboBox(new String[] { "Single Bed", "Double Bed", "King bed"});
+        comboBox = new JComboBox(new String[] { "All","Single Bed", "Double Bed", "King bed"});
         comboBox.setBounds(130, 100, 150, 20);
         comboBox.addActionListener(new ActionListener() {
             @Override

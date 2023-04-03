@@ -1,23 +1,15 @@
 package com.hotelManagementSystem.views;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-import java.awt.BorderLayout;
 import java.awt.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
 
 import com.hotelManagementSystem.controller.CustomerInfoController;
 import com.hotelManagementSystem.dao.CustomerInfoDao;
-import com.hotelManagementSystem.dao.EmployeeInfoDao;
 import com.hotelManagementSystem.entity.Customer;
-import net.proteanit.sql.DbUtils;
 import java.sql.*;
 
 import javax.swing.*;
@@ -30,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class CustomerInfo extends JFrame {
-    Connection conn = null;
+
     private  static JPanel p1;
     private JButton btnSearch;
     private JTextField textField;
@@ -38,7 +30,7 @@ public class CustomerInfo extends JFrame {
     private JLabel lblNewLabel;
     private JLabel lblGender;
     private JTable table;
-    private JLabel lblCountry;
+    private JLabel lblPhone;
     private JLabel lblRoom;
     private JLabel lblStatus;
     private JLabel lblNewLabel_1;
@@ -70,11 +62,12 @@ public class CustomerInfo extends JFrame {
         p1.setLayout(null);
         customer = new Customer();
 
-        String[] columnNames = {"ID", "Number", "Name", "Gender", "Country", "Room", "Check-in Status", "Deposit"};
+        String[] columnNames = {"ID", "Number", "Name", "Gender", "Phone", "Room", "Check-in", "Check-out","Price Room", "Deposit"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();
-        table.setBounds(50, 50, 1000, 500);;
+        table.setBounds(50, 50, 1000, 450);;
+        table.setModel(tableModel);
         table.enableInputMethods(false);
         p1.add(table);
 
@@ -87,7 +80,7 @@ public class CustomerInfo extends JFrame {
         }
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(200, 200, 120, 30);
+        btnRefresh.setBounds(320, 500, 120, 30);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new CustomerInfoController().btnRefresh(btnRefresh, table, tableModel);
@@ -119,7 +112,7 @@ public class CustomerInfo extends JFrame {
 
 
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(600, 100, 120, 30);
+        btnSearch.setBounds(600, 500, 120, 30);
         btnSearch.setBackground(Color.BLACK);
         btnSearch.setForeground(Color.WHITE);
         new CustomerInfoController().btnSearch(btnSearch, table, tableModel, customer);
@@ -147,23 +140,28 @@ public class CustomerInfo extends JFrame {
         lblGender.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblGender);
 
-        lblCountry = new JLabel("Country");
-        lblCountry.setBounds(590, 20, 50, 16);
-        lblCountry.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblCountry);
+        lblPhone = new JLabel("Phone");
+        lblPhone.setBounds(590, 20, 50, 16);
+        lblPhone.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblPhone);
 
         lblRoom = new JLabel("Room");
         lblRoom.setBounds(715, 20, 50, 16);
         lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblRoom);
 
-        lblStatus = new JLabel("Status");
+        lblStatus = new JLabel("Check-in");
         lblStatus.setBounds(830, 20, 50, 16);
         lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblStatus);
 
+        JLabel lblNewLabel_2 = new JLabel("Check-out");
+        lblNewLabel_2.setBounds(955, 20, 50, 16);
+        lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 13));
+        p1.add(lblNewLabel_2);
+
         lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(955, 20, 50, 16);
+        lblNewLabel_1.setBounds(980, 20, 50, 16);
         lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
         p1.add(lblNewLabel_1);
 

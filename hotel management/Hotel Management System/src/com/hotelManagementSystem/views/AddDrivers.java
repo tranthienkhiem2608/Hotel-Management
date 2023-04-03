@@ -1,7 +1,5 @@
 package com.hotelManagementSystem.views;
 
-import com.hotelManagementSystem.conn.Conn;
-
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -115,20 +113,27 @@ public class AddDrivers extends JFrame {
         JRadioButton NewRadioButton = new JRadioButton("MALE");
         NewRadioButton.setBackground(Color.WHITE);
         NewRadioButton.setBounds(170, 230, 70, 27);
+        NewRadioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                driver.setGender("male");
+            }
+        });
         p1.add(NewRadioButton);
 
         JRadioButton Female = new JRadioButton("FEMALE");
         Female.setBackground(Color.WHITE);
         Female.setBounds(240, 230, 70, 27);
+        Female.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                driver.setGender("female");
+            }
+        });
         p1.add(Female);
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(NewRadioButton);
-        if(bg.getSelection() == Female.getModel()){
-            driver.setGender("female");
-        }else {
-            driver.setGender("male");
-        }
         bg.add(Female);
 
         JLabel l4 = new JLabel("Phone");
@@ -142,17 +147,17 @@ public class AddDrivers extends JFrame {
         t3.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
 
             @Override
             public void changedUpdate(DocumentEvent e) {
-                driver.setCarCompany(t3.getText());
+                driver.setPhone(t3.getText());
             }
         });
         p1.add(t3);

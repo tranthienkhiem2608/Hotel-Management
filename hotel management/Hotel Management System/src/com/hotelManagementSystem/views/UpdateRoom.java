@@ -1,5 +1,9 @@
 package com.hotelManagementSystem.views;
 
+import com.hotelManagementSystem.conn.Conn;
+import com.hotelManagementSystem.controller.NewCustomerController;
+import com.hotelManagementSystem.controller.UpdateRoomController;
+import com.hotelManagementSystem.entity.Room;
 
 import java.awt.BorderLayout;
 import java.awt.*;
@@ -8,24 +12,26 @@ import javax.swing.*;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UpdateRoom extends JFrame {
-    Connection conn = null;
-    PreparedStatement pst = null;
-    private JPanel contentPane;
-    private JTextField txt_ID;
-    private JTextField txt_Ava;
-    private JTextField txt_Status;
-    private JTextField txt_Room;
+    private JPanel p1;
 
-    Choice c1;
+    private JTextField txt_Price;
 
-    /**
-     * Launch the application.
-     */
+    private JTextField txt_BedType;
+
+    private Room room;
+
+    private JComboBox c1;
+
+    public JPanel getP1() {
+        return p1;
+    }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -42,18 +48,14 @@ public class UpdateRoom extends JFrame {
         this.dispose();
     }
 
-    /**
-     * Create the frame.
-     * @throws SQLException
-     */
-    public UpdateRoom() throws SQLException {
-        //conn = Javaconnect.getDBConnection();
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(200, 100, 1000, 600);
-        contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(null);
+
+    public UpdateRoom() {initComponent();    }
+    private void initComponent(){
+        room = new Room();
+        p1 = new JPanel();
+        p1.setBorder(new EmptyBorder(5, 5, 5, 5));
+        setContentPane(p1);
+        p1.setLayout(null);
 
         ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/roomview.jpg"));
         Image i3 = i1.getImage().getScaledInstance(563, 375,Image.SCALE_DEFAULT);
@@ -62,128 +64,122 @@ public class UpdateRoom extends JFrame {
         l1.setBounds(400,80,563,375);
         add(l1);
 
-        JLabel lblUpdateRoomStatus = new JLabel("UPDATE ROOM STATUS");
+        JLabel lblUpdateRoomStatus = new JLabel("UPDATE ROOM");
         lblUpdateRoomStatus.setFont(new Font("Arial", Font.BOLD, 50));
         lblUpdateRoomStatus.setForeground(Color.decode("#E09145"));
         lblUpdateRoomStatus.setBounds(200, 10, 600, 50);
-        contentPane.add(lblUpdateRoomStatus);
+        p1.add(lblUpdateRoomStatus);
 
-        JLabel lblNewLabel = new JLabel("Customer ID:");
+        JLabel lblNewLabel = new JLabel("Room ID:");
         lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         lblNewLabel.setForeground(Color.decode("#f0f5f5"));
         lblNewLabel.setBounds(20, 130, 150, 27);
-        contentPane.add(lblNewLabel);
+        p1.add(lblNewLabel);
 
-        c1 = new Choice();
-//        Su dung DB
-//        try{
-//            conn c = new conn();
-//            ResultSet rs = c.s.executeQuery("select * from customer");
-//            while(rs.next()){
-//                c1.add(rs.getString("number"));
-//            }
-//        }catch(Exception e){ }
-        c1.setBounds(180, 130, 140, 20);
-        contentPane.add(c1);
+        c1 = new JComboBox();
+        p1.add(c1);
+        JButton btnRefresh = new JButton("Refresh");
+        btnRefresh.setBounds(330, 130, 80, 20);
+        new UpdateRoomController().refreshBtn(btnRefresh, c1);
+        p1.add(btnRefresh);
 
-        JLabel lblRoomId = new JLabel("Room Number:");
+        try{
+            Conn c = new Conn();
+            ResultSet rs = c.s.executeQuery("select * from room where availability = 'Available'");
+            while(rs.next()){
+                c1.addItem(rs.getString("roomNumber"));
+            }
+            c1.setBounds(180, 130, 140, 20);
+            String selectedItem = (String) c1.getSelectedItem();
+            if (selectedItem != null && !selectedItem.isEmpty()) {
+                c1.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        String selectedItem = (String) c1.getSelectedItem();
+                        room.setRoomNumber(Integer.parseInt(selectedItem));
+                    }
+                });
+            }
+
+        }catch (Exception e){}
+
+        JLabel lblRoomId = new JLabel("Price:");
         lblRoomId.setFont(new Font("Arial", Font.PLAIN, 20));
         lblRoomId.setForeground(Color.decode("#f0f5f5"));
         lblRoomId.setBounds(20, 190, 150, 27);
-        contentPane.add(lblRoomId);
+        p1.add(lblRoomId);
 
-        txt_Room = new JTextField();
-        txt_Room.setBounds(180, 190, 140, 20);
-        contentPane.add(txt_Room);
+        txt_Price = new JTextField();
+        txt_Price.setBounds(180, 190, 140, 20);
+        txt_Price.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if(txt_Price.getText().length() > 0) {
+                    room.setPrice(Integer.parseInt(txt_Price.getText()));
+                }
+            }
 
-        JLabel lblAvailability = new JLabel("Availability:");
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if(txt_Price.getText().length() > 0) {
+                    room.setPrice(Integer.parseInt(txt_Price.getText()));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if(txt_Price.getText().length() > 0) {
+                    room.setPrice(Integer.parseInt(txt_Price.getText()));
+                }
+            }
+        });
+        p1.add(txt_Price);
+
+        JLabel lblAvailability = new JLabel("Bed type:");
         lblAvailability.setFont(new Font("Arial", Font.PLAIN, 20));
         lblAvailability.setForeground(Color.decode("#f0f5f5"));
         lblAvailability.setBounds(20, 250, 150, 27);
-        contentPane.add(lblAvailability);
+        p1.add(lblAvailability);
 
-        txt_Ava = new JTextField();
-        txt_Ava.setBounds(180, 250, 140, 20);
-        contentPane.add(txt_Ava);
+        txt_BedType = new JTextField();
+        txt_BedType.setBounds(180, 250, 140, 20);
+        txt_BedType.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                if(txt_BedType.getText().length() > 0) {
+                    room.setBedType(txt_BedType.getText());
+                }
+            }
 
-        JLabel lblCleanStatus = new JLabel("Clean Status:");
-        lblCleanStatus.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblCleanStatus.setForeground(Color.decode("#f0f5f5"));
-        lblCleanStatus.setBounds(20, 310, 150, 27);
-        contentPane.add(lblCleanStatus);
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                if(txt_BedType.getText().length() > 0) {
+                    room.setBedType(txt_BedType.getText());
+                }
+            }
 
-        txt_Status = new JTextField();
-        txt_Status.setBounds(180, 310, 140, 20);
-        contentPane.add(txt_Status);
-
-
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                if(txt_BedType.getText().length() > 0) {
+                    room.setBedType(txt_BedType.getText());
+                }
+            }
+        });
+        p1.add(txt_BedType);
 
         JButton b1 = new JButton("Check");
-        //            Su dung DB
-//        b1.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) {
-//                try{
-//                    String s1 = c1.getSelectedItem();
-//                    conn c = new conn();
-//                    ResultSet rs1 = c.s.executeQuery("select * from customer where number = "+s1);
-//
-//                    while(rs1.next()){
-//                        txt_Room.setText(rs1.getString("room_number"));
-//                    }
-//                }catch(Exception ee){}
-//                try{
-//                    conn c  = new conn();
-//                    ResultSet rs2 = c.s.executeQuery("select * from room where room_number = "+txt_Room.getText());
-//                    while(rs2.next()){
-//                        txt_Ava.setText(rs2.getString("availability"));
-//                        txt_Status.setText(rs2.getString("clean_status"));
-//                    }
-//                }catch(Exception ee){}
-//            }
-//        });
         b1.setBounds(80, 380, 180, 50);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
-        contentPane.add(b1);
+        new UpdateRoomController().btnCheckRoom(b1, room, txt_Price, txt_BedType);
+        p1.add(b1);
 
         JButton btnUpdate = new JButton("Update");
-//        Su dung DB
-//        btnUpdate.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent e) throws NumberFormatException {
-//
-//                try{
-//                    conn c = new conn();
-//                    String str = "update room set clean_status = '"+txt_Status.getText()+"' where room_number = "+txt_Room.getText();
-//                    c.s.executeUpdate(str);
-//                    JOptionPane.showMessageDialog(null, "Update Sucessful");
-//
-//                    new Reception().setVisible(true);
-//                    setVisible(false);
-//                }catch (Exception ee){
-//                    ee.printStackTrace();
-//                }
-//
-//
-//            }
-//        });
         btnUpdate.setBounds(80, 470, 180, 50);
         btnUpdate.setBackground(Color.BLACK);
         btnUpdate.setForeground(Color.WHITE);
-        contentPane.add(btnUpdate);
-
-//        ImageIcon i6  = new ImageIcon(ClassLoader.getSystemResource("icons/back.png"));
-//        Image i4 = i6.getImage().getScaledInstance(50, 50,Image.SCALE_DEFAULT);
-//        ImageIcon i5 = new ImageIcon(i4);
-//        JButton btnExit = new JButton(i5);
-//        btnExit.setBackground(Color.decode("#292C35"));
-//        btnExit.setBounds(900,490,50,50);
-////        btnExit.addActionListener(new ActionListener() {
-////            public void actionPerformed(ActionEvent e) {
-////                new ManagerDashboard().setVisible(true);
-////                setVisible(false);
-////            }
-////        });
-//        contentPane.add(btnExit);
+        new UpdateRoomController().btnUpdate(btnUpdate, room);
+        p1.add(btnUpdate);
 
         JPanel gradientPanel = new JPanel() {
             @Override
@@ -196,7 +192,6 @@ public class UpdateRoom extends JFrame {
             }
         };
         gradientPanel.setBounds(0, 0, 1000, 600);
-        contentPane.add(gradientPanel);
+        p1.add(gradientPanel);
     }
-
 }
