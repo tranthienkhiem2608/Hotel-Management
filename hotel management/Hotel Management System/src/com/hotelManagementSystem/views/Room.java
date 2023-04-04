@@ -2,6 +2,7 @@ package com.hotelManagementSystem.views;
 
 import javax.swing.*;
 import javax.swing.border.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -51,13 +52,25 @@ public class Room extends javax.swing.JFrame {
             l1.setBounds(500,0,600,600);
             add(l1);
 
-
+            String[] columnNames = {"Room ID", "Availability", "Clean Status", "Price", "Bed Type"};
+            DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+//
             table = new JTable();
-            table.setBounds(0, 40, 500, 500);
-        p1.add(table);
+            table.setBounds(0, 40, 500, 500);;
+            table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+            p1.add(table);
+
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setBounds(0, 40, 500, 500);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+            p1.add(scrollPane);
+
+//            table = new JTable();
+//            table.setBounds(0, 40, 500, 500);
+//        p1.add(table);
         try{
             RoomDao roomDao = new RoomDao();
-            roomDao.showRoom(table);
+            roomDao.showRoom(table, tableModel);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -66,30 +79,30 @@ public class Room extends javax.swing.JFrame {
             editBtn.setBounds(180, 550, 120, 30);
             editBtn.setBackground(Color.BLACK);
             editBtn.setForeground(Color.WHITE);
-            new RoomDao().showRoom(table);
+            new RoomDao().showRoom(table, tableModel);
         p1.add(editBtn);
 
-            lblAvailability = new JLabel("Availability");
-            lblAvailability.setBounds(119, 15, 69, 14);
-        p1.add(lblAvailability);
-
-            lblCleanStatus = new JLabel("Clean Status");
-            lblCleanStatus.setBounds(216, 15, 76, 14);
-        p1.add(lblCleanStatus);
-
-            lblNewLabel = new JLabel("Price");
-            lblNewLabel.setBounds(330, 15, 46, 14);
-        p1.add(lblNewLabel);
-
-            lblNewLabel_1 = new JLabel("Bed Type");
-            lblNewLabel_1.setBounds(417, 15, 76, 14);
-        p1.add(lblNewLabel_1);
-
-
-            lblId = new JLabel("Room Number");
-            lblId.setBounds(12, 15, 90, 14);
-        p1.add(lblId);
-            getContentPane().setBackground(Color.WHITE);
+//            lblAvailability = new JLabel("Availability");
+//            lblAvailability.setBounds(119, 15, 69, 14);
+//        p1.add(lblAvailability);
+//
+//            lblCleanStatus = new JLabel("Clean Status");
+//            lblCleanStatus.setBounds(216, 15, 76, 14);
+//        p1.add(lblCleanStatus);
+//
+//            lblNewLabel = new JLabel("Price");
+//            lblNewLabel.setBounds(330, 15, 46, 14);
+//        p1.add(lblNewLabel);
+//
+//            lblNewLabel_1 = new JLabel("Bed Type");
+//            lblNewLabel_1.setBounds(417, 15, 76, 14);
+//        p1.add(lblNewLabel_1);
+//
+//
+//            lblId = new JLabel("Room Number");
+//            lblId.setBounds(12, 15, 90, 14);
+//        p1.add(lblId);
+//            getContentPane().setBackground(Color.WHITE);
         }
 }
 

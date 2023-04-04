@@ -19,6 +19,7 @@ public class UpdateCheckController {
                 price = new UpdateCheckDao().getPriceRoom(customer);
                 long milliseconds1 = customer.getCheckInDate().getTime();
                 long milliseconds2 = customer.getCheckOutDate().getTime();
+//                System.out.println(customer.getCheckInDate() + " " + customer.getCheckInTime());
                 long diff = milliseconds2 - milliseconds1;
                 long diffDays = diff / (24 * 60 * 60 * 1000);
                 price = (int) (price * diffDays);
