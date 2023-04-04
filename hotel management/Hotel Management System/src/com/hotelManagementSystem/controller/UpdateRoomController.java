@@ -11,6 +11,7 @@ import java.awt.*;
 public class UpdateRoomController {
     public void btnCheckRoom(JButton btn, Room room, JTextField t1 , JTextField t2){
         btn.addActionListener(e -> {
+            System.out.println(room.getRoomNumber());
             if(new UpdateRoomDao().getRoomInfo(room) == null){
                 new Notification("Customer not found").setVisible(true);
             }else{

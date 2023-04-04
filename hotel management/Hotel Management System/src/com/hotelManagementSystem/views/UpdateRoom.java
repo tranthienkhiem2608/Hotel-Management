@@ -100,6 +100,7 @@ public class UpdateRoom extends JFrame {
                     }
                 });
             }
+
         }catch (Exception e){}
 
         JLabel lblRoomId = new JLabel("Price:");
