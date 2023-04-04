@@ -14,7 +14,9 @@ public class ManagerInfoDao {
 
     public void showManager(JTable table, DefaultTableModel tableModel){
         user = new User();
+
         try{
+
             String query = "select * from users where position = 'manager'";
             PreparedStatement stmt  = conn.getConnection().prepareStatement(query);
             ResultSet rs = stmt.executeQuery();

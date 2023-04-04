@@ -199,6 +199,7 @@ public class NewCustomer extends JFrame{
                 comboBox_1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        String selectedItem = (String) comboBox_1.getSelectedItem();
                         customer.setRoomNumber(Integer.parseInt(selectedItem));
                     }
                 });

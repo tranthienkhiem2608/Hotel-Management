@@ -95,6 +95,7 @@ public class UpdateRoom extends JFrame {
                 c1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
+                        String selectedItem = (String) c1.getSelectedItem();
                         room.setRoomNumber(Integer.parseInt(selectedItem));
                     }
                 });

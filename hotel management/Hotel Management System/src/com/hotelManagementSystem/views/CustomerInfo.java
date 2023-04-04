@@ -69,6 +69,7 @@ public class CustomerInfo extends JFrame {
         table.setBounds(50, 50, 1000, 450);;
         table.setModel(tableModel);
         table.enableInputMethods(false);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
         p1.add(table);
 
         JScrollPane scrollPane = new JScrollPane(table);
@@ -85,14 +86,14 @@ public class CustomerInfo extends JFrame {
         }
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(320, 500, 120, 30);
+        btnRefresh.setBounds(600, 500, 120, 30);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new CustomerInfoController().btnRefresh(btnRefresh, table, tableModel);
         p1.add(btnRefresh);
 
         textField = new JTextField();
-        textField.setBounds(40, 500, 250, 30);
+        textField.setBounds(50, 500, 250, 30);
         textField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -117,7 +118,7 @@ public class CustomerInfo extends JFrame {
 
 
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(600, 500, 120, 30);
+        btnSearch.setBounds(320, 500, 120, 30);
         btnSearch.setBackground(Color.BLACK);
         btnSearch.setForeground(Color.WHITE);
         new CustomerInfoController().btnSearch(btnSearch, table, tableModel, customer);
