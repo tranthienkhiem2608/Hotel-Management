@@ -11,19 +11,20 @@ import javax.swing.*;
 public class ManagerDashboardDao {
     private final Conn conn = new Conn();
 
-    public void setTextNameUser(String id, JTextArea txtName){
+    public String setTextNameUser(String id){
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.id = ?";
         try{
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, id);
             ResultSet rs = pstmt.executeQuery();
             if(rs.next()){
-                txtName.setText(rs.getString("name"));
+                return rs.getString("name");
             }
         }catch (Exception e){
             e.printStackTrace();
         } finally {
             conn.closeConnection();
         }
+        return null;
     }
 }

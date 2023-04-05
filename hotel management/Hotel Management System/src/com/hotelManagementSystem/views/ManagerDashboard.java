@@ -1,8 +1,12 @@
 package com.hotelManagementSystem.views;
+import ChatSys.Client.Client;
+import ChatSys.Server.Server;
 import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import com.hotelManagementSystem.entity.User;
 import com.hotelManagementSystem.controller.ManagerDashboardController;
@@ -14,11 +18,12 @@ public class ManagerDashboard extends JFrame{
     private JLabel l1;
     private static JLabel labelListBtnAđd, labelListBtnEmployee;
     private JPanel p1, p2;
-    private static JPanel p3, p4, p5, p6, p7, p8, p9, p10;
+    private static JPanel p3, p4, p5, p6, p7, p8, p9, p10, p11;
     private JTextArea t1;
     private static JTextArea t2;
+    private static String UserName = "User";
 
-    private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, profileBtn, updateStatusBtn, statisticsBtn, historyBtn, driverBtn;
+    private  JButton logoutBtn, addBtn, viewBtn, customerBtn, employeeBtn, profileBtn, updateStatusBtn, statisticsBtn, historyBtn, driverBtn, chatBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
@@ -96,9 +101,8 @@ public class ManagerDashboard extends JFrame{
         try{
             Login l = new Login();
             l.setVisible(false);
-            new ManagerDashboardDao().setTextNameUser(l.getIDLogin(), t2);
-
-
+            UserName = new ManagerDashboardDao().setTextNameUser(l.getIDLogin());
+            t2.setText(UserName);
         }catch(Exception e){
 
         }
@@ -178,6 +182,13 @@ public class ManagerDashboard extends JFrame{
         p10.setVisible(false);
         add(p10);
 
+        p11 = new JPanel();
+        p11.setBounds(265, 130, 1100, 600);
+        p11.setBackground(Color.decode("#d5e1e4"));
+        p11.setLayout(null);
+        p11.setVisible(false);
+        add(p11);
+
 
         ImageIcon profileIcon = new ImageIcon(ClassLoader.getSystemResource("icons/editUser.jpg"));
         Image profileImage = profileIcon.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
@@ -185,7 +196,7 @@ public class ManagerDashboard extends JFrame{
         profileBtn.setBorder(null);
         profileBtn.setBounds(1250, 30, 30, 30);
         profileBtn.setBackground(Color.decode("#272a32"));
-        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6, p7, p8, p9, p10);
+        new ManagerDashboardController().BtnProfileUser(profileBtn, labelListBtnAđd, labelListBtnEmployee,p3,p4, p5,p6, p7, p8, p9, p10, p11);
         p1.add(profileBtn);
 
 
@@ -196,7 +207,7 @@ public class ManagerDashboard extends JFrame{
         buttonList.setBackground(Color.decode("#a3a3a3"));
         buttonList.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5, p6, p7, p8, p9, p10);
+        new ManagerDashboardController().checkSelectBtnListAdd(buttonList, labelListBtnAđd, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         labelListBtnAđd.add(buttonList);
 
 
@@ -206,7 +217,7 @@ public class ManagerDashboard extends JFrame{
         buttonList2.setBackground(Color.decode("#a3a3a3"));
         buttonList2.setForeground(Color.decode("#2b2b2b"));
         // check selected item
-        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10);
+        new ManagerDashboardController().checkSelectBtnListEmployee(buttonList2, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         labelListBtnEmployee.add(buttonList2);
 
         addBtn = new JButton("Add");
@@ -225,7 +236,7 @@ public class ManagerDashboard extends JFrame{
         viewBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         viewBtn.setBackground(Color.decode("#292c35"));
         viewBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10);
+        new ManagerDashboardController().checkViewBtn(viewBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         p2.add(viewBtn);
 
         customerBtn = new JButton("Customer Info");
@@ -234,7 +245,7 @@ public class ManagerDashboard extends JFrame{
         customerBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         customerBtn.setBackground(Color.decode("#292c35"));
         customerBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6, p8, p9, p10);
+        new ManagerDashboardController().checkCustomerInfoBtn(customerBtn,labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p7, p6, p8, p9, p10, p11);
         p2.add(customerBtn);
 
 
@@ -254,7 +265,7 @@ public class ManagerDashboard extends JFrame{
         driverBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         driverBtn.setBackground(Color.decode("#292c35"));
         driverBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkDriverInfoBtn(driverBtn, labelListBtnEmployee, labelListBtnAđd, p3, p4, p5, p6, p7, p8, p9, p10);
+        new ManagerDashboardController().checkDriverInfoBtn(driverBtn, labelListBtnEmployee, labelListBtnAđd, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         p2.add(driverBtn);
 
         updateStatusBtn = new JButton("Update Room");
@@ -263,7 +274,7 @@ public class ManagerDashboard extends JFrame{
         updateStatusBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         updateStatusBtn.setBackground(Color.decode("#292c35"));
         updateStatusBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().checkUpdateStatusBtn(updateStatusBtn, labelListBtnAđd, labelListBtnEmployee, p8, p4, p5, p6, p7, p3, p9, p10);
+        new ManagerDashboardController().checkUpdateStatusBtn(updateStatusBtn, labelListBtnAđd, labelListBtnEmployee, p8, p4, p5, p6, p7, p3, p9, p10, p11);
         p2.add(updateStatusBtn);
 
         statisticsBtn = new JButton("Statistics");
@@ -272,6 +283,7 @@ public class ManagerDashboard extends JFrame{
         statisticsBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         statisticsBtn.setBackground(Color.decode("#292c35"));
         statisticsBtn.setForeground(Color.decode("#f0f5f5"));
+        new ManagerDashboardController().checkStatisticsBtn(statisticsBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         p2.add(statisticsBtn);
 
         historyBtn = new JButton("History");
@@ -280,8 +292,28 @@ public class ManagerDashboard extends JFrame{
         historyBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         historyBtn.setBackground(Color.decode("#292c35"));
         historyBtn.setForeground(Color.decode("#f0f5f5"));
-        new ManagerDashboardController().historyBtn(historyBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10);
+        new ManagerDashboardController().historyBtn(historyBtn, labelListBtnAđd, labelListBtnEmployee, p3, p4, p5, p6, p7, p8, p9, p10, p11);
         p2.add(historyBtn);
+
+
+        ImageIcon chatBut = new ImageIcon(ClassLoader.getSystemResource("icons/chat_ic.png"));
+        Image chat1 = chatBut.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        chatBtn = new JButton(new ImageIcon(chat1));
+        chatBtn.setBounds(100, 600, 50, 50);
+        chatBtn.setBorder(null);
+        chatBtn.setFont(new Font("Arial", Font.PLAIN, 20));
+        chatBtn.setBackground(Color.decode("#292c35"));
+        chatBtn.setForeground(Color.decode("#f0f5f5"));
+//        chatBtn.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                new Server()
+//                new Client();
+//            }
+//        });
+        p2.add(chatBtn);
+
+
 
 
         JPanel gradientPanel = new JPanel() {

@@ -1,32 +1,96 @@
 package com.hotelManagementSystem.views;
 
+import com.hotelManagementSystem.dao.ChartDao;
+
 import org.knowm.xchart.*;
-import org.knowm.xchart.demo.charts.ExampleChart;
-import org.knowm.xchart.style.Styler;
-import org.knowm.xchart.style.colors.XChartSeriesColors;
-import org.knowm.xchart.style.lines.SeriesLines;
-import org.knowm.xchart.style.markers.SeriesMarkers;
 
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.*;
-import java.util.List;
-
-import static org.knowm.xchart.style.colors.ChartColor.GREY;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //4 data biểu đồ :
 //        - XChart Pie Chart: theo dõi nhu cầu chọn loại phòng của khách hàng
 //        -XChart Donut Chart: số lượng phòng khả dụng và không khả dụng
 //        -XChart Basic Bar Chart: theo dõi số lượng khách hàng theo tuần
 //        - XYChart: quản lý doanh thu hàng tháng
+
+
+public class Chart extends JFrame{
+    private JPanel p1;
+    private JButton refreshBtn;
+    private PieChart pieChart;
+    private CategoryChart barChart;
+    private CategoryChart barChart2;
+    private XYChart xyChart;
+
+    public JPanel getP1() {
+        return p1;
+    }
+    public Chart(){
+        initComponent();
+    }
+
+    private void initComponent(){
+        p1 = new JPanel();
+        p1.setBounds(0, 0, 1100, 600);
+        p1.setLayout(null);
+        add(p1);
+
+
+        pieChart = new ChartDao().getChartPieChart();
+        JPanel chartPanel = new XChartPanel<>(pieChart);
+        chartPanel.setBounds(0, 0, 500, 300);
+        p1.add(chartPanel);
+
+        barChart = new ChartDao().getChartBarChart();
+        JPanel chartPanel2 = new XChartPanel<>(barChart);
+        chartPanel2.setBounds(500, 0, 500, 300);
+        p1.add(chartPanel2);
+
+        barChart2 = new ChartDao().getChartBar2Chart();
+        JPanel chartPanel3 = new XChartPanel<>(barChart2);
+        chartPanel3.setBounds(0, 300, 500, 250);
+        p1.add(chartPanel3);
+
+        xyChart = new ChartDao().getChartLineChart();
+        JPanel chartPanel4 = new XChartPanel<>(xyChart);
+        chartPanel4.setBounds(500, 300, 500, 250);
+        p1.add(chartPanel4);
+
+
+        ImageIcon refreshBut = new ImageIcon(ClassLoader.getSystemResource("icons/refresh.png"));
+        Image imgButton1 = refreshBut.getImage().getScaledInstance(40, 40, Image.SCALE_DEFAULT);
+        refreshBtn = new JButton(new ImageIcon(imgButton1));
+        refreshBtn.setBounds(1020, 250, 40, 40);
+        refreshBtn.setBorder(null);
+        refreshBtn.setBackground(Color.decode("#eeeeee"));
+        refreshBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pieChart = new ChartDao().getChartPieChart();
+                barChart = new ChartDao().getChartBarChart();
+                barChart2 = new ChartDao().getChartBar2Chart();
+                xyChart = new ChartDao().getChartLineChart();
+                chartPanel.repaint();
+                chartPanel2.repaint();
+                chartPanel3.repaint();
+                chartPanel4.repaint();
+            }
+        });
+        p1.add(refreshBtn);
+
+
+    }
+
+    public  static void main(String[] args) {
+        new Chart();
+    }
+
+
+
+}
 
 // Pie Chart
 //public class Chart implements ExampleChart<PieChart> {
@@ -108,37 +172,37 @@ import static org.knowm.xchart.style.colors.ChartColor.GREY;
 //}
 
 //Basic Bar Chart
-public class Chart implements ExampleChart<CategoryChart> {
+//public class Chart implements ExampleChart<CategoryChart> {
+//
+//    public static void main(String[] args) {
+//
+//        ExampleChart<CategoryChart> exampleChart = new Chart();
+//        CategoryChart chart = exampleChart.getChart();
+//        new SwingWrapper<CategoryChart>(chart).displayChart();
+//    }
+//
+//    @Override
+//    public CategoryChart getChart() {
+//
+//        // Create Chart
+//        CategoryChart chart = new CategoryChartBuilder().width(1000).height(600).title("Score Histogram").xAxisTitle("Score").yAxisTitle("Number").build();
+//
+//        // Customize Chart
+//        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
+//        chart.getStyler().setLabelsRotation(1);
+//
+//        // Series
+//        chart.addSeries("test 1", Arrays.asList(new Integer[] { 0, 1, 2, 3, 4 }), Arrays.asList(new Integer[] { 4, 5, 9, 6, 5 }));
+//
+//        return chart;
+//    }
+//    public String getExampleChartName() {
+//        return null;
+//    }
+//}
 
-    public static void main(String[] args) {
 
-        ExampleChart<CategoryChart> exampleChart = new Chart();
-        CategoryChart chart = exampleChart.getChart();
-        new SwingWrapper<CategoryChart>(chart).displayChart();
-    }
-
-    @Override
-    public CategoryChart getChart() {
-
-        // Create Chart
-        CategoryChart chart = new CategoryChartBuilder().width(1000).height(600).title("Score Histogram").xAxisTitle("Score").yAxisTitle("Number").build();
-
-        // Customize Chart
-        chart.getStyler().setLegendPosition(Styler.LegendPosition.InsideNW);
-        chart.getStyler().setLabelsRotation(1);
-
-        // Series
-        chart.addSeries("test 1", Arrays.asList(new Integer[] { 0, 1, 2, 3, 4 }), Arrays.asList(new Integer[] { 4, 5, 9, 6, 5 }));
-
-        return chart;
-    }
-    public String getExampleChartName() {
-        return null;
-    }
-}
-
-
-////Customized Chart
+//Customized Chart
 //public class Chart implements ExampleChart<XYChart> {
 //
 //    public static void main(String[] args) {
@@ -207,9 +271,3 @@ public class Chart implements ExampleChart<CategoryChart> {
 //
 //        return chart;
 //    }
-//
-//    @Override
-//    public String getExampleChartName() {
-//        return null;
-//    }
-//}

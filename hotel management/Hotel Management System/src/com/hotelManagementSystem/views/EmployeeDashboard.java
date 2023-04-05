@@ -19,12 +19,11 @@ public class EmployeeDashboard extends JFrame {
     private static JPanel p3, p4, p5, p6, p7, p8, p9, p10;
     private JTextArea t1;
     private static JTextArea t2;
-    private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn,profileBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn;
+    private  JButton logoutBtn, newCustomerBtn, viewBtn, customerBtn,profileBtn, chechInOutBtn, updateRoomBtn, pickUpServiceBtn, searchRoomBtn, chatBtn;
     private ImageIcon logoutIcon;
     private  Image logoutImage;
     private static JLabel labelListBtnCheckInOut;
-    private JList<String> buttonList;
-
+    private static String UserName;
     public EmployeeDashboard() {
         initComponent();
         setLocationRelativeTo(null);
@@ -87,12 +86,13 @@ public class EmployeeDashboard extends JFrame {
         t2.setFont(new Font("serif", Font.ITALIC, 20));
         t2.setForeground(Color.decode("#b3530b"));
         t2.setBackground(Color.decode("#1b1c22"));
-        t2.setEditable(true);
+        t2.setEditable(false);
         try{
 
             Login l = new Login();
             l.setVisible(false);
-            new EmployeeDashboardDao().setTextNameUser(l.getIDLogin(), t2);
+            UserName = new EmployeeDashboardDao().setTextNameUser(l.getIDLogin());
+            t2.setText(UserName);
 
         }catch(Exception e){
 
@@ -240,6 +240,16 @@ public class EmployeeDashboard extends JFrame {
         searchRoomBtn.setForeground(Color.decode("#f0f5f5"));
         new EmployeeDashboardController().checkSearchRoomBtn(searchRoomBtn, p6, p4, p5, p3, p7, p8, p9, p10);
         p2.add(searchRoomBtn);
+
+        ImageIcon chatBut = new ImageIcon(ClassLoader.getSystemResource("icons/chat_ic.png"));
+        Image chat1 = chatBut.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        chatBtn = new JButton(new ImageIcon(chat1));
+        chatBtn.setBounds(100, 600, 50, 50);
+        chatBtn.setBorder(null);
+        chatBtn.setFont(new Font("Arial", Font.PLAIN, 20));
+        chatBtn.setBackground(Color.decode("#292c35"));
+        chatBtn.setForeground(Color.decode("#f0f5f5"));
+        p2.add(chatBtn);
 
 
 

@@ -22,6 +22,8 @@ public class ManagerDashboardController {
     private HistoryCustomer historyCustomer;
     private DriverInfo driverInfo;
 
+    private Chart chart;
+
     private CardLayout cardLayout, cardLayout2, cardLayout3, cardLayout4, cardLayout5, cardLayout6;
     public ManagerDashboardController(){
         addDrivers = new AddDrivers();
@@ -35,6 +37,7 @@ public class ManagerDashboardController {
         updateRoom = new UpdateRoom();
         historyCustomer = new HistoryCustomer();
         driverInfo = new DriverInfo();
+        chart = new Chart();
     }
     public void addCardLayout(JPanel p){
         addDrivers.setVisible(false);
@@ -77,8 +80,10 @@ public class ManagerDashboardController {
 
     public void addCardLayout5(JPanel p) {
         historyCustomer.setVisible(false);
+        chart.setVisible(false);
         cardLayout5 = new CardLayout();
         p.setLayout(cardLayout5);
+        p.add(chart.getP1(), "chart");
         p.add(historyCustomer.getP1(), "historyCustomer");
     }
 
@@ -105,7 +110,7 @@ public class ManagerDashboardController {
 
     }
 
-    public void checkSelectBtnListAdd(JList<String> list, JLabel p, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkSelectBtnListAdd(JList<String> list, JLabel p, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout(p2);
         list.addListSelectionListener(e -> {
             if(list.getSelectedValue().equals("Room")){
@@ -118,6 +123,7 @@ public class ManagerDashboardController {
                 p7.setVisible(false);
                 p8.setVisible(false);
                 p9.setVisible(false);
+                p10.setVisible(false);
                 cardLayout.show(p2, "addRoom");
             }else if(list.getSelectedValue().equals("User")){
                 p3.setVisible(false);
@@ -129,6 +135,7 @@ public class ManagerDashboardController {
                 p7.setVisible(false);
                 p8.setVisible(false);
                 p9.setVisible(false);
+                p10.setVisible(false);
                 cardLayout.show(p2, "addUser");
             }else if(list.getSelectedValue().equals("Driver")){
                 p3.setVisible(false);
@@ -140,11 +147,12 @@ public class ManagerDashboardController {
                 p7.setVisible(false);
                 p8.setVisible(false);
                 p9.setVisible(false);
+                p10.setVisible(false);
                 cardLayout.show(p2, "addDrivers");
             }
         });
     }
-    public void checkSelectBtnListEmployee(JList<String> list, JLabel p, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkSelectBtnListEmployee(JList<String> list, JLabel p, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout2(p3);
         list.addListSelectionListener(e -> {
             if(list.getSelectedValue().equals("Employee")){
@@ -157,6 +165,7 @@ public class ManagerDashboardController {
                 p7.setVisible(false);
                 p8.setVisible(false);
                 p9.setVisible(false);
+                p10.setVisible(false);
                 cardLayout2.show(p3, "employeeInfo");
             }else if(list.getSelectedValue().equals("Manager")){
                 p.setVisible(false);
@@ -168,12 +177,13 @@ public class ManagerDashboardController {
                 p7.setVisible(false);
                 p8.setVisible(false);
                 p9.setVisible(false);
+                p10.setVisible(false);
                 cardLayout2.show(p3, "managerInfo");
             }
         });
     }
 
-    public void checkViewBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkViewBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout3(p4);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -186,11 +196,12 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(false);
             p9.setVisible(false);
+            p10.setVisible(false);
             cardLayout3.show(p4, "viewRoom");
         });
     }
 
-    public void BtnProfileUser(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void BtnProfileUser(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout4(p5);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -203,12 +214,13 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(false);
             p9.setVisible(false);
+            p10.setVisible(false);
             cardLayout4.show(p5, "profileUser");
         });
     }
 
 
-    public void checkCustomerInfoBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkCustomerInfoBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout3(p5);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -221,11 +233,12 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(false);
             p9.setVisible(false);
+            p10.setVisible(false);
             cardLayout3.show(p5, "customerInfo");
         });
     }
 
-    public void checkUpdateStatusBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkUpdateStatusBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout4(p2);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -238,11 +251,12 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(false);
             p9.setVisible(false);
+            p10.setVisible(false);
             cardLayout4.show(p2, "updateRoom");
         });
     }
 
-    public void historyBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void historyBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout5(p8);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -255,11 +269,12 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(true);
             p9.setVisible(false);
+            p10.setVisible(false);
             cardLayout5.show(p8, "historyCustomer");
         });
     }
 
-    public void checkDriverInfoBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9){
+    public void checkDriverInfoBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout6(p9);
         btn.addActionListener(e -> {
             l1.setVisible(false);
@@ -272,7 +287,26 @@ public class ManagerDashboardController {
             p7.setVisible(false);
             p8.setVisible(false);
             p9.setVisible(true);
+            p10.setVisible(false);
             cardLayout6.show(p9, "driverInfo");
+        });
+    }
+
+    public void checkStatisticsBtn(JButton btn,JLabel l1, JLabel l2, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
+        addCardLayout5(p10);
+        btn.addActionListener(e -> {
+            l1.setVisible(false);
+            l2.setVisible(false);
+            p2.setVisible(false);
+            p3.setVisible(false);
+            p4.setVisible(false);
+            p5.setVisible(false);
+            p6.setVisible(false);
+            p7.setVisible(false);
+            p8.setVisible(false);
+            p9.setVisible(false);
+            p10.setVisible(true);
+            cardLayout5.show(p10, "chart");
         });
     }
 
