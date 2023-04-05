@@ -57,20 +57,20 @@ public class NewCustomer extends JFrame{
         customer = new Customer();
 
         ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/fifth.png"));
-        Image i3 = i1.getImage().getScaledInstance(300, 400,Image.SCALE_DEFAULT);
+        Image i3 = i1.getImage().getScaledInstance(400, 500,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l1 = new JLabel(i2);
-        l1.setBounds(480,10,300,500);
+        l1.setBounds(600,20,400,500);
         p1.add(l1);
 
         JLabel lblName = new JLabel("NEW CUSTOMER FORM");
-        lblName.setFont(new Font("Yu Mincho", Font.PLAIN, 20));
-        lblName.setBounds(118, 11, 260, 53);
+        lblName.setFont(new Font("Arial", Font.BOLD, 30));
+        lblName.setBounds(60, 11, 350, 53);
         p1.add(lblName);
 
         JLabel lblId = new JLabel("ID :");
         lblId.setBounds(35, 76, 200, 14);
-        setFont(new Font("Arial", Font.BOLD, 17));
+        setFont(new Font("Arial", Font.BOLD, 20));
         p1.add(lblId);
 
         comboBox = new JComboBox(new String[] {"Passport", "Aadhar Card", "Voter Id", "Driving license"});
@@ -85,7 +85,7 @@ public class NewCustomer extends JFrame{
 
         JLabel l2 = new JLabel("Number :");
         l2.setBounds(35, 111, 200, 14);
-        setFont(new Font("Arial", Font.BOLD, 17));
+        setFont(new Font("Arial", Font.BOLD, 20));
         p1.add(l2);
 
         t1 = new JTextField();
@@ -110,7 +110,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblName_1 = new JLabel("Name :");
         lblName_1.setBounds(35, 151, 200, 14);
-        setFont(new Font("Arial", Font.BOLD, 17));
+        setFont(new Font("Arial", Font.BOLD, 20));
         p1.add(lblName_1);
 
         t2 = new JTextField();
@@ -137,7 +137,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblGender = new JLabel("Gender :");
         lblGender.setBounds(35, 191, 200, 14);
-        setFont(new Font("Arial", Font.BOLD, 17));
+        setFont(new Font("Arial", Font.BOLD, 20));
         p1.add(lblGender);
 
         r1 = new JRadioButton("male");
@@ -152,7 +152,7 @@ public class NewCustomer extends JFrame{
         });
         add(r1);
 
-        r2 = new JRadioButton("female");
+        r2 = new JRadioButton("Female");
         r2.setFont(new Font("Raleway", Font.BOLD, 14));
         r2.setBackground(Color.WHITE);
         r2.setBounds(350, 191, 100, 12);
@@ -171,7 +171,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblPhone = new JLabel("Phone:");
         lblPhone.setBounds(35, 231, 200, 14);
-        setFont(new Font("Arial", Font.BOLD, 17));
+        setFont(new Font("Arial", Font.BOLD, 20));
         p1.add(lblPhone);
 
         JLabel lblReserveRoomNumber = new JLabel("Allocated Room Number :");
@@ -214,7 +214,7 @@ public class NewCustomer extends JFrame{
 
             JLabel lblCheckInStatus = new JLabel("Checked-In : ");
             lblCheckInStatus.setBounds(35, 316, 200, 17);
-            setFont(new Font("Arial", Font.BOLD, 17));
+            setFont(new Font("Arial", Font.BOLD, 20));
             p1.add(lblCheckInStatus);
             t4 = new JTextArea();
             t4.setBounds(271, 316, 200, 20);
@@ -226,7 +226,7 @@ public class NewCustomer extends JFrame{
 
             JLabel lblCheckOutStatus = new JLabel("Checked-Out : ");
             lblCheckOutStatus.setBounds(35, 359, 200, 17);
-            setFont(new Font("Arial", Font.BOLD, 17));
+            setFont(new Font("Arial", Font.BOLD, 20));
             p1.add(lblCheckOutStatus);
 
             JDateChooser dateChooser = new JDateChooser();
@@ -251,7 +251,7 @@ public class NewCustomer extends JFrame{
 
         JLabel lblDeposite = new JLabel("Deposit :");
         lblDeposite.setBounds(35, 402, 200, 14);
-            setFont(new Font("Arial", Font.BOLD, 17));
+            setFont(new Font("Arial", Font.BOLD, 20));
             p1.add(lblDeposite);
 
 
@@ -303,7 +303,7 @@ public class NewCustomer extends JFrame{
 
         JButton btnNewButton = new JButton("Add");
 
-        btnNewButton.setBounds(175, 430, 120, 30);
+        btnNewButton.setBounds(170, 450, 120, 30);
         btnNewButton.setBackground(Color.BLACK);
         btnNewButton.setForeground(Color.WHITE);
         new NewCustomerController().addNewCustomer(btnNewButton,  customer);

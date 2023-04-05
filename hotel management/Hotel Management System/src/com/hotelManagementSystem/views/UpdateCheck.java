@@ -71,17 +71,15 @@ public class UpdateCheck extends JFrame {
         p1.setLayout(null);
         customer = new Customer();
 
-        JTextArea lblUpdateCheckStatus = new JTextArea("Check-In Details");
-        lblUpdateCheckStatus.setFont(new Font("serif", Font.BOLD, 30));
-        lblUpdateCheckStatus.setBounds(0, 0, 1400, 50);
-        lblUpdateCheckStatus.setForeground(Color.decode("#e09145"));
-        lblUpdateCheckStatus.setBackground(Color.decode("#1b1c22"));
-        lblUpdateCheckStatus.setEditable(false);
+        JTextArea lblUpdateCheckStatus = new JTextArea("CHECK-IN DETAILS");
+        lblUpdateCheckStatus.setFont(new Font("Arial", Font.BOLD, 35));
+        lblUpdateCheckStatus.setForeground(Color.BLACK);
+        lblUpdateCheckStatus.setBounds(90, 15, 600, 50);
         p1.add(lblUpdateCheckStatus);
 
         ImageIcon i1 = new ImageIcon(ClassLoader.getSystemResource("icons/nine.jpg"));
         JLabel l1 = new JLabel(i1);
-        l1.setBounds(500, 70, 476, 270);
+        l1.setBounds(550, 120, 476, 270);
         add(l1);
 
         JLabel lblNewLabel = new JLabel("ID:");
@@ -160,7 +158,7 @@ public class UpdateCheck extends JFrame {
 
             JLabel lblNewLabel_6 = new JLabel("Checked-out :");
             lblNewLabel_6.setFont(new Font("Arial", Font.BOLD, 16));
-            lblNewLabel_6.setBounds(25, 285, 107, 16);
+            lblNewLabel_6.setBounds(25, 285, 120, 16);
             p1.add(lblNewLabel_6);
 
 
@@ -268,17 +266,17 @@ public class UpdateCheck extends JFrame {
 
             p1.add(txt_Payment);
 
-            JButton btnAdd = new JButton("Check");
-            btnAdd.setFont(new Font("Arial", Font.BOLD, 17));
-            btnAdd.setBounds(80, 450, 100, 40);
+            JButton btnAdd = new JButton("CHECK");
+            btnAdd.setFont(new Font("Arial", Font.BOLD, 13));
+            btnAdd.setBounds(90, 450, 100, 40);
             btnAdd.setBackground(Color.BLACK);
             btnAdd.setForeground(Color.WHITE);
             new UpdateCheckController().btnCheckOut(btnAdd, customer,txt_ID, txt_Status, txt_Time, txt_TimeOut, txt_Deposit, txt_Payment);
             p1.add(btnAdd);
 
-            JButton btnUpdate = new JButton("Update");
-            btnUpdate.setFont(new Font("Arial", Font.BOLD, 17));
-            btnUpdate.setBounds(220, 450, 100, 40);
+            JButton btnUpdate = new JButton("UPDATE");
+            btnUpdate.setFont(new Font("Arial", Font.BOLD, 13));
+            btnUpdate.setBounds(230, 450, 100, 40);
             btnUpdate.setBackground(Color.BLACK);
             btnUpdate.setForeground(Color.WHITE);
             new UpdateCheckController().btnUpdate(btnUpdate, customer);

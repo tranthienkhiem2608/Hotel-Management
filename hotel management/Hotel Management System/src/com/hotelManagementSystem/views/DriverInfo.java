@@ -50,21 +50,20 @@ public class DriverInfo extends JFrame {
 
     public DriverInfo() {
         p1 = new JPanel();
-        p1.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(p1);
         p1.setLayout(null);
         driver = new Driver();
 
         JLabel lblPickUpService = new JLabel("DRIVER INFORMATION");
-        lblPickUpService.setFont(new Font("Arial", Font.BOLD, 50));
+        lblPickUpService.setFont(new Font("Arial", Font.BOLD, 30));
         lblPickUpService.setForeground(Color.black);
-        lblPickUpService.setBounds(200, 10, 600, 50);
+        lblPickUpService.setBounds(350, 10, 600, 50);
         p1.add(lblPickUpService);
 
-        JLabel lblTypeOfCar = new JLabel("Type of Car");
-        lblTypeOfCar.setFont(new Font("Arial", Font.PLAIN, 20));
+        JLabel lblTypeOfCar = new JLabel("Type of Car:");
+        lblTypeOfCar.setFont(new Font("Arial", Font.BOLD, 16));
         lblTypeOfCar.setForeground(Color.black);
-        lblTypeOfCar.setBounds(100, 100, 150, 27);
+        lblTypeOfCar.setBounds(100, 80, 150, 27);
         p1.add(lblTypeOfCar);
 
         comboBox = new JComboBox();
@@ -74,7 +73,7 @@ public class DriverInfo extends JFrame {
             while(rs.next()){
                 comboBox.addItem(rs.getString("carBrand"));
             }
-            comboBox.setBounds(270, 100, 150, 20);
+            comboBox.setBounds(220, 83, 150, 20);
             String selectedItem = (String) comboBox.getSelectedItem();
             if (selectedItem != null && !selectedItem.isEmpty()) {
                 comboBox.addActionListener(new ActionListener() {
@@ -92,10 +91,16 @@ public class DriverInfo extends JFrame {
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();
-        table.setBounds(30, 190, 900, 300);
+        table.setBounds(30, 270, 900, 200);
         table.setModel(tableModel);
         table.enableInputMethods(false);
         p1.add(table);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(60, 120, 1000, 450);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p1.add(scrollPane);
 
         try{
             DriverInfoDao driverInfoDao = new DriverInfoDao();
@@ -105,58 +110,15 @@ public class DriverInfo extends JFrame {
             e.printStackTrace();
         }
 
-        JLabel lblInfo = new JLabel("Name");
-        lblInfo.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblInfo.setForeground(Color.black);
-        lblInfo.setBounds(50, 150, 100, 27);
-        p1.add(lblInfo);
-
-
-        JLabel lblNewLabel = new JLabel("Age");
-        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblNewLabel.setForeground(Color.black);
-        lblNewLabel.setBounds(180, 150, 100, 27);
-        p1.add(lblNewLabel);
-
-        JLabel lblGender = new JLabel("Gender");
-        lblGender.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblGender.setForeground(Color.black);
-        lblGender.setBounds(310, 150, 100, 27);
-        p1.add(lblGender);
-
-        JLabel lblTypeOfDriver = new JLabel("Phone");
-        lblTypeOfDriver.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblTypeOfDriver.setForeground(Color.black);
-        lblTypeOfDriver.setBounds(440, 150, 100, 27);
-        p1.add(lblTypeOfDriver);
-
-        JLabel lblDateOfThe = new JLabel("Car Brand");
-        lblDateOfThe.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblDateOfThe.setForeground(Color.black);
-        lblDateOfThe.setBounds(570, 150, 100, 27);
-        p1.add(lblDateOfThe);
-
-        JLabel lblAirport = new JLabel("Available");
-        lblAirport.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblAirport.setForeground(Color.black);
-        lblAirport.setBounds(700, 150, 100, 27);
-        p1.add(lblAirport);
-
-        JLabel lblAvailable = new JLabel("Location");
-        lblAvailable.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblAvailable.setForeground(Color.black);
-        lblAvailable.setBounds(830, 150, 100, 27);
-        p1.add(lblAvailable);
-
         JButton btnRegister = new JButton("Find");
-        btnRegister.setBounds(450, 100, 100, 20);
+        btnRegister.setBounds(400, 83, 100, 20);
         btnRegister.setBackground(Color.BLACK);
         btnRegister.setForeground(Color.WHITE);
         new DriverInfoController().btnFind(btnRegister ,table, tableModel, driver);
         p1.add(btnRegister);
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(600, 500, 180, 50);
+        btnRefresh.setBounds(450, 500, 180, 50);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new DriverInfoController().btnRefresh(btnRefresh, table,comboBox, tableModel);
@@ -174,7 +136,7 @@ public class DriverInfo extends JFrame {
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        gradientPanel.setBounds(0, 0, 1000, 600);
+        gradientPanel.setBounds(0, 0, 1200, 600);
         p1.add(gradientPanel);
     }
 }

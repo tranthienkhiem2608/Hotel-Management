@@ -58,28 +58,28 @@ public class UpdateRoom extends JFrame {
         p1.setLayout(null);
 
         ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/roomview.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(563, 375,Image.SCALE_DEFAULT);
+        Image i3 = i1.getImage().getScaledInstance(600, 550,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l1 = new JLabel(i2);
-        l1.setBounds(400,80,563,375);
+        l1.setBounds(460,25,600,550);
         add(l1);
 
         JLabel lblUpdateRoomStatus = new JLabel("UPDATE ROOM");
-        lblUpdateRoomStatus.setFont(new Font("Arial", Font.BOLD, 50));
-        lblUpdateRoomStatus.setForeground(Color.decode("#E09145"));
-        lblUpdateRoomStatus.setBounds(200, 10, 600, 50);
+        lblUpdateRoomStatus.setFont(new Font("Arial", Font.BOLD, 35));
+        lblUpdateRoomStatus.setForeground(Color.BLACK);
+        lblUpdateRoomStatus.setBounds(90, 15, 600, 50);
         p1.add(lblUpdateRoomStatus);
 
         JLabel lblNewLabel = new JLabel("Room ID:");
-        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblNewLabel.setForeground(Color.decode("#f0f5f5"));
+        lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblNewLabel.setForeground(Color.BLACK);
         lblNewLabel.setBounds(20, 130, 150, 27);
         p1.add(lblNewLabel);
 
         c1 = new JComboBox();
         p1.add(c1);
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(330, 130, 80, 20);
+        btnRefresh.setBounds(300, 130, 80, 20);
         new UpdateRoomController().refreshBtn(btnRefresh, c1);
         p1.add(btnRefresh);
 
@@ -89,7 +89,7 @@ public class UpdateRoom extends JFrame {
             while(rs.next()){
                 c1.addItem(rs.getString("roomNumber"));
             }
-            c1.setBounds(180, 130, 140, 20);
+            c1.setBounds(150, 130, 140, 20);
             String selectedItem = (String) c1.getSelectedItem();
             if (selectedItem != null && !selectedItem.isEmpty()) {
                 c1.addActionListener(new ActionListener() {
@@ -104,13 +104,13 @@ public class UpdateRoom extends JFrame {
         }catch (Exception e){}
 
         JLabel lblRoomId = new JLabel("Price:");
-        lblRoomId.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblRoomId.setForeground(Color.decode("#f0f5f5"));
+        lblRoomId.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblRoomId.setForeground(Color.BLACK);
         lblRoomId.setBounds(20, 190, 150, 27);
         p1.add(lblRoomId);
 
         txt_Price = new JTextField();
-        txt_Price.setBounds(180, 190, 140, 20);
+        txt_Price.setBounds(150, 190, 140, 20);
         txt_Price.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -136,13 +136,13 @@ public class UpdateRoom extends JFrame {
         p1.add(txt_Price);
 
         JLabel lblAvailability = new JLabel("Bed type:");
-        lblAvailability.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblAvailability.setForeground(Color.decode("#f0f5f5"));
+        lblAvailability.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblAvailability.setForeground(Color.BLACK);
         lblAvailability.setBounds(20, 250, 150, 27);
         p1.add(lblAvailability);
 
         txt_BedType = new JTextField();
-        txt_BedType.setBounds(180, 250, 140, 20);
+        txt_BedType.setBounds(150, 250, 140, 20);
         txt_BedType.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -167,15 +167,15 @@ public class UpdateRoom extends JFrame {
         });
         p1.add(txt_BedType);
 
-        JButton b1 = new JButton("Check");
-        b1.setBounds(80, 380, 180, 50);
+        JButton b1 = new JButton("CHECK");
+        b1.setBounds(90, 360, 100, 40);
         b1.setBackground(Color.BLACK);
         b1.setForeground(Color.WHITE);
         new UpdateRoomController().btnCheckRoom(b1, room, txt_Price, txt_BedType);
         p1.add(b1);
 
-        JButton btnUpdate = new JButton("Update");
-        btnUpdate.setBounds(80, 470, 180, 50);
+        JButton btnUpdate = new JButton("UPDATE");
+        btnUpdate.setBounds(210, 360, 100, 40);
         btnUpdate.setBackground(Color.BLACK);
         btnUpdate.setForeground(Color.WHITE);
         new UpdateRoomController().btnUpdate(btnUpdate, room);
@@ -185,13 +185,13 @@ public class UpdateRoom extends JFrame {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                GradientPaint gradient = new GradientPaint(0, 0, Color.decode("#292C35"), getWidth(), getHeight(), Color.decode("#292C35"));
+                GradientPaint gradient = new GradientPaint(0, 0, Color.decode("#fcf6f0"), getWidth(), getHeight(), Color.decode("#fcf6f0"));
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setPaint(gradient);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        gradientPanel.setBounds(0, 0, 1000, 600);
+        gradientPanel.setBounds(0, 0, 1200, 600);
         p1.add(gradientPanel);
     }
 }

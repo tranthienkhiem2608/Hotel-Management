@@ -154,6 +154,7 @@ public class EmployeeDashboard extends JFrame {
 
         p10 = new JPanel();
         p10.setBounds(265, 130, 1100, 600);
+
         p10.setVisible(false);
         p10.setLayout(null);
         add(p10);

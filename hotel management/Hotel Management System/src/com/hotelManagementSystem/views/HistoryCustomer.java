@@ -65,11 +65,23 @@ public class HistoryCustomer extends JFrame {
         String[] columnNames = {"ID", "Number", "Name", "Gender", "Phone", "Room", "Check-in", "Check-out", "Deposit"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
+        JLabel lblPickUpService = new JLabel("HISTORY");
+        lblPickUpService.setFont(new Font("Arial", Font.BOLD, 30));
+        lblPickUpService.setForeground(Color.black);
+        lblPickUpService.setBounds(460, 10, 600, 50);
+        p1.add(lblPickUpService);
+
         table = new JTable();
         table.setBounds(50, 50, 1000, 450);;
         table.setModel(tableModel);
         table.enableInputMethods(false);
         p1.add(table);
+
+        JScrollPane scrollPane = new JScrollPane(table);
+        scrollPane.setBounds(50, 65, 1000, 450);
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        p1.add(scrollPane);
 
         try{
             HistoryCustomerDao customerInfoDao = new HistoryCustomerDao();
@@ -80,14 +92,14 @@ public class HistoryCustomer extends JFrame {
         }
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(320, 500, 120, 30);
+        btnRefresh.setBounds(600, 515, 120, 30);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new HistoryCustomerController().btnRefresh(btnRefresh, table, tableModel);
         p1.add(btnRefresh);
 
         textField = new JTextField();
-        textField.setBounds(40, 500, 250, 30);
+        textField.setBounds(50, 515, 250, 30);
         textField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -112,58 +124,11 @@ public class HistoryCustomer extends JFrame {
 
 
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(600, 500, 120, 30);
+        btnSearch.setBounds(320, 515, 120, 30);
         btnSearch.setBackground(Color.BLACK);
         btnSearch.setForeground(Color.WHITE);
         new HistoryCustomerController().btnSearch(btnSearch, table, tableModel, historyCustomer);
         p1.add(btnSearch);
-
-
-
-        lblId = new JLabel("ID");
-        lblId.setBounds(100, 20, 50, 16);
-        lblId.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblId);
-
-        JLabel l1 = new JLabel("Number");
-        l1.setBounds(100, 20, 50, 16);
-        l1.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(l1);
-
-        lblNewLabel = new JLabel("Name");
-        lblNewLabel.setBounds(200, 20, 50, 16);
-        lblNewLabel.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblNewLabel);
-
-        lblGender = new JLabel("Gender");
-        lblGender.setBounds(300, 20, 50, 16);
-        lblGender.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblGender);
-
-        lblPhone = new JLabel("Phone");
-        lblPhone.setBounds(400, 20, 50, 16);
-        lblPhone.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblPhone);
-
-        lblRoom = new JLabel("Room");
-        lblRoom.setBounds(500, 20, 50, 16);
-        lblRoom.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblRoom);
-
-        lblStatus = new JLabel("Check-in");
-        lblStatus.setBounds(600, 20, 50, 16);
-        lblStatus.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblStatus);
-
-        lblStatusOut = new JLabel("Check-out");
-        lblStatusOut.setBounds(700, 20, 50, 16);
-        lblStatusOut.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblStatusOut);
-
-        lblNewLabel_1 = new JLabel("Deposit");
-        lblNewLabel_1.setBounds(800, 20, 50, 16);
-        lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 13));
-        p1.add(lblNewLabel_1);
 
         getContentPane().setBackground(Color.WHITE);
     }
