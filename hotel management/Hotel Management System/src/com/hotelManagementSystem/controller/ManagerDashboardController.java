@@ -15,12 +15,13 @@ public class ManagerDashboardController {
     private AddRoom addRoom;
     private ManagerInfo managerInfo;
     private EmployeeInfo employeeInfo;
-    private Room viewRoom;
+    private SearchRoom searchRoom;
     private ProfileUser profileUser;
     private CustomerInfo customerInfo;
     private UpdateRoom updateRoom;
     private HistoryCustomer historyCustomer;
     private DriverInfo driverInfo;
+
 
     private CardLayout cardLayout, cardLayout2, cardLayout3, cardLayout4, cardLayout5, cardLayout6;
     public ManagerDashboardController(){
@@ -29,7 +30,7 @@ public class ManagerDashboardController {
         addRoom = new AddRoom();
         managerInfo = new ManagerInfo();
         employeeInfo = new EmployeeInfo();
-        viewRoom = new Room();
+        searchRoom = new SearchRoom();
         profileUser = new ProfileUser();
         customerInfo = new CustomerInfo();
         updateRoom = new UpdateRoom();
@@ -57,11 +58,11 @@ public class ManagerDashboardController {
         p.add(employeeInfo.getP1(), "employeeInfo");
     }
     public void addCardLayout3(JPanel p){
-        viewRoom.setVisible(false);
+        searchRoom.setVisible(false);
         customerInfo.setVisible(false);
         cardLayout3 = new CardLayout();
         p.setLayout(cardLayout3);
-        p.add(viewRoom.getP1(), "viewRoom");
+        p.add(searchRoom.getP1(), "viewRoom");
         p.add(customerInfo.getP1(), "customerInfo");
     }
 

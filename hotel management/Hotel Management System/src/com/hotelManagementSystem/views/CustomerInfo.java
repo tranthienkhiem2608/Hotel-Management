@@ -65,6 +65,12 @@ public class CustomerInfo extends JFrame {
         String[] columnNames = {"ID", "Number", "Name", "Gender", "Phone", "Room", "Check-in", "Check-out","Price Room", "Deposit"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
+        JLabel lblPickUpService = new JLabel("CUSTOMER INFORMATION");
+        lblPickUpService.setFont(new Font("Arial", Font.BOLD, 30));
+        lblPickUpService.setForeground(Color.black);
+        lblPickUpService.setBounds(300, 10, 600, 50);
+        p1.add(lblPickUpService);
+
         table = new JTable();
         table.setBounds(50, 50, 1000, 450);;
         table.setModel(tableModel);
@@ -73,7 +79,7 @@ public class CustomerInfo extends JFrame {
         p1.add(table);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(50, 50, 1000, 450);
+        scrollPane.setBounds(50, 65, 1000, 450);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         p1.add(scrollPane);
 
@@ -86,14 +92,14 @@ public class CustomerInfo extends JFrame {
         }
 
         JButton btnRefresh = new JButton("Refresh");
-        btnRefresh.setBounds(600, 500, 120, 30);
+        btnRefresh.setBounds(600, 515, 120, 30);
         btnRefresh.setBackground(Color.BLACK);
         btnRefresh.setForeground(Color.WHITE);
         new CustomerInfoController().btnRefresh(btnRefresh, table, tableModel);
         p1.add(btnRefresh);
 
         textField = new JTextField();
-        textField.setBounds(50, 500, 250, 30);
+        textField.setBounds(50, 515, 250, 30);
         textField.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -118,7 +124,7 @@ public class CustomerInfo extends JFrame {
 
 
         btnSearch = new JButton("Search");
-        btnSearch.setBounds(320, 500, 120, 30);
+        btnSearch.setBounds(320, 515, 120, 30);
         btnSearch.setBackground(Color.BLACK);
         btnSearch.setForeground(Color.WHITE);
         new CustomerInfoController().btnSearch(btnSearch, table, tableModel, customer);

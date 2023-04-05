@@ -55,6 +55,12 @@ public class EmployeeInfo extends JFrame {
         p2.setLayout(null);
         p1.add(p2);
 
+        JLabel lblPickUpService = new JLabel("EMPLOYEE INFORMATION");
+        lblPickUpService.setFont(new Font("Arial", Font.BOLD, 40));
+        lblPickUpService.setForeground(Color.black);
+        lblPickUpService.setBounds(300, 10, 600, 50);
+        p1.add(lblPickUpService);
+
         String[] columnNames = {"ID", "Name", "Age", "Gender", "Position", "Salary", "Phone", "Email"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
@@ -64,7 +70,7 @@ public class EmployeeInfo extends JFrame {
         p1.add(table);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(50, 50, 1000, 450);
+        scrollPane.setBounds(50, 65, 1000, 450);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         p1.add(scrollPane);
 
@@ -77,7 +83,7 @@ public class EmployeeInfo extends JFrame {
         }
 
         JButton btnRefesh = new JButton("REFRESH");
-        btnRefesh.setBounds(400, 560, 120, 30);
+        btnRefesh.setBounds(400, 550, 120, 30);
         btnRefesh.setBackground(Color.BLACK);
         btnRefesh.setForeground(Color.WHITE);
         p1.add(btnRefesh);
@@ -85,7 +91,7 @@ public class EmployeeInfo extends JFrame {
         getContentPane().setBackground(Color.WHITE);
 
         JButton btnExit = new JButton("EDIT");
-        btnExit.setBounds(550, 560, 120, 30);
+        btnExit.setBounds(550, 550, 120, 30);
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.WHITE);
         new EmployeeInfoController().ChangeToEdit(btnExit);

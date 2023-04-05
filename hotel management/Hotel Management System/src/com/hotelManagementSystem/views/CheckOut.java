@@ -60,22 +60,22 @@ public class CheckOut extends JFrame{
         customer = new Customer();
         customer1 = new Customer();
 
-        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/sixth.jpg"));
-        Image i3 = i1.getImage().getScaledInstance(450, 253,Image.SCALE_DEFAULT);
+        ImageIcon i1  = new ImageIcon(ClassLoader.getSystemResource("icons/checkout.png"));
+        Image i3 = i1.getImage().getScaledInstance(450, 500,Image.SCALE_DEFAULT);
         ImageIcon i2 = new ImageIcon(i3);
         JLabel l1 = new JLabel(i2);
-        l1.setBounds(500,120,450,253);
+        l1.setBounds(550,50,450,500);
         add(l1);
 
         JLabel lblCheckOut = new JLabel("CHECK OUT ");
-        lblCheckOut.setFont(new Font("Arial", Font.BOLD, 50));
-        lblCheckOut.setForeground(Color.decode("#E09145"));
-        lblCheckOut.setBounds(300, 20, 500, 50);
+        lblCheckOut.setFont(new Font("Arial", Font.BOLD, 30));
+        lblCheckOut.setForeground(Color.BLACK);
+        lblCheckOut.setBounds(125, 15, 600, 50);
         p1.add(lblCheckOut);
 
         JLabel lblName = new JLabel("Number :");
-        lblName.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblName.setForeground(Color.decode("#f0f5f5"));
+        lblName.setFont(new Font("Arial", Font.PLAIN, 18));
+        lblName.setForeground(Color.BLACK);
         lblName.setBounds(20, 120, 100, 27);
         p1.add(lblName);
 
@@ -87,7 +87,7 @@ public class CheckOut extends JFrame{
             while(rs.next()){
                 comboBox.addItem(rs.getString("numberID"));
             }
-            comboBox.setBounds(200, 120, 150, 20);
+            comboBox.setBounds(200, 122, 150, 20);
             String selectedItem = (String) comboBox.getSelectedItem();
             if (selectedItem != null && !selectedItem.isEmpty()) {
                 comboBox.addActionListener(new ActionListener() {
@@ -110,7 +110,7 @@ public class CheckOut extends JFrame{
 
         JLabel lblRoomNumber = new JLabel("Room Number:");
         lblRoomNumber.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblRoomNumber.setForeground(Color.decode("#f0f5f5"));
+        lblRoomNumber.setForeground(Color.BLACK);
         lblRoomNumber.setBounds(20, 190, 150, 27);
         p1.add(lblRoomNumber);
 
@@ -121,12 +121,12 @@ public class CheckOut extends JFrame{
 
         JLabel lblCheckIn = new JLabel("Checkin Time:");
         lblCheckIn.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblCheckIn.setForeground(Color.decode("#f0f5f5"));
+        lblCheckIn.setForeground(Color.BLACK);
         lblCheckIn.setBounds(20, 260, 150, 27);
         p1.add(lblCheckIn);
 
         txt_Time = new JTextArea();
-        txt_Time.setBounds(248, 235, 140, 20);
+        txt_Time.setBounds(200, 260, 150, 20);
         txt_Time.setEditable(false);
         txt_Time.setText("0/0/0 00:00:00");
         p1.add(txt_Time);
@@ -144,7 +144,7 @@ public class CheckOut extends JFrame{
 
         JLabel lblCheckOut1 = new JLabel("Checkout Time:");
         lblCheckOut1.setFont(new Font("Arial", Font.PLAIN, 20));
-        lblCheckOut1.setForeground(Color.decode("#f0f5f5"));
+        lblCheckOut1.setForeground(Color.BLACK);
         lblCheckOut1.setBounds(20, 330, 150, 20);
         p1.add(lblCheckOut1);
 
@@ -156,7 +156,7 @@ public class CheckOut extends JFrame{
         Date time = new Date();
 
         txt_TimeCheckOut = new JTextArea();
-        txt_TimeCheckOut.setBounds(248, 305, 140, 20);
+        txt_TimeCheckOut.setBounds(200, 330, 150, 20);
         txt_TimeCheckOut.setEditable(false);
         txt_TimeCheckOut.setText(dateFormat.format(date) + " " + timeFormat.format(time));
         p1.add(txt_TimeCheckOut);
@@ -165,7 +165,7 @@ public class CheckOut extends JFrame{
 
         JButton btnCheckOut = new JButton("Check Out");
         new CheckOutController().btnCheckOut(btnCheckOut, customer1);
-        btnCheckOut.setBounds(220, 400, 180, 50);
+        btnCheckOut.setBounds(170, 400, 150, 35);
         btnCheckOut.setBackground(Color.BLACK);
         btnCheckOut.setForeground(Color.WHITE);
         p1.add(btnCheckOut);
@@ -176,13 +176,13 @@ public class CheckOut extends JFrame{
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                GradientPaint gradient = new GradientPaint(0, 0, Color.decode("#292C35"), getWidth(), getHeight(), Color.decode("#292C35"));
+                GradientPaint gradient = new GradientPaint(0, 0, Color.decode("#fcf6f0"), getWidth(), getHeight(), Color.decode("#fcf6f0"));
                 Graphics2D g2d = (Graphics2D) g;
                 g2d.setPaint(gradient);
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         };
-        gradientPanel.setBounds(0, 0, 1000, 600);
+        gradientPanel.setBounds(0, 0, 1200, 600);
         p1.add(gradientPanel);
     }
 
