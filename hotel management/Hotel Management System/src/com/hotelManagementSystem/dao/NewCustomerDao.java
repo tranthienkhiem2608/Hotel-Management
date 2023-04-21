@@ -11,7 +11,7 @@ import java.sql.Time;
 import java.time.format.DateTimeFormatter;
 
 public class NewCustomerDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public int addNewCustomer(Customer customer) {
 
@@ -47,7 +47,7 @@ public class NewCustomerDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 
@@ -57,12 +57,12 @@ public class NewCustomerDao {
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
             while(rs.next()){
-                comboBox.addItem(rs.getInt("roomNumber"));
+                comboBox.addItem(String.valueOf(rs.getInt("roomNumber")));
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

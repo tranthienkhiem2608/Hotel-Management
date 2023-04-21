@@ -31,6 +31,7 @@ public class NewCustomer extends JFrame{
         new NewCustomer().setVisible(true);
 
     }
+    private final Conn conn = Conn.getInstance();
 
     private static JPanel p1;
     private JTextField t1,t2,t3,t5,t6;
@@ -188,8 +189,8 @@ public class NewCustomer extends JFrame{
         p1.add(btnRefresh);
 
         try{
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from room where availability = 'Available'");
+
+            ResultSet rs = conn.getStatment().executeQuery("select * from room where availability = 'Available'");
             while(rs.next()){
                 comboBox_1.addItem(rs.getString("roomNumber"));
             }
@@ -200,7 +201,9 @@ public class NewCustomer extends JFrame{
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         String selectedItem = (String) comboBox_1.getSelectedItem();
-                        customer.setRoomNumber(Integer.parseInt(selectedItem));
+                        if (selectedItem != null)
+                            customer.setRoomNumber(Integer.parseInt(selectedItem));
+
                     }
                 });
             }

@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.dao;
 
+import com.hotelManagementSystem.bean.PasswordEncoder;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
@@ -14,7 +15,7 @@ import java.awt.*;
 public class ForgotPasswordDao {
 
     public ForgotPasswordDao(){}
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
 
     public User checkValidUser(User user, Account account) {
@@ -34,15 +35,15 @@ public class ForgotPasswordDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return null;
     }
 
     public int changePassword(Account account, User user) {
 
-        String query = "update account set password = '" + account.getPassword() + "' where id = '" + user.getId() + "'";
         try {
+            String query = "update account set password = '" + PasswordEncoder.encode(account.getPassword()) + "' where id = '" + user.getId() + "'";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.executeUpdate();
             return 1;
@@ -52,7 +53,7 @@ public class ForgotPasswordDao {
             return 0;
 
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

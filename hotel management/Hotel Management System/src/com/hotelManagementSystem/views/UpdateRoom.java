@@ -19,6 +19,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class UpdateRoom extends JFrame {
+    private final Conn conn = Conn.getInstance();
+
     private JPanel p1;
 
     private JTextField txt_Price;
@@ -84,8 +86,7 @@ public class UpdateRoom extends JFrame {
         p1.add(btnRefresh);
 
         try{
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from room where availability = 'Available'");
+            ResultSet rs = conn.getStatment().executeQuery("select * from room where availability = 'Available'");
             while(rs.next()){
                 c1.addItem(rs.getString("roomNumber"));
             }

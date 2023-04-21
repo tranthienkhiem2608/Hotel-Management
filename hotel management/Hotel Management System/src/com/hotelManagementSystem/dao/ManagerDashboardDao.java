@@ -9,7 +9,7 @@ import com.hotelManagementSystem.views.ManagerDashboard;
 import javax.swing.*;
 
 public class ManagerDashboardDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public String setTextNameUser(String id){
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.id = ?";
@@ -23,7 +23,7 @@ public class ManagerDashboardDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return null;
     }

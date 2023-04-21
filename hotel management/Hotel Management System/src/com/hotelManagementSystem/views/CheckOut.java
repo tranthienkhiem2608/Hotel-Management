@@ -22,6 +22,7 @@ import java.awt.event.*;
 import java.awt.event.ActionEvent;
 
 public class CheckOut extends JFrame{
+    private final Conn conn = Conn.getInstance();
 
     PreparedStatement pst = null;
     private JPanel p1;
@@ -82,8 +83,7 @@ public class CheckOut extends JFrame{
 
         comboBox = new JComboBox();
         try{
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from customer");
+            ResultSet rs = conn.getStatment().executeQuery("select * from customer");
             while(rs.next()){
                 comboBox.addItem(rs.getString("numberID"));
             }

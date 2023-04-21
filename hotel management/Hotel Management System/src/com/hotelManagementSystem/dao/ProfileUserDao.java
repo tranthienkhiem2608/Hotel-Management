@@ -1,5 +1,6 @@
 package com.hotelManagementSystem.dao;
 
+import com.hotelManagementSystem.bean.PasswordEncoder;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
@@ -11,7 +12,7 @@ import java.sql.PreparedStatement;
 
 public class ProfileUserDao {
     private Login l;
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public ProfileUserDao(){
         l = new Login();
@@ -30,7 +31,7 @@ public class ProfileUserDao {
             stmt.setString(4, user.getPhone());
             stmt.setString(5, user.getEmail());
             stmt.setString(6, l.getIDLogin());
-            stmt2.setString(1, account.getPassword());
+            stmt2.setString(1, PasswordEncoder.encode(account.getPassword()));
             stmt2.setString(2, l.getIDLogin());
             int flag = stmt.executeUpdate();
             int flag2 = stmt2.executeUpdate();
@@ -43,7 +44,7 @@ public class ProfileUserDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

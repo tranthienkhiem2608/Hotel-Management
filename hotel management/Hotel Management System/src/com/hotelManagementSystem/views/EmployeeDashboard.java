@@ -24,6 +24,8 @@ public class EmployeeDashboard extends JFrame {
     private  Image logoutImage;
     private static JLabel labelListBtnCheckInOut;
     private static String UserName;
+
+    private static String chatName;
     public EmployeeDashboard() {
         initComponent();
         setLocationRelativeTo(null);
@@ -93,6 +95,7 @@ public class EmployeeDashboard extends JFrame {
             l.setVisible(false);
             UserName = new EmployeeDashboardDao().setTextNameUser(l.getIDLogin());
             t2.setText(UserName);
+            chatName = l.getIDLogin() + " - " + UserName;
 
         }catch(Exception e){
 
@@ -250,6 +253,7 @@ public class EmployeeDashboard extends JFrame {
         chatBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         chatBtn.setBackground(Color.decode("#292c35"));
         chatBtn.setForeground(Color.decode("#f0f5f5"));
+        new EmployeeDashboardController().chatBtn(chatBtn, chatName);
         p2.add(chatBtn);
 
 

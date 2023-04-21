@@ -10,7 +10,7 @@ import com.hotelManagementSystem.views.EmployeeDashboard;
 import javax.swing.*;
 
 public class EmployeeDashboardDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public String setTextNameUser(String id){
         String query = "SELECT users.*, account.* FROM users JOIN account ON users.id = account.id WHERE users.id = ?";
@@ -24,7 +24,7 @@ public class EmployeeDashboardDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return null;
     }

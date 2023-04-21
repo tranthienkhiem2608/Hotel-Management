@@ -7,21 +7,24 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class CustomerInfoDao {
     private Customer customer;
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public void viewCustomerInfo(JTable table, DefaultTableModel tableModel){
         customer = new Customer();
         String dateTime ="";
         String dateTimeOut = "";
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmt1 = null;
 
         try{
             String query = "SELECT * FROM customer";
             String query1 = "SELECT room.price FROM customer JOIN room ON customer.roomNumber = room.roomNumber WHERE customer.roomNumber = ? ";
 
-            PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
+            pstmt = conn.getConnection().prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
 
                 while (rs.next()) {
@@ -36,7 +39,7 @@ public class CustomerInfoDao {
                     customer.setCheckOutDate(rs.getDate("checkOutDate"));
                     customer.setCheckOutTime(rs.getTime("checkOutTime"));
                     customer.setDeposit(rs.getInt("deposit"));
-                    PreparedStatement pstmt1 = conn.getConnection().prepareStatement(query1);
+                    pstmt1 = conn.getConnection().prepareStatement(query1);
                     pstmt1.setInt(1, customer.getRoomNumber());
                     ResultSet rs1 = pstmt1.executeQuery();
                     long diff = customer.getCheckOutDate().getTime() - customer.getCheckInDate().getTime();
@@ -59,7 +62,7 @@ public class CustomerInfoDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }
@@ -96,7 +99,7 @@ public class CustomerInfoDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

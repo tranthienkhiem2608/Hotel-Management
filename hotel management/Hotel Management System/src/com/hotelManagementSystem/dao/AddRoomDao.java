@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 public class AddRoomDao {
 
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public int addRoom(Room room){
         try{
@@ -23,7 +23,7 @@ public class AddRoomDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

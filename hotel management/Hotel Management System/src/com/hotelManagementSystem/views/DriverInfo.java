@@ -19,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.Font;
 
 public class DriverInfo extends JFrame {
+    private final Conn conn = Conn.getInstance();
+
     private static JPanel p1;
     private JTable table;
     private JComboBox comboBox;
@@ -68,8 +70,8 @@ public class DriverInfo extends JFrame {
 
         comboBox = new JComboBox();
         try{
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from drivers");
+
+            ResultSet rs = conn.getStatment().executeQuery("select * from drivers");
             while(rs.next()){
                 comboBox.addItem(rs.getString("carBrand"));
             }

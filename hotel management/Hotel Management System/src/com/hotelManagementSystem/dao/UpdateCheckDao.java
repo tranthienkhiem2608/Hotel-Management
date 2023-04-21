@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UpdateCheckDao {
-    private Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
     public Customer getCustomerInfo(Customer customer){
         try{
             String query = "SELECT * FROM customer WHERE numberID = ?";
@@ -33,7 +33,7 @@ public class UpdateCheckDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return null;
     }
@@ -50,7 +50,7 @@ public class UpdateCheckDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return 0;
     }
@@ -70,21 +70,21 @@ public class UpdateCheckDao {
             e.printStackTrace();
             return 0;
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 
     public void refreshID(JComboBox comboBox){
 
         try{
-            ResultSet rs = conn.s.executeQuery("select * from customer");
+            ResultSet rs = conn.getStatment().executeQuery("select * from customer");
             while (rs.next()) {
                 comboBox.addItem(rs.getString("numberID"));
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

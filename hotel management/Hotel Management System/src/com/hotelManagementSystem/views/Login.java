@@ -54,7 +54,7 @@ public class Login extends JFrame{
         user = new User();
 
         p1 = new JPanel();
-        p1.setBounds(0, 0, 1400, 800);
+        p1.setBounds( 0, 0, 1400, 800);
         p1.setLayout(null);
         add(p1);
 

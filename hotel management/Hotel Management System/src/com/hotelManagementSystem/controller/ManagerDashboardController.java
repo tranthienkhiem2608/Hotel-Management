@@ -1,12 +1,9 @@
 package com.hotelManagementSystem.controller;
-import com.hotelManagementSystem.conn.Conn;
-import com.hotelManagementSystem.views.ManagerDashboard;
 import com.hotelManagementSystem.views.*;
-import com.hotelManagementSystem.dao.*;
+
 import javax.swing.*;
 import java.awt.*;
 
-import java.awt.*;
 
 public class ManagerDashboardController {
 
@@ -307,6 +304,17 @@ public class ManagerDashboardController {
             p9.setVisible(false);
             p10.setVisible(true);
             cardLayout5.show(p10, "chart");
+        });
+    }
+
+    public void chatBtn(JButton btn, String chatName){
+        btn.addActionListener(e -> {
+            String name = "Harry";
+            //call setupSocket
+
+            Client client = new Client(name);
+            client.setVisible(true);
+
         });
     }
 

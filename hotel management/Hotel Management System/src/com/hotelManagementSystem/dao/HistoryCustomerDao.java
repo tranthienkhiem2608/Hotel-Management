@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 public class HistoryCustomerDao {
 
     private HistoryCus historyCustomer;
-    private Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
     public void viewCustomerInfo (JTable table, DefaultTableModel tableModel){
 
         historyCustomer = new HistoryCus();
@@ -45,7 +45,7 @@ public class HistoryCustomerDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }
@@ -82,7 +82,7 @@ public class HistoryCustomerDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

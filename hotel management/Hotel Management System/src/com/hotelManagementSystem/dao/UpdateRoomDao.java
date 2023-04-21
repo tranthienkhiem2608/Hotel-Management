@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class UpdateRoomDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public Room getRoomInfo(Room room){
         try{
@@ -59,7 +59,7 @@ public class UpdateRoomDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

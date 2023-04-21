@@ -1,4 +1,5 @@
 package com.hotelManagementSystem.dao;
+import com.hotelManagementSystem.bean.PasswordEncoder;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
@@ -11,7 +12,8 @@ import java.util.Random;
 
 public class AddUserDao {
 
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
+    private String pass;
 
     public int addUser(User user, Account account) {
         try {
@@ -21,8 +23,10 @@ public class AddUserDao {
                 String query2 = "insert into Users values('" + user.getId() + "', '" + user.getName() + "', '" + user.getAge() + "', '" + user.getGender() + "', '" + user.getPosition() + "', '" + user.getSalary() + "', '" + user.getPhone() + "', '" + user.getEmail() + "')";
                 conn.getStatment().executeUpdate(query2);
                 if (user.getPosition().equals("Manager") || user.getPosition().equals("Receptionist")) {
-                    String query3 = "insert into Account values('" + user.getId() + "', '" + generateRandomPassword(10) + "','" + "khong" + "','" + "0" +"')";
+                    pass = generateRandomPassword(10);
+                    String query3 = "insert into Account values('" + user.getId() + "', '" + PasswordEncoder.encode(pass) + "','" + "khong" + "','" + "0" +"')";
                     conn.getStatment().executeUpdate(query3);
+                    new Notification("Password: " + pass + "\nAccount created successfully");
                     return 1;
                 } else {
                     return 3;
@@ -34,7 +38,8 @@ public class AddUserDao {
             e.printStackTrace();
             return 0;
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
+
         }
     }
 

@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 
 public class ManagerInfoDao {
     private User user;
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public void showManager(JTable table, DefaultTableModel tableModel){
         user = new User();
@@ -37,7 +37,7 @@ public class ManagerInfoDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }

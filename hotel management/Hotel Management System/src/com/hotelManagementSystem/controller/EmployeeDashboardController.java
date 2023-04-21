@@ -1,9 +1,10 @@
 package com.hotelManagementSystem.controller;
-import com.hotelManagementSystem.conn.Conn;
+
 import com.hotelManagementSystem.views.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class EmployeeDashboardController {
 
@@ -169,6 +170,14 @@ public class EmployeeDashboardController {
         });
     }
 
+    public void chatBtn(JButton btn, String chatName){
+        btn.addActionListener(e -> {
+            String name = "tom";
+          //call setupSocket
 
+            Client client = new Client(name);
+            client.setVisible(true);
+        });
+    }
 
 }

@@ -1,6 +1,5 @@
 package com.hotelManagementSystem.views;
-import ChatSys.Client.Client;
-import ChatSys.Server.Server;
+
 import com.hotelManagementSystem.conn.Conn;
 
 import javax.swing.*;
@@ -28,7 +27,7 @@ public class ManagerDashboard extends JFrame{
     private  Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
-
+    private static String chatName;
 
 
      public ManagerDashboard() {
@@ -103,6 +102,7 @@ public class ManagerDashboard extends JFrame{
             l.setVisible(false);
             UserName = new ManagerDashboardDao().setTextNameUser(l.getIDLogin());
             t2.setText(UserName);
+            chatName = l.getIDLogin() + " - " + UserName;
         }catch(Exception e){
 
         }
@@ -304,13 +304,7 @@ public class ManagerDashboard extends JFrame{
         chatBtn.setFont(new Font("Arial", Font.PLAIN, 20));
         chatBtn.setBackground(Color.decode("#292c35"));
         chatBtn.setForeground(Color.decode("#f0f5f5"));
-//        chatBtn.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                new Server()
-//                new Client();
-//            }
-//        });
+        new ManagerDashboardController().chatBtn(chatBtn, chatName);
         p2.add(chatBtn);
 
 

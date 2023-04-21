@@ -7,7 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class CheckOutDao {
-    private Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public Customer checkCustomer(Customer customer){
         try{
@@ -31,14 +31,13 @@ public class CheckOutDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return null;
     }
 
 
     public int checkOut(Customer customer){
-        //check deposit of customer with price of room at room number
         long diff = customer.getCheckOutDate().getTime() - customer.getCheckInDate().getTime();
         int diffDays = (int) (diff / (1000 * 60 * 60 * 24));
         String query = "SELECT price FROM room WHERE roomNumber = ?";
@@ -99,21 +98,21 @@ public class CheckOutDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 
     public void refreshID(JComboBox comboBox){
 
         try{
-            ResultSet rs = conn.s.executeQuery("select * from customer");
+            ResultSet rs = conn.getStatment().executeQuery("select * from customer");
             while (rs.next()) {
                 comboBox.addItem(rs.getString("numberID"));
             }
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

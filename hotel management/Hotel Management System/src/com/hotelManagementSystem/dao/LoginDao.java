@@ -1,5 +1,7 @@
 package com.hotelManagementSystem.dao;
 
+import com.hotelManagementSystem.ChatSys.Server.Server;
+import com.hotelManagementSystem.bean.PasswordEncoder;
 import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Account;
 import com.hotelManagementSystem.entity.User;
@@ -8,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class LoginDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
 
     public int checkLogin(Account account, User user){
@@ -17,8 +19,10 @@ public class LoginDao {
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, account.getIdAccount());
             ResultSet rs = pstmt.executeQuery();
+            String pass = PasswordEncoder.encode(account.getPassword());
+            System.out.println(pass);
             if(rs.next()){
-                if(rs.getString("password").equals(account.getPassword())){
+                if(pass.equals(rs.getString("password"))){
                     user.setId(rs.getString("id"));
                     user.setName(rs.getString("name"));
                     user.setAge(rs.getInt("age"));
@@ -45,7 +49,7 @@ public class LoginDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
         return 0;
     }

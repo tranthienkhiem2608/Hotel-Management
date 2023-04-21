@@ -7,11 +7,11 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="rs2xml" level="application" />
     <orderEntry type="library" name="mysql-connector-java-8.0.28" level="application" />
     <orderEntry type="library" name="jcalendar-1.4" level="application" />
     <orderEntry type="library" name="xchart-demo-3.8.3" level="application" />
     <orderEntry type="library" name="jfreechart-1.5.2" level="project" />
     <orderEntry type="library" name="xchart-3.8.3" level="project" />
+    <orderEntry type="library" name="rs2xml" level="application" />
   </component>
 </module>

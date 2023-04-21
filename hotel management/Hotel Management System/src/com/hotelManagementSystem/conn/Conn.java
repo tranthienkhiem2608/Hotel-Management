@@ -1,33 +1,42 @@
 package com.hotelManagementSystem.conn;
+
 import java.sql.*;
 
 import static com.hotelManagementSystem.constants.Constants.*;
 
-
 public class Conn {
 
+    private static Conn instance;
     private Connection c;
-    public Statement s;
-    public Conn() {
+    private Statement s;
+
+    private Conn() {
         try {
             Class.forName(CLASSNAME);
             System.out.println(MESSDB);
-            c =DriverManager.getConnection(URL, ROOT, PASSWORD);
+            c = DriverManager.getConnection(URL, ROOT, PASSWORD);
             s = c.createStatement();
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    public Statement getStatment(){
+
+    public static Conn getInstance() {
+        if (instance == null) {
+            instance = new Conn();
+        }
+        return instance;
+    }
+
+    public Statement getStatment() {
         return s;
     }
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         return c;
     }
 
-
-
-    public void closeConnection(){
+    public void closeConnection() {
         try {
             c.close();
             s.close();
@@ -35,6 +44,5 @@ public class Conn {
             e.printStackTrace();
         }
     }
-
 
 }

@@ -20,6 +20,8 @@ import java.awt.event.ActionEvent;
 
 public class UpdateCheck extends JFrame {
 
+    private final Conn conn = Conn.getInstance();
+
     private static JPanel p1;
     private JTextField txt_ID;
     private JTextField txt_Room;
@@ -89,8 +91,7 @@ public class UpdateCheck extends JFrame {
 
         comboBox_1 = new JComboBox();
         try {
-            Conn c = new Conn();
-            ResultSet rs = c.s.executeQuery("select * from customer");
+            ResultSet rs = conn.getStatment().executeQuery("select * from customer");
             while (rs.next()) {
                 comboBox_1.addItem(rs.getString("numberID"));
             }

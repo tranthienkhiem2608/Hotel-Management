@@ -10,7 +10,7 @@ import javax.swing.table.TableModel;
 import java.sql.ResultSet;
 
 public class SearchRoomDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public void showRoom(JTable table, Room room, DefaultTableModel model){
         String query = "select * from room where bedType = '"+room.getBedType()+"'";
@@ -103,7 +103,7 @@ public class SearchRoomDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

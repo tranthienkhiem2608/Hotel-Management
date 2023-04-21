@@ -6,7 +6,7 @@ import com.hotelManagementSystem.views.Notification;
 import java.sql.ResultSet;
 
 public class AddDriversDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
     public int addDrivers(Driver driver){
         try{
             String query1 = "select * from Drivers where name = '" + driver.getName() + "'";
@@ -23,7 +23,7 @@ public class AddDriversDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 

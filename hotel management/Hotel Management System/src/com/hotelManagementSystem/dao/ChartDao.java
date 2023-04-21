@@ -13,14 +13,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChartDao {
-    private Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public PieChart getChartPieChart(){
         int countSingle = 0;
         int countDouble = 0;
         int countKing = 0;
         PieChart chart = new PieChartBuilder().width(500).height(300).title("The needs of customers").build();
-        Color[] sliceColors = new Color[] { new Color(224, 68, 14), new Color(230, 105, 62), new Color(236, 143, 110)  };
+        Color[] sliceColors = new Color[] { new Color(230, 24, 9), new Color(37, 199, 8), new Color(11, 58, 227)  };
         chart.getStyler().setSeriesColors(sliceColors);
         String createTempTableSql = "CREATE TEMPORARY TABLE temp_customer_history AS SELECT * FROM HistoryCustomer;";
         String query = "SELECT * FROM Customer UNION ALL SELECT * FROM temp_customer_history";
@@ -58,7 +58,7 @@ public class ChartDao {
         int countAvailable = 0;
         int countOccupied = 0;
         CategoryChart chart = new CategoryChartBuilder().width(500).height(300).title("Room Status").xAxisTitle("count").yAxisTitle("Room number").build();
-        Color[] sliceColors = new Color[] { new Color(224, 68, 14), new Color(230, 105, 62) };
+        Color[] sliceColors = new Color[] { new Color(242, 60, 49), new Color(38, 50, 82) };
         chart.getStyler().setSeriesColors(sliceColors);
         chart.getStyler().setLabelsRotation(0);
         chart.getStyler().setAvailableSpaceFill(0.2);
@@ -94,7 +94,7 @@ public class ChartDao {
 
     public CategoryChart getChartBar2Chart(){
         CategoryChart chart = new CategoryChartBuilder().width(500).height(250).title("Customer").xAxisTitle("DateTime").yAxisTitle("Number Customer").build();
-        Color[] sliceColors = new Color[] { new Color(224, 68, 14) };
+        Color[] sliceColors = new Color[] { new Color(242, 60, 49) };
         chart.getStyler().setSeriesColors(sliceColors);
         chart.getStyler().setAvailableSpaceFill(0.2);
         chart.getStyler().setLabelsRotation(0);
@@ -129,7 +129,7 @@ public class ChartDao {
 
     public XYChart getChartLineChart(){
         XYChart chart = new XYChartBuilder().width(500).height(250).title("Revenue").xAxisTitle("DateTime").yAxisTitle("Revenue").build();
-        Color[] sliceColors = new Color[] { new Color(224, 68, 14) };
+        Color[] sliceColors = new Color[] { new Color(242, 60, 49) };
         chart.getStyler().setSeriesColors(sliceColors);
         String query ="SELECT * FROM historyCustomer";
         Map<String, Integer> weeklyRevenue = new TreeMap<>();

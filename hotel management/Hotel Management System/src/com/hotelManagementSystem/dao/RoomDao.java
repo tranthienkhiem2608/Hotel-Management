@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.ResultSet;
 
 public class RoomDao {
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
     private Room room;
     public void showRoom(JTable table, DefaultTableModel model){
         room = new Room();
@@ -29,7 +29,7 @@ public class RoomDao {
         }catch (Exception e){
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }

@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 
 public class EditEmployeeDao {
 
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
     public User searchUser(User user) {
         try {
             String query = "select * from users where id = '" + user.getId() + "'";
@@ -31,7 +31,7 @@ public class EditEmployeeDao {
             e.printStackTrace();
             return null;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
     public int saveUser(User user){
@@ -53,7 +53,7 @@ public class EditEmployeeDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 
@@ -73,7 +73,7 @@ public class EditEmployeeDao {
             e.printStackTrace();
             return 0;
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

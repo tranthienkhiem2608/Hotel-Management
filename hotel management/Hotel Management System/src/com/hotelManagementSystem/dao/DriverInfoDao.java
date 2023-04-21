@@ -13,14 +13,14 @@ import java.sql.ResultSet;
 public class DriverInfoDao {
 
     private Driver driver;
-    private Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public void viewDriverInfo(JTable table, DefaultTableModel tableModel, JComboBox comboBox) {
         driver = new Driver();
 
         try {
             comboBox.removeAllItems();
-            ResultSet rs1 = conn.s.executeQuery("select * from drivers");
+            ResultSet rs1 = conn.getStatment().executeQuery("select * from drivers");
             while(rs1.next()){
                 comboBox.addItem(rs1.getString("carBrand"));
             }
@@ -45,7 +45,7 @@ public class DriverInfoDao {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }
@@ -73,7 +73,7 @@ public class DriverInfoDao {
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
     }
 }

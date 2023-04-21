@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 public class EmployeeInfoDao {
 
     private User user;
-    private final Conn conn = new Conn();
+    private final Conn conn = Conn.getInstance();
 
     public void showEmployee(JTable table, DefaultTableModel tableModel){
         user = new User();
@@ -36,7 +36,7 @@ public class EmployeeInfoDao {
         }catch (Exception e){
             e.printStackTrace();
         } finally {
-            conn.closeConnection();
+//            conn.closeConnection();
         }
 
     }
