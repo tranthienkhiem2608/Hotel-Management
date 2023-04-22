@@ -65,9 +65,15 @@ public class AccountSetting extends JFrame {
         lblPassword.setForeground(Color.decode("#f0f5f5"));
         p1.add(lblPassword);
 
+        JLabel lblQuestion = new JLabel("Security Question: What is your favourite food?");
+        lblQuestion.setBounds(100, 250,500, 30 );
+        lblQuestion.setFont(new Font("Arial", Font.ITALIC, 20));
+        lblQuestion.setForeground(Color.decode("#13e010"));
+        p1.add(lblQuestion);
+
 
         JLabel lblKeyAnswer = new JLabel("Key Answer");
-        lblKeyAnswer.setBounds(100, 250, 130, 30);
+        lblKeyAnswer.setBounds(100, 280, 130, 30);
         lblKeyAnswer.setFont(new Font("Arial", Font.PLAIN, 20));
         lblKeyAnswer.setForeground(Color.decode("#f0f5f5"));
         p1.add(lblKeyAnswer);
@@ -113,7 +119,7 @@ public class AccountSetting extends JFrame {
 
 
         JTextField txtKeyAnswer = new JTextField();
-        txtKeyAnswer.setBounds(220, 250, 200, 30);
+        txtKeyAnswer.setBounds(220, 280, 200, 30);
         txtKeyAnswer.setFont(new Font("serif", Font.PLAIN, 15));
         txtKeyAnswer.setBackground(Color.decode("#e6f2f2"));
         txtKeyAnswer.setForeground(Color.decode("#1a1a1a"));

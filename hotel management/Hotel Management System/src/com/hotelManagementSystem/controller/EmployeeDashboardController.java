@@ -175,7 +175,7 @@ public class EmployeeDashboardController {
             String name = "tom";
           //call setupSocket
 
-            Client client = new Client(name);
+            Client client = new Client(chatName);
             client.setVisible(true);
         });
     }

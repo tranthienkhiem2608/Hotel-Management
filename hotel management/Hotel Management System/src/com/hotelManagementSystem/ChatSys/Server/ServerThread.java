@@ -59,7 +59,7 @@ public class ServerThread implements Runnable {
             System.out.println("Khời động luông mới thành công, ID là: " + clientNumber + " với tên là: " + clientName);
             write("get-id" + "," + this.clientNumber + "," + this.clientName);
             Server.serverThreadBus.sendOnlineList();
-            Server.serverThreadBus.mutilCastSend("global-message"+","+"---Client "+this.clientName+" đã đăng nhập---");
+            Server.serverThreadBus.mutilCastSend("global-message"+","+this.clientName+" đã đăng nhập---");
             String message;
             while (!isClosed) {
                 message = is.readLine();
@@ -68,10 +68,10 @@ public class ServerThread implements Runnable {
                 }
                 String[] messageSplit = message.split(",");
                 if(messageSplit[0].equals("send-to-global")){
-                    Server.serverThreadBus.boardCast(this.getClientName(),"global-message"+","+"Client "+messageSplit[2]+"-" + messageSplit[3]+": "+messageSplit[1]);
+                    Server.serverThreadBus.boardCast(this.getClientName(),"global-message"+","+messageSplit[3]+"(" + messageSplit[2]+"): "+messageSplit[1]);
                 }
                 if(messageSplit[0].equals("send-to-person")){// clientNumber, message, clientName, clientNumber loi co the o day
-                    Server.serverThreadBus.sendMessageToPersion(messageSplit[4],"Client "+ messageSplit[2]+"-"+ messageSplit[3]+" (tới bạn): "+messageSplit[1]);
+                    Server.serverThreadBus.sendMessageToPersion(messageSplit[4],messageSplit[3] +"(tới bạn): "+messageSplit[1]);
                 }
             }
         } catch (IOException e) {
@@ -79,7 +79,7 @@ public class ServerThread implements Runnable {
             Server.serverThreadBus.remove(clientName);
             System.out.println(this.clientName+" đã thoát");
             Server.serverThreadBus.sendOnlineList();
-            Server.serverThreadBus.mutilCastSend("global-message"+","+"---Client "+this.clientName+" đã thoát---");
+            Server.serverThreadBus.mutilCastSend("global-message"+","+"---"+this.clientName+" đã thoát---");
         }
     }
     public void write(String message) throws IOException{

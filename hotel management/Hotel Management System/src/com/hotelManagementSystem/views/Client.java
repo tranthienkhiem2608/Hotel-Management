@@ -219,9 +219,9 @@ public class Client extends JFrame {
             }
         }else{
             try {
-                String[] parner = ((String) Objects.requireNonNull(jComboBox1.getSelectedItem())).split(" ");
+                String[] parner = ((String) Objects.requireNonNull(jComboBox1.getSelectedItem())).split("-");
                 write("send-to-person"+","+messageContent+","+this.id+","+ clientName+","+parner[1]);
-                jTextArea1.setText(jTextArea1.getText()+"Bạn (tới Client "+parner[1]+"): "+messageContent+"\n");
+                jTextArea1.setText(jTextArea1.getText()+"Bạn (tới "+parner[1]+"): "+messageContent+"\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
@@ -269,7 +269,7 @@ public class Client extends JFrame {
                             String[] onlineSplit = messageSplit[1].split("-");
                             for (String s : onlineSplit) {
                                 onlineList.add(s);
-                                online.append("Client ").append(s).append(" đang online\n");
+                                online.append(s).append(" đang online\n");
                             }
                             jTextArea2.setText(online.toString());
                             updateCombobox();
@@ -296,13 +296,13 @@ public class Client extends JFrame {
         String idString = ""+this.getClientName();
         for(String e : onlineList){
             if(!e.equals(idString)){
-                jComboBox1.addItem("Client "+ e);
+                jComboBox1.addItem("-"+ e);
             }
         }
 
     }
     private void setIDTitle(){
-        this.setTitle("Client "+ clientName);
+        this.setTitle(clientName);
     }
     private void setID(int id){
         this.id = id;

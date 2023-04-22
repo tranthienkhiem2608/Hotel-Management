@@ -25,7 +25,7 @@ public class EmployeeDashboard extends JFrame {
     private static JLabel labelListBtnCheckInOut;
     private static String UserName;
 
-    private static String chatName;
+    private static String chatName = "User";
     public EmployeeDashboard() {
         initComponent();
         setLocationRelativeTo(null);
@@ -95,7 +95,7 @@ public class EmployeeDashboard extends JFrame {
             l.setVisible(false);
             UserName = new EmployeeDashboardDao().setTextNameUser(l.getIDLogin());
             t2.setText(UserName);
-            chatName = l.getIDLogin() + " - " + UserName;
+            chatName = UserName + "(" + l.getIDLogin() +")";
 
         }catch(Exception e){
 

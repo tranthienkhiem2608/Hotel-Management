@@ -312,7 +312,7 @@ public class ManagerDashboardController {
             String name = "Harry";
             //call setupSocket
 
-            Client client = new Client(name);
+            Client client = new Client(chatName);
             client.setVisible(true);
 
         });

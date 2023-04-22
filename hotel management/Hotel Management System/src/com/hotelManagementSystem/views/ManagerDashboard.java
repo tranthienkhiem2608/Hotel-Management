@@ -27,7 +27,7 @@ public class ManagerDashboard extends JFrame{
     private  Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
-    private static String chatName;
+    private static String chatName = "User";
 
 
      public ManagerDashboard() {
@@ -102,7 +102,7 @@ public class ManagerDashboard extends JFrame{
             l.setVisible(false);
             UserName = new ManagerDashboardDao().setTextNameUser(l.getIDLogin());
             t2.setText(UserName);
-            chatName = l.getIDLogin() + " - " + UserName;
+            chatName = UserName + "(" + l.getIDLogin() +")";
         }catch(Exception e){
 
         }

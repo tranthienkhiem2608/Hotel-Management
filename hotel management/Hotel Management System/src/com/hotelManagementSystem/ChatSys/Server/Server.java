@@ -57,7 +57,7 @@ public class Server {
                 String[] messArr = mess.split(",");
                 if (messArr[0].equals("connect")) {
                     clientName = messArr[1];
-                    System.out.println("Client " + clientNumber + " " + clientName + " just connected");
+                    System.out.println(clientNumber + " " + clientName + " just connected");
 
                 }
                 ServerThread serverThread = new ServerThread(socketOfServer, clientNumber++, clientName);
