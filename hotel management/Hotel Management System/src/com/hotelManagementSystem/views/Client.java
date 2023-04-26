@@ -76,12 +76,12 @@ public class Client extends JFrame {
     }
 
     private void initComponents() {
-        setSize(1400, 800);
+        setSize(480, 500);
         setLayout(null);
         setBackground(Color.decode("#17181D"));
         p1 = new JPanel();
         p1.setLayout(null);
-        p1.setBounds(0, 0, 1400, 800);
+        p1.setBounds(0, 0, 480, 500);
         p1.setBackground(Color.decode("#17181D"));
         add(p1);
         jPanel3 = new javax.swing.JPanel();
@@ -120,14 +120,16 @@ public class Client extends JFrame {
         jPanel1.add(jScrollPane2, BorderLayout.CENTER);
         p1.add(jPanel1);
 
-        jTabbedPane1.addTab("Danh sách online", jPanel1);
+        jTabbedPane1.addTab("Online List", jPanel1);
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/sendIcon.png")));
-        jButton1.setBackground(new java.awt.Color(44, 45, 51));
+        ImageIcon chatBut = new ImageIcon(ClassLoader.getSystemResource("icons/sendIcon.png"));
+        Image chat1 = chatBut.getImage().getScaledInstance(50, 50, Image.SCALE_DEFAULT);
+        jButton1.setIcon(new ImageIcon(chat1));
+        jButton1.setBackground(new java.awt.Color(50, 50, 51));
         jButton1.setBorder(null);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,45 +143,44 @@ public class Client extends JFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Chọn người nhận");
+        jLabel1.setForeground(Color.BLACK);
+        jLabel1.setText("Choose a recipient");
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Nhập tin nhắn");
+        jLabel1.setForeground(Color.BLACK);
+        jLabel2.setText("Enter a message");
 
         jLabel3.setBackground(new java.awt.Color(118, 93, 89));
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(Color.BLACK);
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("{Người nhận}");
+        jLabel3.setText("{Receiver}");
 
         jPanel2.setLayout(null);
 
-        jLabel1.setBounds(22, 15, 96, 16);
+        jLabel1.setBounds(22, 15, 120, 16);
         jPanel2.add(jLabel1);
         p1.add(jPanel2);
 
-        jComboBox1.setBounds(130, 12, 246, 22);
+        jComboBox1.setBounds(135, 12, 246, 22);
         jPanel2.add(jComboBox1);
-
 
         jLabel3.setBounds(22, 52, 414, 23);
         jPanel2.add(jLabel3);
 
-        jScrollPane1.setBounds(22, 83, 414, 157);
+        jScrollPane1.setBounds(22, 83, 414, 250);
         jPanel2.add(jScrollPane1);
 
         jLabel2.setBounds(22, 248, 96, 16);
         jPanel2.add(jLabel2);
 
-        jTextField1.setBounds(22, 277, 347, 30);
+        jTextField1.setBounds(22, 360, 347, 30);
         jPanel2.add(jTextField1);
 
-        jButton1.setBounds(375, 277, 61, 30);
+        jButton1.setBounds(375, 360, 61, 30);
         jPanel2.add(jButton1);
         p1.add(jPanel2);
 
-        jTabbedPane1.addTab("Nhắn tin", jPanel2);
+        jTabbedPane1.addTab("Chat", jPanel2);
 
         getContentPane().add(jTabbedPane1);
         jTabbedPane1.setBounds(0, 0, 476, 514);
@@ -199,32 +200,32 @@ public class Client extends JFrame {
             jLabel3.setText("Global");
         }
         else{
-            jLabel3.setText("Đang nhắn với "+jComboBox1.getSelectedItem());
+            jLabel3.setText("Messaging with "+jComboBox1.getSelectedItem());
         }
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
         String messageContent = jTextField1.getText();
         if(messageContent.isEmpty()){
-            JOptionPane.showMessageDialog(rootPane, "Bạn chưa nhập tin nhắn");
+            JOptionPane.showMessageDialog(rootPane, "You have not entered a message");
             return;
         }
         if(jComboBox1.getSelectedIndex()==0){
             try {
                 write("send-to-global"+","+messageContent+","+this.id+","+ clientName);
-                jTextArea1.setText(jTextArea1.getText()+"Bạn: "+messageContent+"\n");
+                jTextArea1.setText(jTextArea1.getText()+"You: "+messageContent+"\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "Error");
             }
         }else{
             try {
                 String[] parner = ((String) Objects.requireNonNull(jComboBox1.getSelectedItem())).split("-");
                 write("send-to-person"+","+messageContent+","+this.id+","+ clientName+","+parner[1]);
-                jTextArea1.setText(jTextArea1.getText()+"Bạn (tới "+parner[1]+"): "+messageContent+"\n");
+                jTextArea1.setText(jTextArea1.getText()+"You (to "+parner[1]+"): "+messageContent+"\n");
                 jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(rootPane, "Có lỗi xảy ra");
+                JOptionPane.showMessageDialog(rootPane, "Error");
             }
         }
         jTextField1.setText("");
@@ -240,8 +241,8 @@ public class Client extends JFrame {
                 try {
                     // Gửi yêu cầu kết nối tới Server đang lắng nghe
                     // trên máy 'localhost' cổng 7777.
-                    socketOfClient = new Socket("localhost", 7777);
-                    System.out.println("Kết nối thành công!");
+                    socketOfClient = new Socket("10.124.3.70", 7777);
+                    System.out.println("Successful connection!");
                     // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                     os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));
                     // Luồng đầu vào tại Client (Nhận dữ liệu từ server).
@@ -269,7 +270,7 @@ public class Client extends JFrame {
                             String[] onlineSplit = messageSplit[1].split("-");
                             for (String s : onlineSplit) {
                                 onlineList.add(s);
-                                online.append(s).append(" đang online\n");
+                                online.append(s).append(" online\n");
                             }
                             jTextArea2.setText(online.toString());
                             updateCombobox();
@@ -292,7 +293,7 @@ public class Client extends JFrame {
     }
     private void updateCombobox(){
         jComboBox1.removeAllItems();
-        jComboBox1.addItem("Gửi tất cả");
+        jComboBox1.addItem("Send all");
         String idString = ""+this.getClientName();
         for(String e : onlineList){
             if(!e.equals(idString)){
