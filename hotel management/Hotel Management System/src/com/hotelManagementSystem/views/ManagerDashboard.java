@@ -27,6 +27,7 @@ public class ManagerDashboard extends JFrame{
     private  Image logoutImage;
     private String[] buttonLabels = {"Room", "User", "Driver"}, buttonLabels2 = {"Employee", "Manager"};
     private JList<String> buttonList, buttonList2;
+    private static String userID = "null";
     private static String chatName = "User";
 
 
@@ -34,6 +35,15 @@ public class ManagerDashboard extends JFrame{
         initComponent();
         setLocationRelativeTo(null);
 
+    }
+
+
+    public static String getUserID() {
+        return userID;
+    }
+
+    public static void setUserID(String id) {
+        userID = id;
     }
 
     public static JPanel getP3() {
@@ -102,7 +112,8 @@ public class ManagerDashboard extends JFrame{
             l.setVisible(false);
             UserName = new ManagerDashboardDao().setTextNameUser(l.getIDLogin());
             t2.setText(UserName);
-            chatName = UserName + "(" + l.getIDLogin() +")";
+            userID = l.getIDLogin();
+            chatName = UserName + "(" + userID +")";
         }catch(Exception e){
 
         }

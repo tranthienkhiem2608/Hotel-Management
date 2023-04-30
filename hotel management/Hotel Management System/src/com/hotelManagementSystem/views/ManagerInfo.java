@@ -1,4 +1,6 @@
 package com.hotelManagementSystem.views;
+import com.hotelManagementSystem.controller.EmployeeInfoController;
+import com.hotelManagementSystem.controller.ManagerInfoController;
 import com.hotelManagementSystem.dao.ManagerInfoDao;
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -97,16 +99,17 @@ public class ManagerInfo extends JFrame {
         btnRefesh.setBounds(400, 550, 120, 30);
         btnRefesh.setBackground(Color.BLACK);
         btnRefesh.setForeground(Color.WHITE);
+        new ManagerInfoController().refreshBtn(btnRefesh, table, tableModel);
         p1.add(btnRefesh);
 
         getContentPane().setBackground(Color.WHITE);
-
+        String userID = ManagerDashboard.getUserID();
         JButton btnExit = new JButton("EDIT");
         btnExit.setBounds(550, 550, 120, 30);
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.WHITE);
         p1.add(btnExit);
-
+        new EmployeeInfoController().ChangeToEdit(btnExit, userID);
         getContentPane().setBackground(Color.WHITE);
 
 

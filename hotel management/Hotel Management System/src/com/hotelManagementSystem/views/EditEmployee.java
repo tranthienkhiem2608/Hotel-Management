@@ -25,10 +25,10 @@ public class EditEmployee extends JFrame{
     public JPanel getP1(){
         return p1;
     }
-    public EditEmployee() {
-        initComponent();
+    public EditEmployee(String userID) {
+        initComponent(userID);
     }
-    private void initComponent() {
+    private void initComponent(String userID) {
         setSize(1000, 600);
         setLocation(200, 100);
         p1 = new JPanel();
@@ -355,7 +355,7 @@ public class EditEmployee extends JFrame{
         JButton l6 = new JButton(ib6);
         l6.setBackground(Color.decode("#fcd9b8"));
         l6.setBounds(650, 0, 50, 50);
-        new EditEmployeeController().deleteUser(l6, user, p2);
+        new EditEmployeeController().deleteUser(l6, user, p2, userID);
         p2.add(l6);
 
         ImageIcon i3 = new ImageIcon(ClassLoader.getSystemResource("icons/search.png"));
@@ -384,7 +384,7 @@ public class EditEmployee extends JFrame{
     }
 
 
-    public static void main(String[] args) throws SQLException {
-        new EditEmployee() ;
-    }
+//    public static void main(String[] args) throws SQLException {
+//        new EditEmployee() ;
+//    }
 }

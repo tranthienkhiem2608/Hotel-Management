@@ -149,6 +149,7 @@ public class ManagerDashboardController {
             }
         });
     }
+    //truyen ten vo đay
     public void checkSelectBtnListEmployee(JList<String> list, JLabel p, JPanel p2, JPanel p3, JPanel p4, JPanel p5, JPanel p6, JPanel p7, JPanel p8, JPanel p9, JPanel p10){
         addCardLayout2(p3);
         list.addListSelectionListener(e -> {

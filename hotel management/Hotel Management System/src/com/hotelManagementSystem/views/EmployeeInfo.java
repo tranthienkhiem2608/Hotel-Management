@@ -23,7 +23,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-public class EmployeeInfo extends JFrame {
+public class  EmployeeInfo extends JFrame {
     private static JPanel p1;
     private JTable table;
     private JLabel lblID;
@@ -32,6 +32,7 @@ public class EmployeeInfo extends JFrame {
     private JLabel lblJob, p2;
     private JLabel lblSalary;
     private JLabel lblGender;
+
 
 
     public JPanel getP1() {
@@ -86,15 +87,18 @@ public class EmployeeInfo extends JFrame {
         btnRefesh.setBounds(400, 550, 120, 30);
         btnRefesh.setBackground(Color.BLACK);
         btnRefesh.setForeground(Color.WHITE);
+        new EmployeeInfoController().refreshBtn(btnRefesh, table, tableModel);
         p1.add(btnRefesh);
 
         getContentPane().setBackground(Color.WHITE);
+
+        String userID = ManagerDashboard.getUserID();
 
         JButton btnExit = new JButton("EDIT");
         btnExit.setBounds(550, 550, 120, 30);
         btnExit.setBackground(Color.BLACK);
         btnExit.setForeground(Color.WHITE);
-        new EmployeeInfoController().ChangeToEdit(btnExit);
+        new EmployeeInfoController().ChangeToEdit(btnExit, userID);
         p1.add(btnExit);
 
         getContentPane().setBackground(Color.WHITE);

@@ -102,7 +102,6 @@ public class Client extends JFrame {
         jPanel3.setLayout(new BorderLayout());
         jTextArea1.setEditable(false);
         jTextArea2.setEditable(false);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setBackground(new java.awt.Color(252, 217, 184));
@@ -241,7 +240,7 @@ public class Client extends JFrame {
                 try {
                     // Gửi yêu cầu kết nối tới Server đang lắng nghe
                     // trên máy 'localhost' cổng 7777.
-                    socketOfClient = new Socket("10.124.3.70", 7777);
+                    socketOfClient = new Socket("localhost", 7777);
                     System.out.println("Successful connection!");
                     // Tạo luồng đầu ra tại client (Gửi dữ liệu tới server)
                     os = new BufferedWriter(new OutputStreamWriter(socketOfClient.getOutputStream()));

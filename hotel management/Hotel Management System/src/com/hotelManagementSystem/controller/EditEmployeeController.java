@@ -46,15 +46,19 @@ public class EditEmployeeController {
         });
     }
 
-    public void deleteUser(JButton btn, User user, JPanel panel){
+    public void deleteUser(JButton btn, User user, JPanel panel, String userID){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(new EditEmployeeDao().deleteUser(user) == 1){
+                int flag = new EditEmployeeDao().deleteUser(user, userID);
+                if(flag== 1){
                     new Notification("Delete successfully!").setVisible(true);
                     panel.setVisible(false);
 
-                } else {
+                } else if(flag == 2){
+                    new Notification("You are not authorized to delete another manager").setVisible(true);
+
+                }else {
                     new Notification("Delete failed!").setVisible(true);
                 }
             }

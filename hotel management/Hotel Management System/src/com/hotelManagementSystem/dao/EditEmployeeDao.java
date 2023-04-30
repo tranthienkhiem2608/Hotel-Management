@@ -57,17 +57,35 @@ public class EditEmployeeDao {
         }
     }
 
-    public int deleteUser(User user){
-        try{
-            String query = "delete from account where id = ?";
-            String query2 = "delete from users where id = ?";
-            PreparedStatement stmt = conn.getConnection().prepareStatement(query);
-            PreparedStatement stmt2 = conn.getConnection().prepareStatement(query2);
-            stmt.setString(1, user.getId());
-            stmt2.setString(1, user.getId());
-            int flag = stmt.executeUpdate();
-            int flag2 = stmt2.executeUpdate();
-            return flag2;
+    public int deleteUser(User user, String userID){
+        try {
+            if (user.getPosition().equals("Manager")) {
+                if(userID.equals("ma01")){
+                    String query = "delete from account where id = ?";
+                    String query2 = "delete from users where id = ?";
+                    PreparedStatement stmt = conn.getConnection().prepareStatement(query);
+                    PreparedStatement stmt2 = conn.getConnection().prepareStatement(query2);
+                    stmt.setString(1, user.getId());
+                    stmt2.setString(1, user.getId());
+                    int flag = stmt.executeUpdate();
+                    int flag2 = stmt2.executeUpdate();
+                    return flag2;
+                }
+                else{
+                    return 2;
+                }
+            }
+            else{
+                String query = "delete from account where id = ?";
+                String query2 = "delete from users where id = ?";
+                PreparedStatement stmt = conn.getConnection().prepareStatement(query);
+                PreparedStatement stmt2 = conn.getConnection().prepareStatement(query2);
+                stmt.setString(1, user.getId());
+                stmt2.setString(1, user.getId());
+                int flag = stmt.executeUpdate();
+                int flag2 = stmt2.executeUpdate();
+                return flag2;
+        }
 
         }catch (Exception e){
             e.printStackTrace();
