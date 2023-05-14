@@ -6,6 +6,7 @@ import com.hotelManagementSystem.entity.User;
 import static com.hotelManagementSystem.constants.Constants.*;
 import com.hotelManagementSystem.views.Notification;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.util.Random;
 
@@ -15,7 +16,7 @@ public class AddUserDao {
     private final Conn conn = Conn.getInstance();
     private String pass;
 
-    public int addUser(User user, Account account) {
+    public int addUser(User user, JTextArea textArea) {
         try {
             String query = "SELECT * FROM users WHERE id = '" + user.getId() + "'";
             ResultSet rs = conn.getStatment().executeQuery(query);
@@ -26,7 +27,7 @@ public class AddUserDao {
                     pass = generateRandomPassword(10);
                     String query3 = "insert into Account values('" + user.getId() + "', '" + PasswordEncoder.encode(pass) + "','" + "khong" + "','" + "0" +"')";
                     conn.getStatment().executeUpdate(query3);
-                    new Notification("Password: " + pass + "\nAccount created successfully");
+                    textArea.setText("Password: " + pass);
                     return 1;
                 } else {
                     return 3;

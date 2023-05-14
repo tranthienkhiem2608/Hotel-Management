@@ -9,10 +9,10 @@ import com.hotelManagementSystem.dao.AddUserDao;
 public class AddUserController {
 
     public AddUserController(){}
-    public void addBtn(JButton btn, User user, Account account){
+    public void addBtn(JButton btn, User user, JTextArea textArea){
         btn.addActionListener(e -> {
             System.out.println(user.getId() + " " + user.getName() + " " + user.getAge() + " " + user.getGender() + " " + user.getPosition() + " " + user.getSalary() + " " + user.getPhone() + " " + user.getEmail());
-            int flag = new AddUserDao().addUser(user, account);
+            int flag = new AddUserDao().addUser(user, textArea);
             if(flag == 1){
                 new Notification("Add user successfully!").setVisible(true);
             } else if (flag == 2) {

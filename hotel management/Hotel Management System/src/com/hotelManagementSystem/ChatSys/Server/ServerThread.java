@@ -68,7 +68,7 @@ public class ServerThread implements Runnable {
                 }
                 String[] messageSplit = message.split(",");
                 if(messageSplit[0].equals("send-to-global")){
-                    Server.serverThreadBus.boardCast(this.getClientName(),"global-message"+","+messageSplit[3]+"(" + messageSplit[2]+"): "+messageSplit[1]);
+                    Server.serverThreadBus.boardCast(this.getClientName(),"global-message"+","+messageSplit[3]+": "+messageSplit[1]);
                 }
                 if(messageSplit[0].equals("send-to-person")){// clientNumber, message, clientName, clientNumber loi co the o day
                     Server.serverThreadBus.sendMessageToPersion(messageSplit[4],messageSplit[3] +"(tới bạn): "+messageSplit[1]);
