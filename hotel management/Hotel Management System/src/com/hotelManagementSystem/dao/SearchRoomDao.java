@@ -21,7 +21,7 @@ public class SearchRoomDao {
         String query5 = "select * from Room where availability = 'occupied'";
         try{
             if(room.getBedType() == "All") {
-                if (room.getAvailability() == "available") {
+                if (room.getAvailability() == "Available") {
                     ResultSet rs1 = conn.getStatment().executeQuery(query4);
 
                     while (rs1.next()) {
@@ -34,7 +34,7 @@ public class SearchRoomDao {
                         model.addRow(rowData);
                     }
                     table.setModel(model);
-                } else if (room.getAvailability() == "occupied") {
+                } else if (room.getAvailability() == "Occupied") {
                     ResultSet rs2 = conn.getStatment().executeQuery(query5);
                     while (rs2.next()) {
                         room.setRoomNumber(rs2.getInt("roomNumber"));
@@ -61,7 +61,7 @@ public class SearchRoomDao {
                 }
             }else {
 
-                if (room.getAvailability() == "available") {
+                if (room.getAvailability() == "Available") {
                     ResultSet rs1 = conn.getStatment().executeQuery(query1);
                     while (rs1.next()) {
                         room.setRoomNumber(rs1.getInt("roomNumber"));
@@ -73,7 +73,7 @@ public class SearchRoomDao {
                         model.addRow(rowData);
                     }
                     table.setModel(model);
-                } else if (room.getAvailability() == "occupied") {
+                } else if (room.getAvailability() == "Occupied") {
                     ResultSet rs2 = conn.getStatment().executeQuery(query2);
                     while (rs2.next()) {
                         room.setRoomNumber(rs2.getInt("roomNumber"));

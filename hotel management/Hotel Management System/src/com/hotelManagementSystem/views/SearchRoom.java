@@ -106,7 +106,7 @@ public class SearchRoom extends JFrame {
         });
         p1.add(comboBox_1);
 
-        String[] columnNames = {"Room Number", "Bed Type", "Availability", "Price", "Status"};
+        String[] columnNames = {"Room Number", "Availability", "Status", "Price", "Bed Type"};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
 
         table = new JTable();

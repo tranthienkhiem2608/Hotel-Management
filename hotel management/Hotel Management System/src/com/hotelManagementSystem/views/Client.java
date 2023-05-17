@@ -319,7 +319,7 @@ public class Client extends JFrame {
     }
     public static void main(String args[]) {
 
-        Client client = new Client("Harry");
+        Client client = new Client("Tuan Nguyen(re02)");
     }
 
 
