@@ -10,19 +10,27 @@ import com.hotelManagementSystem.views.Notification;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CheckOutController {
 
-    public Customer btnCheckCustomer(JButton btn, Customer customer, JTextArea txt_RoomNumber, JTextArea txt_Time){
+    public Customer btnCheckCustomer(JButton btn, Customer customer, JTextArea txt_RoomNumber, JTextArea txt_Time, JTextArea txt_TimeCheckOut,JTextArea txt_deposit , JTextArea totalPrice){
         btn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (new CheckOutDao().checkCustomer(customer) == null) {
+                if (new CheckOutDao().checkCustomer(customer, totalPrice) == null) {
                     new Notification("Customer not found").setVisible(true);
 
                 } else {
                     txt_RoomNumber.setText(String.valueOf(customer.getRoomNumber()));
                     txt_Time.setText(customer.getCheckInDate() + " " + customer.getCheckInTime());
+                    txt_deposit.setText(String.valueOf(customer.getDeposit()));
+                    DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                    Date time = new Date();
+                    txt_TimeCheckOut.setText(customer.getCheckOutDate() + " " + timeFormat.format(time));
+                    customer.setCheckOutTime(time);
                 }
 
             }

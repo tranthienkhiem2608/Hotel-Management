@@ -39,18 +39,7 @@ public class ManagerInfo extends JFrame {
     public JPanel getP1() {
         return p1;
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    ManagerInfo frame = new ManagerInfo();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
     public ManagerInfo(){
         initComponent();
     }

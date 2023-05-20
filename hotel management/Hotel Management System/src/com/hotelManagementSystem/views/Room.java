@@ -24,9 +24,6 @@ public class Room extends javax.swing.JFrame {
     public JPanel getP1() {
         return p1;
     }
-    public static void main(String[] args) {
-        new Room().setVisible(true);
-    }
 
     public Room() {
         initComponents();
@@ -36,9 +33,6 @@ public class Room extends javax.swing.JFrame {
 
     private void initComponents() {
 
-            //conn = Javaconnect.getDBConnection();
-//            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            setBounds(450, 200, 1100, 600);
             p1 = new JPanel();
         p1.setSize(1100, 600);
         p1.setLocation(0,0);
@@ -65,9 +59,7 @@ public class Room extends javax.swing.JFrame {
             scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
             p1.add(scrollPane);
 
-//            table = new JTable();
-//            table.setBounds(0, 40, 500, 500);
-//        p1.add(table);
+
         try{
             RoomDao roomDao = new RoomDao();
             roomDao.showRoom(table, tableModel);
@@ -82,27 +74,7 @@ public class Room extends javax.swing.JFrame {
             new RoomDao().showRoom(table, tableModel);
         p1.add(editBtn);
 
-//            lblAvailability = new JLabel("Availability");
-//            lblAvailability.setBounds(119, 15, 69, 14);
-//        p1.add(lblAvailability);
-//
-//            lblCleanStatus = new JLabel("Clean Status");
-//            lblCleanStatus.setBounds(216, 15, 76, 14);
-//        p1.add(lblCleanStatus);
-//
-//            lblNewLabel = new JLabel("Price");
-//            lblNewLabel.setBounds(330, 15, 46, 14);
-//        p1.add(lblNewLabel);
-//
-//            lblNewLabel_1 = new JLabel("Bed Type");
-//            lblNewLabel_1.setBounds(417, 15, 76, 14);
-//        p1.add(lblNewLabel_1);
-//
-//
-//            lblId = new JLabel("Room Number");
-//            lblId.setBounds(12, 15, 90, 14);
-//        p1.add(lblId);
-//            getContentPane().setBackground(Color.WHITE);
+
         }
 }
 

@@ -39,18 +39,7 @@ public class CustomerInfo extends JFrame {
     public JPanel getP1() {
         return p1;
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CustomerInfo frame = new CustomerInfo();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
     public CustomerInfo(){
         initComponent();
     }
@@ -72,14 +61,14 @@ public class CustomerInfo extends JFrame {
         p1.add(lblPickUpService);
 
         table = new JTable();
-        table.setBounds(50, 50, 1000, 450);;
+        table.setBounds(0, 50, 1100, 450);
         table.setModel(tableModel);
         table.enableInputMethods(false);
-        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 15));
+        table.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 10));
         p1.add(table);
 
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(50, 65, 1000, 450);
+        scrollPane.setBounds(0, 65, 1100, 450);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         p1.add(scrollPane);
 

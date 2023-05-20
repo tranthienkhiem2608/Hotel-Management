@@ -33,18 +33,7 @@ public class DriverInfo extends JFrame {
     public JPanel getP1() {
         return p1;
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    DriverInfo frame = new DriverInfo();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
     public void close()
     {
         this.dispose();

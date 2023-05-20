@@ -78,7 +78,4 @@ public class Notification extends JFrame {
         panelForm.add(l1);
         setVisible(true);
     }
-    public static void main(String[] args) {
-        new Notification("Notification");
-    }
 }

@@ -16,8 +16,4 @@ public class PasswordEncoder {
         return hexString.toString();
     }
 
-    //write main method to test
-    public static void main(String[] args) throws NoSuchAlgorithmException {
-        System.out.println(encode("lucle11"));
-    }
 }

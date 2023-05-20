@@ -3,15 +3,17 @@ import com.hotelManagementSystem.conn.Conn;
 import com.hotelManagementSystem.entity.Customer;
 
 import javax.swing.*;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class CheckOutDao {
     private final Conn conn = Conn.getInstance();
 
-    public Customer checkCustomer(Customer customer){
+    public Customer checkCustomer(Customer customer, JTextArea totalPrice){
         try{
             String query = "SELECT * FROM customer WHERE numberID = ?";
+            String query1 = "SELECT price FROM room WHERE roomNumber = ?";
             PreparedStatement pstmt = conn.getConnection().prepareStatement(query);
             pstmt.setString(1, customer.getNumberID());
             ResultSet rs = pstmt.executeQuery();
@@ -24,8 +26,36 @@ public class CheckOutDao {
                 customer.setRoomNumber(rs.getInt("roomNumber"));
                 customer.setCheckInDate(rs.getDate("checkInDate"));
                 customer.setCheckInTime(rs.getTime("checkInTime"));
+                customer.setCheckOutDate(rs.getDate("checkOutDate"));
                 customer.setDeposit(rs.getInt("deposit"));
             }
+            try {
+                long timeOut = 0;
+                java.util.Date date = new java.util.Date();
+                if(customer.getCheckOutDate().getTime() != date.getTime()){
+                    timeOut = date.getTime();
+                }
+                else {
+                    timeOut = customer.getCheckOutDate().getTime();
+                }
+
+                long diff = timeOut - customer.getCheckInDate().getTime();
+                int diffDays = (int) (diff / (1000 * 60 * 60 * 24));
+                PreparedStatement pstmt4 = conn.getConnection().prepareStatement(query1);
+                pstmt4.setInt(1, customer.getRoomNumber());
+                ResultSet rs1 = pstmt4.executeQuery();
+                if (rs1.next()) {
+                    int priceRoom = rs1.getInt("price");
+                    int price = priceRoom * diffDays;
+                    totalPrice.setText(String.valueOf(price));
+                    totalPrice.setForeground(new java.awt.Color(0, 153, 0));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Room number is not exist");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
             return customer;
 
         }catch (Exception e){
@@ -38,7 +68,16 @@ public class CheckOutDao {
 
 
     public int checkOut(Customer customer){
-        long diff = customer.getCheckOutDate().getTime() - customer.getCheckInDate().getTime();
+        long timeOut = 0;
+        java.util.Date date = new java.util.Date();
+        if(customer.getCheckOutDate().getTime() != date.getTime()){
+            timeOut = date.getTime();
+        }
+        else {
+            timeOut = customer.getCheckOutDate().getTime();
+        }
+
+        long diff = timeOut - customer.getCheckInDate().getTime();
         int diffDays = (int) (diff / (1000 * 60 * 60 * 24));
         String query = "SELECT price FROM room WHERE roomNumber = ?";
         String query1 = "SELECT customer.*, room.* FROM customer JOIN room ON customer.roomNumber = room.roomNumber WHERE customer.roomNumber = ? AND customer.deposit = ?";

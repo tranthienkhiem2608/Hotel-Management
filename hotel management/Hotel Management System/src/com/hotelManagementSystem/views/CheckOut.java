@@ -30,25 +30,17 @@ public class CheckOut extends JFrame{
     private JComboBox comboBox;
     private Customer customer, customer1;
     private JButton btnCheckCustomer;
-    private JTextArea txt_Time, txt_RoomNumber, txt_TimeCheckOut;
+    private JTextArea txt_Time, txt_RoomNumber, txt_TimeCheckOut, txt_deposit, txt_totalPrice;
+
+
+
 
     Choice c1;
 
     public JPanel getP1() {
         return p1;
     }
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    CheckOut frame = new CheckOut();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+
     public void close(){
         this.dispose();
     }
@@ -132,6 +124,27 @@ public class CheckOut extends JFrame{
         p1.add(txt_Time);
 
 
+        txt_TimeCheckOut = new JTextArea();
+        txt_TimeCheckOut.setBounds(200, 330, 150, 20);
+        txt_TimeCheckOut.setEditable(false);
+        txt_TimeCheckOut.setText("0/0/0 00:00:00");
+        p1.add(txt_TimeCheckOut);
+
+        txt_deposit = new JTextArea();
+        txt_deposit.setBounds(200, 400, 150, 20);
+        txt_deposit.setEditable(false);
+        txt_deposit.setText("0");
+        p1.add(txt_deposit);
+
+        txt_totalPrice = new JTextArea();
+        txt_totalPrice.setBounds(200, 470, 150, 20);
+        txt_totalPrice.setEditable(false);
+        //set text size
+        txt_totalPrice.setFont(new Font("Arial", Font.BOLD, 20));
+        txt_totalPrice.setText("0");
+        p1.add(txt_totalPrice);
+
+
 
         ImageIcon backBut = new ImageIcon(ClassLoader.getSystemResource("icons/tick.png"));
         Image imgButton1 = backBut.getImage().getScaledInstance(30, 30, Image.SCALE_DEFAULT);
@@ -139,7 +152,7 @@ public class CheckOut extends JFrame{
         btnCheckCustomer.setBounds(370, 120, 20, 20);
         btnCheckCustomer.setBorder(null);
         btnCheckCustomer.setBackground(Color.decode("#292C35"));
-        customer1 =  new CheckOutController().btnCheckCustomer(btnCheckCustomer, customer, txt_RoomNumber, txt_Time);
+        customer1 =  new CheckOutController().btnCheckCustomer(btnCheckCustomer, customer, txt_RoomNumber, txt_Time, txt_TimeCheckOut, txt_deposit, txt_totalPrice);
         p1.add(btnCheckCustomer);
 
         JLabel lblCheckOut1 = new JLabel("Checkout Time:");
@@ -148,24 +161,23 @@ public class CheckOut extends JFrame{
         lblCheckOut1.setBounds(20, 330, 150, 20);
         p1.add(lblCheckOut1);
 
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
+        JLabel lblDeposit = new JLabel("Deposit:");
+        lblDeposit.setFont(new Font("Arial", Font.PLAIN, 20));
+        lblDeposit.setForeground(Color.BLACK);
+        lblDeposit.setBounds(20, 400, 150, 20);
+        p1.add(lblDeposit);
 
-        //time format
-        DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
-        Date time = new Date();
+        JLabel lblTotal = new JLabel("Total:");
+        lblTotal.setFont(new Font("Arial", Font.BOLD, 20));
+        lblTotal.setForeground(Color.BLACK);
+        lblTotal.setBounds(20, 470, 150, 20);
+        p1.add(lblTotal);
 
-        txt_TimeCheckOut = new JTextArea();
-        txt_TimeCheckOut.setBounds(200, 330, 150, 20);
-        txt_TimeCheckOut.setEditable(false);
-        txt_TimeCheckOut.setText(dateFormat.format(date) + " " + timeFormat.format(time));
-        p1.add(txt_TimeCheckOut);
-        customer1.setCheckOutDate(date);
-        customer1.setCheckOutTime(time);
+
 
         JButton btnCheckOut = new JButton("Check Out");
         new CheckOutController().btnCheckOut(btnCheckOut, customer1);
-        btnCheckOut.setBounds(170, 400, 150, 35);
+        btnCheckOut.setBounds(170, 540, 150, 35);
         btnCheckOut.setBackground(Color.BLACK);
         btnCheckOut.setForeground(Color.WHITE);
         p1.add(btnCheckOut);

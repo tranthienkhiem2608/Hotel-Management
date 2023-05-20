@@ -26,11 +26,6 @@ import java.util.Date;
 
 public class NewCustomer extends JFrame{
 
-    public static void main(String[] args) {
-
-        new NewCustomer().setVisible(true);
-
-    }
     private final Conn conn = Conn.getInstance();
 
     private static JPanel p1;

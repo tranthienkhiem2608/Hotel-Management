@@ -47,18 +47,6 @@ public class UpdateCheck extends JFrame {
         return p1;
     }
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    UpdateCheck frame = new UpdateCheck();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     public UpdateCheck() {
         initComponent();

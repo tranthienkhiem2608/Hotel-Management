@@ -6,6 +6,7 @@ import com.hotelManagementSystem.entity.Customer;
 import com.hotelManagementSystem.views.Notification;
 
 import javax.swing.*;
+import java.sql.Date;
 
 public class UpdateCheckController {
 
@@ -19,6 +20,11 @@ public class UpdateCheckController {
                 price = new UpdateCheckDao().getPriceRoom(customer);
                 long milliseconds1 = customer.getCheckInDate().getTime();
                 long milliseconds2 = customer.getCheckOutDate().getTime();
+                java.util.Date date = new java.util.Date();
+                long current = date.getTime();
+                if(milliseconds2 < current){
+                    milliseconds2 = current;
+                }
 //                System.out.println(customer.getCheckInDate() + " " + customer.getCheckInTime());
                 long diff = milliseconds2 - milliseconds1;
                 long diffDays = diff / (24 * 60 * 60 * 1000);
